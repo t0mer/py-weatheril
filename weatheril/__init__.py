@@ -1,7 +1,6 @@
 """Israel Meteorological Service unofficial python api wrapper"""
 import os
 import json
-import logging
 import requests
 import pandas as pd
 from PIL import Image
@@ -18,11 +17,6 @@ forcast_url = "https://ims.gov.il/{}/forecast_data/{}"
 radar_url = "https://ims.gov.il/{}/radar_satellite"
 current_analysis_url = "https://ims.gov.il/{}/now_analysis"
 weather_codes_url = "https://ims.gov.il/{}/weather_codes"
-
-logging.basicConfig(
-    level=logging.INFO,
-    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
-)
 
 
 class WeatherIL:
@@ -51,10 +45,14 @@ class WeatherIL:
                                 json = weather_data)
             return weather
         except Exception as e:
-            logger.error(e)
+            logger.error("Error getting current analysis " + e)
             return None
  
     def get_forcast(self):
+        '''
+        Get weather forcast
+        return: Forcast object
+        '''
         try:
             data = self.get_data(forcast_url.format(self.language,self.location))
             forcast = Forcast()
@@ -84,23 +82,30 @@ class WeatherIL:
                     
             return forcast
         except Exception as e:
-            logger.error(e)
+            logger.error("Error getting forcast data " + e)
             return None   
        
     def get_hourly_forcast(self,data):
+        '''
+        Get the hourly forcast
+        '''
         hours = []
         try:
             for key in data.keys():
                 hours.append(
                     Hourly(key,self.get_weather_name_by_code(data[key]["weather_code"]),int(data[key]["temperature"]))
                 )
-        
-        except Exception as e:
-            logger.error(e)
-        finally:
             return hours
+        except Exception as e:
+            logger.error("Error getting hourly forcast" + e)
+            return None
+
 
     def get_radar_images(self):
+        '''
+        Get the list of images for Satellite and Radar
+        return: RadarSatellite objects with the lists
+        '''
         images_url = "https://ims.gov.il"
         rs = RadarSatellite()
         try:
@@ -116,12 +121,16 @@ class WeatherIL:
 
             for key in data["data"]["types"]["EUROPE"]:
                 rs.europe_satellite_images.append(images_url + key["file_name"])
+            return rs
         except Exception as e:
-            logger.error(e)
-        finally:
+            logger.error("Error getting images. " + e)
             return rs
 
+
     def get_data(self,url):
+        '''
+        Helper method to get the Json data from ims website
+        '''
         try:
             response = requests.get(url)
             response =  json.loads(response.text)
@@ -132,6 +141,9 @@ class WeatherIL:
 
 
     def get_day_of_the_week(self,date):
+        '''
+        Converts the given date to day of the week name
+        '''
         weekday = {
             "Sunday":"ראשון",
             "Monday":"שני",
@@ -149,6 +161,9 @@ class WeatherIL:
             return day
 
     def get_weather_name_by_code(self,weather_code):
+        '''
+        Converts the weather code to name
+        '''
         if self.language == "he":
             weather = {
                 "1250": "בהיר",
@@ -204,6 +219,9 @@ class WeatherIL:
         return weather.get(str(weather_code), "nothing")
 
     def get_location_name_by_id(self,lid):
+        '''
+        Converts location id to City name
+        '''
         lid = str(lid)
         if self.language=="he":
             location = {
