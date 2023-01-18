@@ -18,8 +18,13 @@ class RadarSatellite:
         self.europe_satellite_images = europe_satellite_images
 
 
-    def create_animation(self, images: list=[]):
-        animated_image = str(uuid.uuid4()) + ".gif"
+    def create_animation(self,path: str = None, images: list=[]):
+        if path is not None and os.path.exists(path):
+            animated_image = path + "/" + str(uuid.uuid4()) + ".gif"
+        else:
+            animated_image = os.path.realpath(os.path.dirname(__file__)) + "/" + str(uuid.uuid4()) + ".gif"
+
+                
         extention = os.path.splitext(images[0])[1]
 
         if not os.path.exists("images"):
