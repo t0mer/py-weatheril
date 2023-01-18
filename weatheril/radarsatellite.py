@@ -29,13 +29,17 @@ class RadarSatellite:
 
         if not os.path.exists("images"):
             os.makedirs("images")
-        for image in images:
-            file = requests.get(image)
-            open("images/" + os.path.basename(urlparse(image).path), "wb").write(file.content)
-        frames = [Image.open(image) for image in glob.glob("images/*" + extention)]
+
+        for idx, item in enumerate(images):
+            file = requests.get(images[idx])
+            open("images/" + os.path.basename(urlparse(images[idx]).path), "wb").write(file.content)
+            images[idx] = "images/" + os.path.basename(urlparse(images[idx]).path)
+        
+        frames = [Image.open(image) for image in images]
         frame_one = frames[0]
         frame_one.save(animated_image, format="GIF", append_images=frames,save_all=True, loop=0)
 
         for image in images:
-            os.remove("images/" + os.path.basename(urlparse(image).path))
+            print(image)
+            os.remove(image)
         return animated_image
