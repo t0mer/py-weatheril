@@ -7,7 +7,7 @@ with open("README.md", "r", encoding="UTF-8") as f:
 
 setup_args = dict(
     name='weatheril',
-    version='0.5.0',
+    version='0.5.1',
     description='Israel Meteorological Service unofficial python api wrapper',
     long_description_content_type="text/markdown",
     long_description=readme,
@@ -26,7 +26,8 @@ setup_args = dict(
     install_requires=["requests",
                     "pillow",
                     "pandas",
-                    "urllib3"],
+                    "urllib3",
+                    "loguru"],
     classifiers=[
     "Intended Audience :: Developers",
     "Topic :: Software Development :: Build Tools",
