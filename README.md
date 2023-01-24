@@ -38,3 +38,99 @@ pip3 install --upgrade weatheril
 ```
 
 ### Working with the API
+
+weatheril can be configured to retrive forcast information for specific location. when initiating the library you must set the location id and language (Currently only he and en are supported)
+
+```python
+from weatheril import *
+weather = WeatherIL(21,"he")
+```
+
+In the above example i set **Raanana** as the location and **Hebrew** as language. Full locations list in the table below.
+
+
+
+| Id | Location |
+| ------------ | ----------- |
+| 1| Jerusalem| 
+| 2| Tel Aviv - Yafo| 
+| 3| Haifa| 
+| 4| Rishon le Zion| 
+| 5| Petah Tiqva| 
+| 6| Ashdod| 
+| 7| Netania| 
+| 8| Beer Sheva| 
+| 9| Bnei Brak| 
+| 10| Holon| 
+| 11| Ramat Gan| 
+| 12| Asheqelon| 
+| 13| Rehovot| 
+| 14| Bat Yam| 
+| 15| Bet Shemesh| 
+| 16| Kfar Sava| 
+| 17| Herzliya| 
+| 18| Hadera| 
+| 19| Modiin| 
+| 20| Ramla| 
+| 21| Raanana| 
+| 22| Modiin Illit| 
+| 23| Rahat| 
+| 24| Hod Hasharon| 
+| 25| Givatayim| 
+| 26| Kiryat Ata| 
+| 27| Nahariya| 
+| 28| Beitar Illit| 
+| 29| Um al-Fahm| 
+| 30| Kiryat Gat| 
+| 31| Eilat| 
+| 32| Rosh Haayin| 
+| 33| Afula| 
+| 34| Nes-Ziona| 
+| 35| Akko| 
+| 36| Elad| 
+| 37| Ramat Hasharon| 
+| 38| Karmiel| 
+| 39| Yavneh| 
+| 40| Tiberias| 
+| 41| Tayibe| 
+| 42| Kiryat Motzkin| 
+| 43| Shfaram| 
+| 44| Nof Hagalil| 
+| 45| Kiryat Yam| 
+| 46| Kiryat Bialik| 
+| 47| Kiryat Ono| 
+| 48| Maale Adumim| 
+| 49| Or Yehuda| 
+| 50| Zefat| 
+| 51| Netivot| 
+| 52| Dimona| 
+| 53| Tamra| ,
+| 54| Sakhnin| 
+| 55| Yehud| 
+| 56| Baka al-Gharbiya| 
+| 57| Ofakim| 
+| 58| Givat Shmuel| 
+| 59| Tira| 
+| 60| Arad| 
+| 61| Migdal Haemek| 
+| 62| Sderot| 
+| 63| Araba| 
+| 64| Nesher| 
+| 65| Kiryat Shmona| 
+| 66| Yokneam Illit| 
+| 67| Kafr Qassem| 
+| 68| Kfar Yona| 
+| 69| Qalansawa| 
+| 70| Kiryat Malachi| 
+| 71| Maalot-Tarshiha| 
+| 72| Tirat Carmel| 
+| 73| Ariel| 
+| 74| Or Akiva| 
+| 75| Bet Shean| 
+| 76| Mizpe Ramon| 
+| 77| Lod| 
+| 78| Nazareth| 
+| 79| Qazrin| 
+| 80| En Gedi| 
+
+
