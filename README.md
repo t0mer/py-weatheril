@@ -155,6 +155,6 @@ weather = WeatherIL(21,"he")
 images = weather.get_radar_images()
 animated = create_animation(images = i.middle_east_satellite_images)
 ```
-The function will return the path to the created image.
+The function will return the path for the created image.
 
 [![Sattelite](https://github.com/t0mer/py-weatheril/blob/main/screenshots/animated.gif?raw=true "Sattelite")](https://github.com/t0mer/py-weatheril/blob/main/screenshots/animated.gif?raw=true "Sattelite")
