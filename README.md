@@ -37,7 +37,7 @@ pip install  --upgrade weatheril
 pip3 install --upgrade weatheril
 ```
 
-### Working with the API
+## Working with the API
 
 weatheril can be configured to retrive forcast information for specific location. when initiating the library you must set the location id and language (Currently only he and en are supported)
 
@@ -134,3 +134,26 @@ In the above example i set **Raanana** as the location and **Hebrew** as languag
 | 80| En Gedi| 
 
 
+### Get Sattelite and Radar Images
+
+```python
+from weatheril import *
+weather = WeatherIL(21,"he")
+images = weather.get_radar_images()
+```
+The get_radar_images will retun an object with four lists:
+* imsradar_images - Rain radar images (IMS).
+* radar_images - Radar images.
+* middle_east_satellite_images - Middel East weather sattelite images.
+* europe_satellite_images - Eourope weather sattelite images.
+
+You can also create animateg gif from this images lists by using the create_animation method as follows:
+
+```python
+from weatheril import *
+weather = WeatherIL(21,"he")
+images = weather.get_radar_images()
+animated = create_animation(images = i.middle_east_satellite_images)
+```
+The function will return the path to the created image.
+ 
