@@ -134,7 +134,7 @@ In the above example i set **Raanana** as the location and **Hebrew** as languag
 | 80| En Gedi| 
 
 
-### Get Sattelite and Radar Images
+### Get Satellite and Radar Images
 
 ```python
 from weatheril import *
@@ -158,3 +158,86 @@ animated = create_animation(images = i.middle_east_satellite_images)
 The function will return the path for the created image.
 
 [![Sattelite](https://github.com/t0mer/py-weatheril/blob/main/screenshots/animated.gif?raw=true "Sattelite")](https://github.com/t0mer/py-weatheril/blob/main/screenshots/animated.gif?raw=true "Sattelite")
+
+
+
+### Get current weather status for given location
+
+```python
+from weatheril import *
+weather = WeatherIL(21,"he")
+current = weather.get_current_analysis()
+```
+
+The result will be a weather object containing the data requested:
+* Location.
+* Humidity.
+* Rain.
+* Temperature.
+* Wind speed.
+* Feels like.
+* Json result
+
+```json
+       "33": {
+            "id": "1601809",
+            "lid": "33",
+            "forecast_time": "2023-01-25 16:00:00",
+            "type": "analysis",
+            "main_hour": "0",
+            "heat_stress": "17",
+            "relative_humidity": "58",
+            "due_point_Temp": "11",
+            "rain": null,
+            "temperature": "20",
+            "wind_direction_id": "15",
+            "wind_speed": "2",
+            "wind_chill": "20",
+            "weather_code": null,
+            "heat_stress_level": "0",
+            "feels_like": "20",
+            "min_temp": null,
+            "max_temp": null,
+            "modified": "2023-01-25 15:55:00",
+            "created": "2023-01-22 11:50:05",
+            "u_v_index": "0",
+            "u_v_level": "L",
+            "u_v_i_max": null,
+            "u_v_i_factor": null
+        }
+```
+
+### Get weather forcast
+
+
+```python
+from weatheril import *
+weather = WeatherIL(21,"he")
+forcats = weather.get_forcast()
+```
+
+This method wil return forcast object that includes weather forcast for the new 5 days. The object contains data on Coutry level and also on give location Forcast >> Daily >> Hourly.
+
+```python
+
+class Forcast:
+    days: list
+
+class Daily:
+    date: datetime
+    location: str
+    day: str
+    weather: str
+    minimum_temperature: int
+    maximum_temperature: int
+    maximum_uvi: int
+    hours: list
+    description: str
+
+class Hourly:
+    hour: str
+    weather: str
+    temperature: int
+
+
+```
