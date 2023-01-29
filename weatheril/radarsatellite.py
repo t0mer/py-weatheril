@@ -19,16 +19,19 @@ class RadarSatellite:
         self.europe_satellite_images = europe_satellite_images
 
 
-    def create_animation(self,path: str = None, images: list=[]):
+    def create_animation(self,path: str = None, animated_file:str = "", images: list=[]):
         '''
         This method will download the images needed to create animated Radar / Satellite image
         parameters:
             >>> path: path to save the animated image. if path wil not be provided, the default path will be the current one.
+            >>> animated_file: The name of the animated file 
             >>> images: the list of images for creating the animation.
         '''
         try:
+            if not animated_file or animated_file == "":
+                animated_file = str(uuid.uuid4()) + ".gif"
             if path is not None and os.path.exists(path):
-                animated_image = path + "/" + str(uuid.uuid4()) + ".gif"
+                animated_image = path + "/" + animated_file
             else:
                 animated_image = os.path.realpath(os.path.dirname(__file__)) + "/" + str(uuid.uuid4()) + ".gif"
 
