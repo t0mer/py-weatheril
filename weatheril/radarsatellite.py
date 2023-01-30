@@ -45,15 +45,14 @@ class RadarSatellite:
 
             for idx, item in enumerate(images):
                 file = requests.get(images[idx])
-                open(tempfile.gettempdir() + os.path.basename(urlparse(images[idx]).path), "wb").write(file.content)
-                images[idx] = tempfile.gettempdir() + os.path.basename(urlparse(images[idx]).path)
+                open(tempfile.gettempdir() + "/" + os.path.basename(urlparse(images[idx]).path), "wb").write(file.content)
+                images[idx] = tempfile.gettempdir() + "/" +  os.path.basename(urlparse(images[idx]).path)
             
             frames = [Image.open(image) for image in images]
             frame_one = frames[0]
-            frame_one.save(animated_image, format="GIF", append_images=frames,save_all=True, loop=0)
+            frame_one.save(animated_image, format="GIF", append_images=frames,save_all=True, duration=4, loop=0)
 
             for image in images:
-                print(image)
                 os.remove(image)
             return animated_image
         except Exception as e:
