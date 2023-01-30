@@ -153,12 +153,22 @@ You can also create animateg gif from this images lists by using the create_anim
 from weatheril import *
 weather = WeatherIL(21,"he")
 images = weather.get_radar_images()
-animated = create_animation(images = i.middle_east_satellite_images)
+animated = images.create_animation(images = images.middle_east_satellite_images, animated_file = "file.gif", path="/tmp")
 ```
 The function will return the path for the created image.
 
-[![Sattelite](https://github.com/t0mer/py-weatheril/blob/main/screenshots/animated.gif?raw=true "Sattelite")](https://github.com/t0mer/py-weatheril/blob/main/screenshots/animated.gif?raw=true "Sattelite")
+**Optional**
+You can use the following function to create animated gifs for all images
 
+```python
+from weatheril import *
+weather = WeatherIL(21,"he")
+images = weather.get_radar_images()
+images.generate_images(path="Path to store the images")
+```
+
+
+[![Sattelite](https://github.com/t0mer/py-weatheril/blob/main/screenshots/animated.gif?raw=true "Sattelite")](https://github.com/t0mer/py-weatheril/blob/main/screenshots/animated.gif?raw=true "Sattelite")
 
 
 ### Get current weather status for given location

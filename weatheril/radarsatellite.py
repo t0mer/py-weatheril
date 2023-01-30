@@ -1,10 +1,12 @@
 import os
 import glob
-import requests
 import uuid
+import tempfile
+import requests
 from PIL import Image
 from loguru import logger
 from urllib.parse import urlparse
+
 
 class RadarSatellite:
     imsradar_images: list
@@ -19,7 +21,15 @@ class RadarSatellite:
         self.europe_satellite_images = europe_satellite_images
 
 
-    def create_animation(self,path: str = None, animated_file:str = "", images: list=[]):
+    def generate_images(self,path:str = ""):
+        self.create_animation("imsradar.gif",self.imsradar_images,path)
+        self.create_animation("radar.gif",self.radar_images,path)
+        self.create_animation("middle_east.gif",self.middle_east_satellite_images,path)
+        self.create_animation("europe.gif",self.europe_satellite_images,path)
+        
+
+
+    def create_animation(self, animated_file:str, images: list,path:str ):
         '''
         This method will download the images needed to create animated Radar / Satellite image
         parameters:
@@ -28,23 +38,15 @@ class RadarSatellite:
             >>> images: the list of images for creating the animation.
         '''
         try:
-            if not animated_file or animated_file == "":
-                animated_file = str(uuid.uuid4()) + ".gif"
-            if path is not None and os.path.exists(path):
-                animated_image = path + "/" + animated_file
+            if os.path.exists(path):
+               animated_image = path + "/" + animated_file
             else:
-                animated_image = os.path.realpath(os.path.dirname(__file__)) + "/" + str(uuid.uuid4()) + ".gif"
-
-                    
-            extention = os.path.splitext(images[0])[1]
-
-            if not os.path.exists("images"):
-                os.makedirs("images")
+                animated_image = os.path.realpath(os.path.dirname(__file__)) + "/" + animated_file
 
             for idx, item in enumerate(images):
                 file = requests.get(images[idx])
-                open("images/" + os.path.basename(urlparse(images[idx]).path), "wb").write(file.content)
-                images[idx] = "images/" + os.path.basename(urlparse(images[idx]).path)
+                open(tempfile.gettempdir() + os.path.basename(urlparse(images[idx]).path), "wb").write(file.content)
+                images[idx] = tempfile.gettempdir() + os.path.basename(urlparse(images[idx]).path)
             
             frames = [Image.open(image) for image in images]
             frame_one = frames[0]
