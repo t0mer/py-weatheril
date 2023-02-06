@@ -45,7 +45,7 @@ class WeatherIL:
                                 json = weather_data)
             return weather
         except Exception as e:
-            logger.error("Error getting current analysis " + e)
+            logger.error("Error getting current analysis " + str(e))
             return None
  
     def get_forcast(self):
@@ -82,7 +82,7 @@ class WeatherIL:
                     
             return forcast
         except Exception as e:
-            logger.error("Error getting forcast data " + e)
+            logger.error("Error getting forcast data " + str(e))
             return None   
        
     def get_hourly_forcast(self,data):
@@ -97,7 +97,7 @@ class WeatherIL:
                 )
             return hours
         except Exception as e:
-            logger.error("Error getting hourly forcast" + e)
+            logger.error("Error getting hourly forcast" + str(e))
             return None
 
 
@@ -123,7 +123,7 @@ class WeatherIL:
                 rs.europe_satellite_images.append(images_url + key["file_name"])
             return rs
         except Exception as e:
-            logger.error("Error getting images. " + e)
+            logger.error("Error getting images. " + str(e))
             return rs
 
 
