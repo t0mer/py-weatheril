@@ -42,6 +42,8 @@ class WeatherIL:
                                 temperature=weather_data["temperature"],
                                 wind_speed=weather_data["wind_speed"],
                                 feels_like=weather_data["feels_like"],
+                                u_v_index=weather_data["u_v_index"],
+                                forecast_time=weather_data["forecast_time"],
                                 json = weather_data)
             return weather
         except Exception as e:

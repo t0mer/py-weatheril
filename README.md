@@ -186,6 +186,8 @@ The result will be a weather object containing the data requested:
 * Temperature.
 * Wind speed.
 * Feels like.
+* UV.
+* Time
 * Json result
 
 ```json
