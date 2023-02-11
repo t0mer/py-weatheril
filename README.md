@@ -3,7 +3,7 @@ weatheril is an unofficial [IMS](https://ims.gov.il) (Israel Meteorological Serv
 
 ## Features supported
 * Get current weather status.
-* Get Daily and Hourly forcast (5 days ahead).
+* Get Daily and Hourly forecast (5 days ahead).
 * Get Radar and Satellite images.
 
 
@@ -39,7 +39,7 @@ pip3 install --upgrade weatheril
 
 ## Working with the API
 
-weatheril can be configured to retrive forcast information for specific location. when initiating the library you must set the location id and language (Currently only he and en are supported)
+weatheril can be configured to retrive forecast information for specific location. when initiating the library you must set the location id and language (Currently only he and en are supported)
 
 ```python
 from weatheril import *
@@ -219,20 +219,20 @@ The result will be a weather object containing the data requested:
         }
 ```
 
-### Get weather forcast
+### Get weather forecast
 
 
 ```python
 from weatheril import *
 weather = WeatherIL(21,"he")
-forcats = weather.get_forcast()
+forcats = weather.get_forecast()
 ```
 
-This method wil return forcast object that includes weather forcast for the new 5 days. The object contains data on Coutry level and also on give location Forcast >> Daily >> Hourly.
+This method wil return forecast object that includes weather forecast for the new 5 days. The object contains data on Coutry level and also on give location Forecast >> Daily >> Hourly.
 
 ```python
 
-class Forcast:
+class Forecast:
     days: list
 
 class Daily:

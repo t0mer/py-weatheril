@@ -3,7 +3,7 @@ from json import JSONEncoder
 from datetime import datetime
 
 
-class Forcast:
+class Forecast:
     days: list
 
     def __init__(self,days: list = []):
@@ -46,7 +46,7 @@ class Hourly:
         self.temperature = temperature
 
 
-class ForcastEncoder(JSONEncoder):
+class ForecastEncoder(JSONEncoder):
     """
     Return Contact object as json
     """
