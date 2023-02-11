@@ -4,16 +4,16 @@ import json
 import requests
 import pandas as pd
 from PIL import Image
-from .forcast import *
+from .forecast import *
 from .weather import *
 from loguru import logger
 from urllib.parse import urlparse
-from .radarsatellite import RadarSatellite
+from .radar_satellite import RadarSatellite
 
 
 images_url = "https://ims.gov.il"
 locations_url = "https://ims.gov.il/{}/locations_info"
-forcast_url = "https://ims.gov.il/{}/forecast_data/{}"
+forecast_url = "https://ims.gov.il/{}/forecast_data/{}"
 radar_url = "https://ims.gov.il/{}/radar_satellite"
 current_analysis_url = "https://ims.gov.il/{}/now_analysis"
 weather_codes_url = "https://ims.gov.il/{}/weather_codes"
@@ -25,7 +25,7 @@ class WeatherIL:
         """
         Init the WeatherIL object.
         parameters:
-            >>> location: Location Id for the forcast (Table exists in the readme)
+            >>> location: Location Id for the forecast (Table exists in the readme)
             >>> language: can be he (Hebrew) or en (English). default will be he
         """
         self.language = language
@@ -52,19 +52,17 @@ class WeatherIL:
             logger.error('Error getting current analysis. ' + str(e))
             return None
  
-    def get_forcast(self):
+    def get_forecast(self):
         '''
-        Get weather forcast
-        return: Forcast object
+        Get weather forecast
+        return: Forecast object
         '''
         try:
-            logger.debug('Getting Forcast in ' + str(self.language) + ' of location ' + str(self.location))
-            data = self.get_data(forcast_url.format(self.language, self.location))
-            forcast = Forcast()
-            logger.debug('Got forcast for dates ' + data["data"].keys()[0] + ' to ' + data["data"].keys()[-1])
+            data = self.get_data(forecast_url.format(self.language,self.location))
+            forecast = Forecast()
             for key in data["data"].keys():
                     day = self.get_day_of_the_week(key)
-                    hours = self.get_hourly_forcast(data["data"][key]["hourly"])
+                    hours = self.get_hourly_forecast(data["data"][key]["hourly"])
                     if "description" in str(data):
                         try:
                             description = data["data"][key]["country"]["description"]
@@ -85,16 +83,17 @@ class WeatherIL:
                         description=description
                         
                     )
-                    forcast.days.append(daily)
+                    forecast.days.append(daily)
                     
-            return forcast
+            return forecast
         except Exception as e:
-            logger.error('Error getting forcast data. ' + str(e))
+
+            logger.error("Error getting forecast data " + str(e))
             return None   
        
-    def get_hourly_forcast(self,data):
+    def get_hourly_forecast(self,data):
         '''
-        Get the hourly forcast
+        Get the hourly forecast
         '''
         hours = []
         try:
@@ -104,7 +103,7 @@ class WeatherIL:
                 )
             return hours
         except Exception as e:
-            logger.error('Error getting hourly forcast. ' + str(e))
+            logger.error("Error getting hourly forecast" + str(e))
             return None
 
 
