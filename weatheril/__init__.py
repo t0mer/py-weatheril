@@ -73,6 +73,7 @@ class WeatherIL:
                         location = self.get_location_name_by_id(data["data"][key]["daily"]["lid"]),
                         day = day,
                         weather=self.get_weather_name_by_code(data["data"][key]["daily"]["weather_code"]),
+                        weather_code = data["data"][key]["daily"]["weather_code"],
                         minimum_temperature=data["data"][key]["daily"]["minimum_temperature"],
                         maximum_temperature=data["data"][key]["daily"]["maximum_temperature"],
                         maximum_uvi=data["data"][key]["daily"]["maximum_uvi"],

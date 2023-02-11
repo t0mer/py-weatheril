@@ -15,17 +15,19 @@ class Daily:
     location: str
     day: str
     weather: str
+    weather_code: str
     minimum_temperature: int
     maximum_temperature: int
     maximum_uvi: int
     hours: list
     description: str
 
-    def __init__(self, date: datetime, location: str, day: str,weather: str, minimum_temperature: int, maximum_temperature: int, maximum_uvi: int, description: str, hours: list = []) -> None:
+    def __init__(self, date: datetime, location: str, day: str,weather: str,weather_code: str, minimum_temperature: int, maximum_temperature: int, maximum_uvi: int, description: str, hours: list = []) -> None:
         self.date = date
         self.location = location
         self.day = day
         self.weather = weather
+        self.weather_code = weather_code
         self.minimum_temperature = minimum_temperature
         self.maximum_temperature = maximum_temperature
         self.maximum_uvi = maximum_uvi
