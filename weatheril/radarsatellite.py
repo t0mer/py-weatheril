@@ -36,9 +36,10 @@ class RadarSatellite:
         '''
         try:
             if os.path.exists(path):
-               animated_image = path + "/" + animated_file
+               animated_image_path = path + "/" + animated_file
             else:
-                animated_image = os.path.realpath(os.path.dirname(__file__)) + "/" + animated_file
+                animated_image_path = os.path.realpath(os.path.dirname(__file__)) + "/" + animated_file
+            logger.debug('Creating ' + animated_file + ' animation at: ' + animated_image_path)
 
             for idx, item in enumerate(images):
                 file = requests.get(images[idx])
@@ -47,11 +48,11 @@ class RadarSatellite:
             
             frames = [Image.open(image) for image in images]
             frame_one = frames[0]
-            frame_one.save(animated_image, format="GIF", append_images=frames,save_all=True, duration=4, loop=0)
+            frame_one.save(animated_image_path, format="GIF", append_images=frames,save_all=True, duration=4, loop=0)
 
             for image in images:
                 os.remove(image)
-            return animated_image
+            return animated_image_path
         except Exception as e:
-            logger.error("Error creating animation. " + str(e))
+            logger.error('Error creating ' + animated_file + ' animation. ' + str(e))
             return None

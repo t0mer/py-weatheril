@@ -11,7 +11,7 @@ from urllib.parse import urlparse
 from .radarsatellite import RadarSatellite
 
 
-
+images_url = "https://ims.gov.il"
 locations_url = "https://ims.gov.il/{}/locations_info"
 forcast_url = "https://ims.gov.il/{}/forecast_data/{}"
 radar_url = "https://ims.gov.il/{}/radar_satellite"
@@ -33,8 +33,10 @@ class WeatherIL:
     
     def get_current_analysis(self):
         try:
+            logger.debug('Getting current analysis')
             data = self.get_data(current_analysis_url.format(self.language))
             weather_data = data["data"][self.location]
+            logger.debug('Got current analysis for location ' + str(self.location))
             weather = Weather(lid=weather_data["lid"],
                                 location=self.get_location_name_by_id(weather_data["lid"]),
                                 humidity=weather_data["relative_humidity"],
@@ -47,7 +49,7 @@ class WeatherIL:
                                 json = weather_data)
             return weather
         except Exception as e:
-            logger.error("Error getting current analysis " + str(e))
+            logger.error('Error getting current analysis. ' + str(e))
             return None
  
     def get_forcast(self):
@@ -56,8 +58,10 @@ class WeatherIL:
         return: Forcast object
         '''
         try:
-            data = self.get_data(forcast_url.format(self.language,self.location))
+            logger.debug('Getting Forcast in ' + str(self.language) + ' of location ' + str(self.location))
+            data = self.get_data(forcast_url.format(self.language, self.location))
             forcast = Forcast()
+            logger.debug('Got forcast for dates ' + data["data"].keys()[0] + ' to ' + data["data"].keys()[-1])
             for key in data["data"].keys():
                     day = self.get_day_of_the_week(key)
                     hours = self.get_hourly_forcast(data["data"][key]["hourly"])
@@ -85,7 +89,7 @@ class WeatherIL:
                     
             return forcast
         except Exception as e:
-            logger.error("Error getting forcast data " + str(e))
+            logger.error('Error getting forcast data. ' + str(e))
             return None   
        
     def get_hourly_forcast(self,data):
@@ -100,7 +104,7 @@ class WeatherIL:
                 )
             return hours
         except Exception as e:
-            logger.error("Error getting hourly forcast" + str(e))
+            logger.error('Error getting hourly forcast. ' + str(e))
             return None
 
 
@@ -109,9 +113,9 @@ class WeatherIL:
         Get the list of images for Satellite and Radar
         return: RadarSatellite objects with the lists
         '''
-        images_url = "https://ims.gov.il"
         rs = RadarSatellite()
         try:
+            logger.debug('Getting radar images')
             data = self.get_data(radar_url.format(self.language))
             for key in data["data"]["types"]["IMSRadar"]:
                 rs.imsradar_images.append(images_url + key["file_name"])
@@ -124,9 +128,15 @@ class WeatherIL:
 
             for key in data["data"]["types"]["EUROPE"]:
                 rs.europe_satellite_images.append(images_url + key["file_name"])
+
+            logger.debug(f"\
+                Got: {len(rs.imsradar_images)} IMS Radar Images;\
+                {len(rs.radar_images)} Radar Images;\
+                {len(rs.middle_east_satellite_images)} Middle East Satellite Images;\
+                {len(rs.europe_satellite_images)} European Satellite Images")
             return rs
         except Exception as e:
-            logger.error("Error getting images. " + str(e))
+            logger.error('Error getting images. ' + str(e))
             return rs
 
 
@@ -139,7 +149,7 @@ class WeatherIL:
             response =  json.loads(response.text)
             return response
         except Exception as e:
-            logger.error("Error getting data. " + str(e))
+            logger.error('Error getting data. ' + str(e))
             return ""
 
 
