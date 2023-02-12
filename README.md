@@ -1,7 +1,7 @@
 # weatheril
 [![Downloads](https://static.pepy.tech/personalized-badge/weatheril?period=total&units=international_system&left_color=blue&right_color=green&left_text=Downloads)](https://pepy.tech/project/weatheril) 
 [![DownloaFormatds](https://img.shields.io/pypi/v/weatheril)](https://img.shields.io/pypi/v/weatheril)
-[![DownloaFormatds](https://img.shields.io/pypi/format/weatheril)](https://img.shields.io/pypi/format/weatheril)
+[![DownloaFormatds](https://img.shields.io/pypi/format/weatheril)](https://img.shields.io/pypi/format/weatheril) [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=techblog_weatheril&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=techblog_weatheril)
 
 
 
