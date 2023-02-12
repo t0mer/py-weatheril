@@ -38,12 +38,14 @@ class Daily:
 class Hourly:
     hour: str
     weather: str
+    weather_code: str
     temperature: int
 
-    def __init__(self,hour: str, weather: str, temperature: int) -> None:
+    def __init__(self,hour: str, weather: str,weather_code: str, temperature: int) -> None:
         self.hour = hour
         self.weather = weather
         self.temperature = temperature
+        self.weather_code = weather_code
 
 
 class ForecastEncoder(JSONEncoder):

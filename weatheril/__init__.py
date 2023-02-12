@@ -99,7 +99,7 @@ class WeatherIL:
         try:
             for key in data.keys():
                 hours.append(
-                    Hourly(key,self.get_weather_name_by_code(data[key]["weather_code"]),int(data[key]["temperature"]))
+                    Hourly(key,self.get_weather_name_by_code(data[key]["weather_code"]),data[key]["weather_code"],int(data[key]["temperature"]))
                 )
             return hours
         except Exception as e:
