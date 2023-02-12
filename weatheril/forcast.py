@@ -37,11 +37,13 @@ class Daily:
 
 class Hourly:
     hour: str
+    forecast_time: datetime
     weather: str
     temperature: int
 
-    def __init__(self,hour: str, weather: str, temperature: int) -> None:
+    def __init__(self,hour: str, forecast_time: datetime, weather: str, temperature: int) -> None:
         self.hour = hour
+        self.forecast_time = forecast_time
         self.weather = weather
         self.temperature = temperature
 

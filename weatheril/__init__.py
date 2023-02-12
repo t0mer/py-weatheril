@@ -9,6 +9,7 @@ from .weather import *
 from loguru import logger
 from urllib.parse import urlparse
 from .radarsatellite import RadarSatellite
+from datetime import datetime
 
 
 
@@ -69,7 +70,7 @@ class WeatherIL:
                     else:
                         description = ""
                     daily = Daily(
-                        date = key,
+                        date = datetime.strptime(key, "%Y-%m-%d")
                         location = self.get_location_name_by_id(data["data"][key]["daily"]["lid"]),
                         day = day,
                         weather=self.get_weather_name_by_code(data["data"][key]["daily"]["weather_code"]),
@@ -96,7 +97,7 @@ class WeatherIL:
         try:
             for key in data.keys():
                 hours.append(
-                    Hourly(key,self.get_weather_name_by_code(data[key]["weather_code"]),int(data[key]["temperature"]))
+                    Hourly(key,datetime.strptime(data[key]["forecast_time"], "%Y-%m-%d %H:%M:%S"),self.get_weather_name_by_code(data[key]["weather_code"]),int(data[key]["temperature"]))
                 )
             return hours
         except Exception as e:
