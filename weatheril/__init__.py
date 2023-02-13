@@ -246,7 +246,7 @@ class WeatherIL:
             >>> language: can be he (Hebrew) or en (English). default will be he
         """
         self.language = language
-        self.location = location
+        self.location = str(location)
 
     def get_current_analysis(self):
         try:
