@@ -46,7 +46,9 @@ class WeatherIL:
                                 feels_like=weather_data["feels_like"],
                                 u_v_index=weather_data["u_v_index"],
                                 forecast_time=weather_data["forecast_time"],
-                                json = weather_data)
+                                json = weather_data,
+                                weather_code = weather_data["weather_code"],
+                                weather = self.get_weather_name_by_code(weather_data["weather_code"]))
             return weather
         except Exception as e:
             logger.error('Error getting current analysis. ' + str(e))
@@ -71,7 +73,7 @@ class WeatherIL:
                     else:
                         description = ""
                     daily = Daily(
-                        date = datetime.strptime(key, "%Y-%m-%d")
+                        date = datetime.strptime(key, "%Y-%m-%d"),
                         location = self.get_location_name_by_id(data["data"][key]["daily"]["lid"]),
                         day = day,
                         weather=self.get_weather_name_by_code(data["data"][key]["daily"]["weather_code"]),
@@ -81,8 +83,7 @@ class WeatherIL:
                         maximum_uvi=data["data"][key]["daily"]["maximum_uvi"],
                         hours=hours,
                         description=description
-                        
-                    )
+                        )
                     forecast.days.append(daily)
                     
             return forecast

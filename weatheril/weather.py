@@ -1,5 +1,5 @@
 class Weather:
-    def __init__(self, lid, location,humidity,rain,temperature,wind_speed,feels_like,forecast_time,u_v_index,json):
+    def __init__(self, lid, location,humidity,rain,temperature,wind_speed,feels_like,forecast_time,u_v_index,json,weather_code,weather):
         self.lid = lid
         self.location = location
         self.humidity = humidity
@@ -10,3 +10,5 @@ class Weather:
         self.u_v_index = u_v_index
         self.forecast_time = forecast_time
         self.json = json
+        self.weather_code = weather_code
+        self.weather = weather
