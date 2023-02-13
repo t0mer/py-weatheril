@@ -4,24 +4,11 @@ from datetime import datetime
 
 
 class Forecast:
-    days: list
-
     def __init__(self,days: list = []):
         self.days = days
 
 
 class Daily:
-    date: datetime
-    location: str
-    day: str
-    weather: str
-    weather_code: str
-    minimum_temperature: int
-    maximum_temperature: int
-    maximum_uvi: int
-    hours: list
-    description: str
-
     def __init__(self, date: datetime, location: str, day: str,weather: str,weather_code: str, minimum_temperature: int, maximum_temperature: int, maximum_uvi: int, description: str, hours: list = []) -> None:
         self.date = date
         self.location = location
@@ -36,12 +23,6 @@ class Daily:
 
 
 class Hourly:
-    hour: str
-    forecast_time: datetime
-    weather: str
-    weather_code: str
-    temperature: int
-
     def __init__(self,hour: str,forecast_time: datetime,weather: str,weather_code: str, temperature: int) -> None:
         self.hour = hour
         self.forecast_time = forecast_time
