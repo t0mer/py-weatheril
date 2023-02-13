@@ -4,7 +4,7 @@ import json
 import requests
 import pandas as pd
 from PIL import Image
-from .forecast import *
+from .forecast import Forecast, Daily
 from .weather import *
 from loguru import logger
 from urllib.parse import urlparse
@@ -30,7 +30,7 @@ class WeatherIL:
         """
         self.language = language
         self.location = location
-    
+
     def get_current_analysis(self):
         try:
             logger.debug('Getting current analysis')
@@ -59,7 +59,7 @@ class WeatherIL:
         '''
         try:
             data = self.get_data(forecast_url.format(self.language,self.location))
-            forecast = Forecast()
+            days = []
             for key in data["data"].keys():
                     day = self.get_day_of_the_week(key)
                     hours = self.get_hourly_forecast(data["data"][key]["hourly"])
@@ -81,16 +81,16 @@ class WeatherIL:
                         maximum_uvi=data["data"][key]["daily"]["maximum_uvi"],
                         hours=hours,
                         description=description
-                        
+
                     )
-                    forecast.days.append(daily)
-                    
-            return forecast
+                    days.append(daily)
+
+            return Forecast(days)
         except Exception as e:
 
             logger.error("Error getting forecast data " + str(e))
-            return None   
-       
+            return None
+
     def get_hourly_forecast(self,data):
         '''
         Get the hourly forecast
@@ -164,7 +164,6 @@ class WeatherIL:
             "Thursday":"חמישי",
             "Friday":"שישי",
             "Saturday":"שבת",
-            
         }
         day = pd.Timestamp(date).day_name()
         if self.language=="he":
