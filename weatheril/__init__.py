@@ -4,7 +4,7 @@ import json
 import requests
 import pandas as pd
 from PIL import Image
-from .forecast import Forecast, Daily
+from .forecast import Forecast, Daily, Hourly
 from .weather import *
 from loguru import logger
 from urllib.parse import urlparse
@@ -302,12 +302,10 @@ class WeatherIL:
                         description=description
 
                         )
-                    forecast.days.append(daily)
-                    
-            return forecast
+                    days.append(daily)
+            return Forecast(days)
 
         except Exception as e:
-
             logger.error("Error getting forecast data " + str(e))
             return None
 
