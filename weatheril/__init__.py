@@ -18,6 +18,9 @@ radar_url = "https://ims.gov.il/{}/radar_satellite"
 current_analysis_url = "https://ims.gov.il/{}/now_analysis"
 weather_codes_url = "https://ims.gov.il/{}/weather_codes"
 
+# ims.gov.il does not support ipv6 yet, `requests` use ipv6 by default
+# and wait for timeout before trying ipv4, so we have to disable ipv6
+requests.packages.urllib3.util.connection.HAS_IPV6=False
 
 HE_WEATHER_CODES = {
         "1250": "בהיר",
