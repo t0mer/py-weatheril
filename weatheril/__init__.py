@@ -13,7 +13,7 @@ from datetime import datetime
 
 images_url = "https://ims.gov.il"
 locations_url = "https://ims.gov.il/{}/locations_info"
-forecast_url = "https://ims.gov.il/{}/forecast_data/{}"
+forecast_url = "https://ims.gov.il/{}/full_forecast_data/{}"
 radar_url = "https://ims.gov.il/{}/radar_satellite"
 current_analysis_url = "https://ims.gov.il/{}/now_analysis"
 weather_codes_url = "https://ims.gov.il/{}/weather_codes"
@@ -317,8 +317,14 @@ class WeatherIL:
         try:
             for key in data.keys():
                 hours.append(
-                    Hourly(key,datetime.strptime(data[key]["forecast_time"], "%Y-%m-%d %H:%M:%S"),self.get_weather_description_by_code(data[key]["weather_code"]),data[key]["weather_code"],int(data[key]["temperature"]))
-                )
+                    Hourly(key,datetime.strptime(data[key]["forecast_time"],"%Y-%m-%d %H:%M:%S"),
+                    self.get_weather_description_by_code(data[key]["weather_code"]),
+                    data[key]["weather_code"],int(data[key]["temperature"]),
+                    heat_stress=int(data[key]["heat_stress"]),
+                    relative_humidity=int(data[key]["relative_humidity"]),
+                    rain=float(data[key]["relative_humidity"]),
+                    wind_speed=int(data[key]["wind_speed"]),
+                    wind_direction=int(data[key]["wind_direction_id"])))
             return hours
         except Exception as e:
             logger.error("Error getting hourly forecast" + str(e))

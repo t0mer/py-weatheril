@@ -22,13 +22,21 @@ class Daily:
         self.hours = hours
 
 
+
 class Hourly:
-    def __init__(self,hour: str,forecast_time: datetime,weather: str,weather_code: str, temperature: int) -> None:
+    def __init__(self,hour: str,forecast_time: datetime,weather: str,weather_code: str, temperature: int,heat_stress:int,relative_humidity: int,rain: float, wind_speed:int, wind_direction:str ) -> None:
         self.hour = hour
         self.forecast_time = forecast_time
         self.weather = weather
         self.temperature = temperature
         self.weather_code = weather_code
+        self.heat_stress = heat_stress
+        self.relative_humidity = relative_humidity
+        self.rain = rain
+        self.wind_speed = wind_speed
+        self.wind_direction = wind_direction
+
+
 
 
 class ForecastEncoder(JSONEncoder):
