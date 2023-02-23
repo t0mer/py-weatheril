@@ -2876,7 +2876,6 @@ class Utils:
                                     "16":"338",
                                     "17":"0"}
 
-
     def get_location_name_by_id(self,lid):
         '''
         Converts location id to City name
