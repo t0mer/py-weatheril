@@ -36,8 +36,137 @@ class WeatherIL:
         self.language = language
         self.location = str(location)
 
+    def get_current_analysis(self):
+        try:
+            logger.debug('Getting current analysis')
+            data = self.get_data(current_analysis_url.format(self.language))
+            weather_data = data["data"][self.location]
+            logger.debug('Got current analysis for location ' + str(self.location))
+            weather = Weather(lid=weather_data["lid"],
+                                location=self.get_location_name_by_id(weather_data["lid"]),
+                                humidity=weather_data["relative_humidity"],
+                                rain=weather_data["rain"],
+                                temperature=weather_data["temperature"],
+                                wind_speed=weather_data["wind_speed"],
+                                feels_like=weather_data["feels_like"],
+                                u_v_index=weather_data["u_v_index"],
+                                forecast_time=weather_data["forecast_time"],
+                                json = weather_data,
+                                weather_code = weather_data["weather_code"],
+                                description = self.get_weather_description_by_code(weather_data["weather_code"]))
+            return weather
+        except Exception as e:
+            logger.error('Error getting current analysis. ' + str(e))
+            return None
+ 
+    def get_forecast(self):
+        '''
+        Get weather forecast
+        return: Forecast object
+        '''
+        try:
+            data = self.get_data(forecast_url.format(self.language,self.location))
+            days = []
+            for key in data["data"].keys():
+                    day = self.get_day_of_the_week(key)
+                    hours = self.get_hourly_forecast(data["data"][key]["hourly"])
+                    if "description" in str(data):
+                        try:
+                            description = data["data"][key]["country"]["description"]
+                        except:
+                            description = ""
+                    else:
+                        description = ""
+                    daily = Daily(
+                        date = datetime.strptime(key, "%Y-%m-%d"),
+                        location = self.get_location_name_by_id(data["data"][key]["daily"]["lid"]),
+                        day = day,
+                        weather=self.get_weather_description_by_code(data["data"][key]["daily"]["weather_code"]),
+                        weather_code = data["data"][key]["daily"]["weather_code"],
+                        minimum_temperature=data["data"][key]["daily"]["minimum_temperature"],
+                        maximum_temperature=data["data"][key]["daily"]["maximum_temperature"],
+                        maximum_uvi=data["data"][key]["daily"]["maximum_uvi"],
+                        hours=hours,
+                        description=description
 
-        self.HE_LOCATIONS = {
+                        )
+                    days.append(daily)
+            return Forecast(days)
+
+        except Exception as e:
+            logger.error("Error getting forecast data " + str(e))
+            return None
+
+    def get_hourly_forecast(self,data):
+        '''
+        Get the hourly forecast
+        '''
+        hours = []
+        try:
+            for key in data.keys():
+                hours.append(
+                    Hourly(key,datetime.strptime(data[key]["forecast_time"],"%Y-%m-%d %H:%M:%S"),
+                    self.get_weather_description_by_code(data[key]["weather_code"]),
+                    data[key]["weather_code"],int(data[key]["temperature"]),
+                    heat_stress=int(data[key]["heat_stress"]),
+                    relative_humidity=int(data[key]["relative_humidity"]),
+                    rain=float(data[key]["relative_humidity"]),
+                    wind_speed=int(data[key]["wind_speed"]),
+                    wind_direction=self.get_wind_direction(data[key]["wind_direction_id"])))
+            return hours
+        except Exception as e:
+            logger.error("Error getting hourly forecast" + str(e))
+            return None
+
+    def get_radar_images(self):
+        '''
+        Get the list of images for Satellite and Radar
+        return: RadarSatellite objects with the lists
+        '''
+        rs = RadarSatellite()
+        try:
+            logger.debug('Getting radar images')
+            data = self.get_data(radar_url.format(self.language))
+            for key in data["data"]["types"]["IMSRadar"]:
+                rs.imsradar_images.append(images_url + key["file_name"])
+
+            for key in data["data"]["types"]["radar"]:
+                rs.radar_images.append(images_url + key["file_name"])
+
+            for key in data["data"]["types"]["MIDDLE-EAST"]:
+                rs.middle_east_satellite_images.append(images_url + key["file_name"])
+
+            for key in data["data"]["types"]["EUROPE"]:
+                rs.europe_satellite_images.append(images_url + key["file_name"])
+
+            logger.debug(f"\
+                Got: {len(rs.imsradar_images)} IMS Radar Images;\
+                {len(rs.radar_images)} Radar Images;\
+                {len(rs.middle_east_satellite_images)} Middle East Satellite Images;\
+                {len(rs.europe_satellite_images)} European Satellite Images")
+            return rs
+        except Exception as e:
+            logger.error('Error getting images. ' + str(e))
+            return rs
+
+    def get_data(self,url):
+        '''
+        Helper method to get the Json data from ims website
+        '''
+        try:
+            response = requests.get(url)
+            response =  json.loads(response.text)
+            return response
+        except Exception as e:
+            logger.error('Error getting data. ' + str(e))
+            return ""
+
+    def get_location_name_by_id(self,lid):
+        '''
+        Converts location id to City name
+        '''
+        
+        HE_LOCATIONS = {
        "1": {
             "lid": "1",
             "name": "ירושלים",
@@ -1417,7 +1546,7 @@ class WeatherIL:
         }
     }
 
-        self.EN_LOCATIONS = {
+        EN_LOCATIONS = {
         "1": {
             "lid": "1",
             "name": "Jerusalem",
@@ -2797,7 +2926,20 @@ class WeatherIL:
         }
     }
 
-        self.HE_WEATHER_CODES = {
+        lid = str(lid)
+        if self.language=="he":
+            location_map = HE_LOCATIONS
+        else:
+            location_map = EN_LOCATIONS
+        return location_map.get(lid, "Nothing")["name"]
+
+    def get_weather_description_by_code(self,weather_code):
+        
+        '''
+        Converts the weather code to name
+        '''
+        
+        HE_WEATHER_CODES = {
                 "1250": "בהיר",
                 "1220": "מעונן חלקית",
                 "1230": "מעונן",
@@ -2823,7 +2965,7 @@ class WeatherIL:
                 "1520": "שלג כבד",
             }
 
-        self.EN_WEATHER_CODES = {
+        EN_WEATHER_CODES = {
                 "1250": "Clear",
                 "1220": "Partly cloudy",
                 "1230": "Cloudy",
@@ -2849,7 +2991,17 @@ class WeatherIL:
                 "1520": "Heavy snow",
             }
 
-        self.HE_WIND_DIRECTIONS = {
+        if self.language == "he":
+            description_map = HE_WEATHER_CODES
+        else:
+            description_map = EN_WEATHER_CODES
+        return description_map.get(str(weather_code), "Nothing")
+
+    def get_wind_direction(self,direction_code):
+        '''
+        Converts the wind direction code to name
+        '''
+        HE_WIND_DIRECTIONS = {
         "360": "צפון",
         "23": "North North East",
         "45": "צפון מזרח",
@@ -2869,7 +3021,7 @@ class WeatherIL:
         "0": "צפון"
     }
 
-        self.EN_WIND_DIRECTIONS = {
+        EN_WIND_DIRECTIONS = {
         "360": "North",
         "23": "North North East",
         "45": "North East",
@@ -2889,7 +3041,7 @@ class WeatherIL:
         "0": "North"
     }
 
-        self.WIND_DIRECTIONS_IDS = {"1":"360",
+        WIND_DIRECTIONS_IDS = {"1":"360",
                                     "2":"23",
                                     "3":"45",
                                     "4":"68",
@@ -2907,164 +3059,11 @@ class WeatherIL:
                                     "16":"338",
                                     "17":"0"}
 
-
-
-    def get_current_analysis(self):
-        try:
-            logger.debug('Getting current analysis')
-            data = self.get_data(current_analysis_url.format(self.language))
-            weather_data = data["data"][self.location]
-            logger.debug('Got current analysis for location ' + str(self.location))
-            weather = Weather(lid=weather_data["lid"],
-                                location=self.get_location_name_by_id(weather_data["lid"]),
-                                humidity=weather_data["relative_humidity"],
-                                rain=weather_data["rain"],
-                                temperature=weather_data["temperature"],
-                                wind_speed=weather_data["wind_speed"],
-                                feels_like=weather_data["feels_like"],
-                                u_v_index=weather_data["u_v_index"],
-                                forecast_time=weather_data["forecast_time"],
-                                json = weather_data,
-                                weather_code = weather_data["weather_code"],
-                                description = self.get_weather_description_by_code(weather_data["weather_code"]))
-            return weather
-        except Exception as e:
-            logger.error('Error getting current analysis. ' + str(e))
-            return None
- 
-    def get_forecast(self):
-        '''
-        Get weather forecast
-        return: Forecast object
-        '''
-        try:
-            data = self.get_data(forecast_url.format(self.language,self.location))
-            days = []
-            for key in data["data"].keys():
-                    day = self.get_day_of_the_week(key)
-                    hours = self.get_hourly_forecast(data["data"][key]["hourly"])
-                    if "description" in str(data):
-                        try:
-                            description = data["data"][key]["country"]["description"]
-                        except:
-                            description = ""
-                    else:
-                        description = ""
-                    daily = Daily(
-                        date = datetime.strptime(key, "%Y-%m-%d"),
-                        location = self.get_location_name_by_id(data["data"][key]["daily"]["lid"]),
-                        day = day,
-                        weather=self.get_weather_description_by_code(data["data"][key]["daily"]["weather_code"]),
-                        weather_code = data["data"][key]["daily"]["weather_code"],
-                        minimum_temperature=data["data"][key]["daily"]["minimum_temperature"],
-                        maximum_temperature=data["data"][key]["daily"]["maximum_temperature"],
-                        maximum_uvi=data["data"][key]["daily"]["maximum_uvi"],
-                        hours=hours,
-                        description=description
-
-                        )
-                    days.append(daily)
-            return Forecast(days)
-
-        except Exception as e:
-            logger.error("Error getting forecast data " + str(e))
-            return None
-
-    def get_hourly_forecast(self,data):
-        '''
-        Get the hourly forecast
-        '''
-        hours = []
-        try:
-            for key in data.keys():
-                hours.append(
-                    Hourly(key,datetime.strptime(data[key]["forecast_time"],"%Y-%m-%d %H:%M:%S"),
-                    self.get_weather_description_by_code(data[key]["weather_code"]),
-                    data[key]["weather_code"],int(data[key]["temperature"]),
-                    heat_stress=int(data[key]["heat_stress"]),
-                    relative_humidity=int(data[key]["relative_humidity"]),
-                    rain=float(data[key]["relative_humidity"]),
-                    wind_speed=int(data[key]["wind_speed"]),
-                    wind_direction=self.get_wind_direction(data[key]["wind_direction_id"])))
-            return hours
-        except Exception as e:
-            logger.error("Error getting hourly forecast" + str(e))
-            return None
-
-    def get_radar_images(self):
-        '''
-        Get the list of images for Satellite and Radar
-        return: RadarSatellite objects with the lists
-        '''
-        rs = RadarSatellite()
-        try:
-            logger.debug('Getting radar images')
-            data = self.get_data(radar_url.format(self.language))
-            for key in data["data"]["types"]["IMSRadar"]:
-                rs.imsradar_images.append(images_url + key["file_name"])
-
-            for key in data["data"]["types"]["radar"]:
-                rs.radar_images.append(images_url + key["file_name"])
-
-            for key in data["data"]["types"]["MIDDLE-EAST"]:
-                rs.middle_east_satellite_images.append(images_url + key["file_name"])
-
-            for key in data["data"]["types"]["EUROPE"]:
-                rs.europe_satellite_images.append(images_url + key["file_name"])
-
-            logger.debug(f"\
-                Got: {len(rs.imsradar_images)} IMS Radar Images;\
-                {len(rs.radar_images)} Radar Images;\
-                {len(rs.middle_east_satellite_images)} Middle East Satellite Images;\
-                {len(rs.europe_satellite_images)} European Satellite Images")
-            return rs
-        except Exception as e:
-            logger.error('Error getting images. ' + str(e))
-            return rs
-
-    def get_data(self,url):
-        '''
-        Helper method to get the Json data from ims website
-        '''
-        try:
-            response = requests.get(url)
-            response =  json.loads(response.text)
-            return response
-        except Exception as e:
-            logger.error('Error getting data. ' + str(e))
-            return ""
-
-    def get_location_name_by_id(self,lid):
-        '''
-        Converts location id to City name
-        '''
-        lid = str(lid)
-        if self.language=="he":
-            location_map = self.HE_LOCATIONS
-        else:
-            location_map = self.EN_LOCATIONS
-        return location_map.get(lid, "Nothing")["name"]
-
-    def get_weather_description_by_code(self,weather_code):
-        
-        '''
-        Converts the weather code to name
-        '''
+        wind_direction = WIND_DIRECTIONS_IDS.get(direction_code, "Nothing")
         if self.language == "he":
-            description_map = self.HE_WEATHER_CODES
+            description_map = HE_WIND_DIRECTIONS
         else:
-            description_map = self.EN_WEATHER_CODES
-        return description_map.get(str(weather_code), "Nothing")
-
-    def get_wind_direction(self,direction_code):
-        '''
-        Converts the wind direction code to name
-        '''
-        wind_direction = self.WIND_DIRECTIONS_IDS.get(direction_code, "Nothing")
-        if self.language == "he":
-            description_map = self.HE_WIND_DIRECTIONS
-        else:
-            description_map = self.EN_WIND_DIRECTIONS
+            description_map = EN_WIND_DIRECTIONS
         return description_map.get(str(wind_direction), "Nothing")
 
     def get_day_of_the_week(self,date):
