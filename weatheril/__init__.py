@@ -2,7 +2,7 @@
 import os
 import json
 import requests
-
+import pandas as pd
 from PIL import Image
 from .forecast import Forecast, Daily, Hourly
 from .weather import *
