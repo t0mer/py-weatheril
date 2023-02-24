@@ -164,4 +164,5 @@ class WeatherIL:
             return ""
 
 
-
+    def get_location_name_by_id(self,lid):
+        return self.utils.get_location_name_by_id(lid)
