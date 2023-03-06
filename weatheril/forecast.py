@@ -1,13 +1,17 @@
+from __future__ import annotations
 from typing import Dict
 from json import JSONEncoder
 from datetime import datetime
+from dataclasses import dataclass, field
 
 
+@dataclass
 class Forecast:
     def __init__(self,days: list = []):
         self.days = days
 
 
+@dataclass
 class Daily:
     def __init__(self, date: datetime, location: str, day: str,weather: str,weather_code: str, minimum_temperature: int, maximum_temperature: int, maximum_uvi: int, description: str, hours: list = []) -> None:
         self.date = date
@@ -22,7 +26,7 @@ class Daily:
         self.hours = hours
 
 
-
+@dataclass
 class Hourly:
     def __init__(self,hour: str,forecast_time: datetime,weather: str,weather_code: str, temperature: int,heat_stress:int,relative_humidity: int,rain: float, wind_speed:int, wind_direction:str ) -> None:
         self.hour = hour
@@ -35,7 +39,6 @@ class Hourly:
         self.rain = rain
         self.wind_speed = wind_speed
         self.wind_direction = wind_direction
-
 
 
 
