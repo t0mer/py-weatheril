@@ -2,8 +2,8 @@ from __future__ import annotations
 from typing import Dict
 from json import JSONEncoder
 from datetime import datetime
-from utils import get_wind_direction, get_day_of_the_week, get_weather_description_by_code, get_location_name_by_id
 from dataclasses import dataclass, field
+from .utils import get_wind_direction, get_day_of_the_week, get_weather_description_by_code, get_location_name_by_id
 
 
 
