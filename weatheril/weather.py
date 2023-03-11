@@ -1,7 +1,9 @@
+from utils import get_location_name_by_id, get_weather_description_by_code
+
 class Weather:
-    def __init__(self, lid, location,humidity,rain,temperature,wind_speed,feels_like,forecast_time,u_v_index,json,weather_code,description):
+    def __init__(self, lid,humidity,rain,temperature,wind_speed,feels_like,forecast_time,u_v_index,json,weather_code,description):
         self.lid = lid
-        self.location = location
+        self.location = get_location_name_by_id(lid)
         self.humidity = humidity
         self.rain = rain
         self.temperature = temperature
@@ -11,4 +13,4 @@ class Weather:
         self.forecast_time = forecast_time
         self.json = json
         self.weather_code = weather_code
-        self.description = description
+        self.description = get_weather_description_by_code(weather_code)
