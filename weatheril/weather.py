@@ -1,4 +1,9 @@
+from __future__ import annotations
+from dataclasses import dataclass, field
 from utils import get_location_name_by_id, get_weather_description_by_code
+
+@dataclass
+
 
 class Weather:
     def __init__(self, lid,humidity,rain,temperature,wind_speed,feels_like,forecast_time,u_v_index,json,weather_code,description):

@@ -1,3 +1,4 @@
+from __future__ import annotations
 import os
 import glob
 import uuid
@@ -6,8 +7,9 @@ import requests
 from PIL import Image
 from loguru import logger
 from urllib.parse import urlparse
+from dataclasses import dataclass, field
 
-
+@dataclass
 class RadarSatellite:
     imsradar_images: list
     radar_images: list
