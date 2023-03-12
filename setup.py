@@ -25,7 +25,6 @@ setup_args = dict(
     python_requires=">=3.6",
     install_requires=["requests",
                     "pillow",
-                    "pandas",
                     "urllib3",
                     "loguru"],
     classifiers=[
