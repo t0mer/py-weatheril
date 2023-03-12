@@ -17,7 +17,6 @@ weatheril is an unofficial [IMS](https://ims.gov.il) (Israel Meteorological Serv
 * [Loguru](https://pypi.org/project/loguru/)
 * [Requests ](https://pypi.org/project/requests/)
 * [Pillow](https://pypi.org/project/Pillow/)
-* [pandas](https://pypi.org/project/pandas/)
 * [urllib3](https://pypi.org/project/urllib3/)
 
 
