@@ -105,7 +105,7 @@ class WeatherIL:
                            temperature=int(data[key]["temperature"]),
                            heat_stress=int(data[key]["heat_stress"]),
                            relative_humidity=int(data[key]["relative_humidity"]),
-                           rain=float(data[key]["relative_humidity"]),
+                           rain=float(data[key]["rain"]),
                            wind_speed=int(data[key]["wind_speed"]),
                            wind_direction_id=int(data[key]["wind_direction_id"])))
             return hours
