@@ -1,5 +1,8 @@
-from utils import *
+from __future__ import annotations
+from dataclasses import dataclass, field
+from .utils import *
 
+@dataclass
 class Weather:
     def __init__(self, lid,humidity,rain,temperature,wind_speed,feels_like,forecast_time,u_v_index,json,weather_code,description):
         self.lid = lid
