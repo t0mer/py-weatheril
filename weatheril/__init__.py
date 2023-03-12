@@ -83,7 +83,6 @@ class WeatherIL:
                         maximum_uvi=data["data"][key]["daily"]["maximum_uvi"],
                         hours=hours,
                         description=description
-
                         )
                     days.append(daily)
             return Forecast(days)

@@ -1,7 +1,7 @@
 from typing import Dict
 from json import JSONEncoder
 from datetime import datetime
-from utils import get_wind_direction, get_day_of_the_week, get_weather_description_by_code, get_location_name_by_id
+from utils import *
 
 
 class Forecast:
@@ -10,7 +10,7 @@ class Forecast:
 
 
 class Daily:
-    def __init__(self, date: datetime, lid: str,weather: str,weather_code: str, minimum_temperature: int, maximum_temperature: int, maximum_uvi: int, description: str, hours: list = []) -> None:
+    def __init__(self, date: datetime, lid: str, weather_code: str, minimum_temperature: int, maximum_temperature: int, maximum_uvi: int, description: str, hours: list = []) -> None:
         self.date = date
         self.lid = lid
         self.location = get_location_name_by_id(lid),
