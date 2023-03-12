@@ -1,56 +1,60 @@
 from __future__ import annotations
-from typing import Dict
-from json import JSONEncoder
-from datetime import datetime
-from .utils import *
+
 from dataclasses import dataclass, field
+from datetime import datetime
+from json import JSONEncoder
 
-
-
+from .utils import get_location_name_by_id, get_day_of_the_week, get_weather_description_by_code, get_wind_direction
 
 
 @dataclass
 class Forecast:
-    def __init__(self,days: list = []):
-        self.days = days
-
+    days: list[Daily] = field(default_factory=list)
 
 @dataclass
 class Daily:
-    def __init__(self, date: datetime, lid: str, weather_code: str, minimum_temperature: int, maximum_temperature: int, maximum_uvi: int, description: str, hours: list = []) -> None:
-        self.date = date
-        self.lid = lid
-        self.location = get_location_name_by_id(lid),
-        self.day = get_day_of_the_week(date)
-        self.weather_code = weather_code
-        self.weather = get_weather_description_by_code(weather_code)
-        self.minimum_temperature = minimum_temperature
-        self.maximum_temperature = maximum_temperature
-        self.maximum_uvi = maximum_uvi
-        self.description = description
-        self.hours = hours
+    language: str
+    date: datetime
+    lid: str
+    weather_code: str
+    minimum_temperature: int
+    maximum_temperature: int
+    maximum_uvi: int
+    description: str
+    hours: list[Hourly] = field(default_factory=list)
+    day: str = field(init=False)
+    location: str = field(init=False)
+    weather: str = field(init=False)
 
+    def __post_init__(self):
+        self.day = get_day_of_the_week(self.language, self.date)
+        self.location = get_location_name_by_id(self.language, self.lid)
+        self.weather = get_weather_description_by_code(self.language, self.weather_code)
 
 @dataclass
 class Hourly:
-    def __init__(self,hour: str,forecast_time: datetime,weather_code: str, temperature: int,heat_stress:int,relative_humidity: int,rain: float, wind_speed:int, wind_direction_id:int ) -> None:
-        self.hour = hour
-        self.forecast_time = forecast_time
-        self.temperature = temperature
-        self.weather_code = weather_code
-        self.weather = get_weather_description_by_code(weather_code)
-        self.heat_stress = heat_stress
-        self.relative_humidity = relative_humidity
-        self.rain = rain
-        self.wind_speed = wind_speed
-        self.wind_direction_id = wind_direction_id
-        self.wind_direction = get_wind_direction(self.wind_direction_id)
+    language: str
+    hour: str
+    forecast_time: datetime
+    temperature: int
+    weather_code: str
+    heat_stress: int
+    relative_humidity: int
+    rain: float
+    wind_speed: int
+    wind_direction_id: int
+    weather: str = field(init=False)
+    wind_direction: str = field(init=False)
 
+    def __post_init__(self):
+        self.weather = get_weather_description_by_code(self.language, self.weather_code)
+        self.wind_direction = get_wind_direction(self.language, self.wind_direction_id)
 
 
 class ForecastEncoder(JSONEncoder):
     """
     Return Contact object as json
     """
+
     def default(self, o):
         return o.__dict__

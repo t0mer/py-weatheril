@@ -1,19 +1,28 @@
 from __future__ import annotations
+
 from dataclasses import dataclass, field
-from .utils import *
+from datetime import datetime
+
+from .utils import get_location_name_by_id, get_weather_description_by_code
+
 
 @dataclass
 class Weather:
-    def __init__(self, lid,humidity,rain,temperature,wind_speed,feels_like,forecast_time,u_v_index,json,weather_code,description):
-        self.lid = lid
-        self.location = get_location_name_by_id(lid)
-        self.humidity = humidity
-        self.rain = rain
-        self.temperature = temperature
-        self.wind_speed = wind_speed
-        self.feels_like = feels_like
-        self.u_v_index = u_v_index
-        self.forecast_time = forecast_time
-        self.json = json
-        self.weather_code = weather_code
-        self.description = get_weather_description_by_code(weather_code)
+    langauge: str
+    lid: str
+    humidity: int
+    rain: float
+    temperature: int
+    wind_speed: int
+    feels_like: int
+    forecast_time: datetime
+    u_v_index: int
+    json: str
+    weather_code: str
+    location: str = field(init=False)
+    description: str = field(init=False)
+
+    def __post_init__(self):
+        self.location = get_location_name_by_id(self.langauge, self.lid)
+        self.description = get_weather_description_by_code(self.langauge, self.weather_code)
+
