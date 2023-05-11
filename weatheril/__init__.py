@@ -1,6 +1,5 @@
 """Israel Meteorological Service unofficial python api wrapper"""
 import json
-from datetime import datetime
 
 import requests
 from loguru import logger
@@ -13,7 +12,7 @@ images_url = "https://ims.gov.il"
 locations_url = "https://ims.gov.il/{}/locations_info"
 forecast_url = "https://ims.gov.il/{}/full_forecast_data/{}"
 radar_url = "https://ims.gov.il/{}/radar_satellite"
-current_analysis_url = "https://ims.gov.il/{}/now_analysis"
+current_analysis_url = "https://ims.gov.il/{}/now_analysis/{}"
 weather_codes_url = "https://ims.gov.il/{}/weather_codes"
 
 # ims.gov.il does not support ipv6 yet, `requests` use ipv6 by default
@@ -27,7 +26,7 @@ class WeatherIL:
         Init the WeatherIL object.
         parameters:
             >>> location: Location Id for the forecast (Table exists in the readme)
-            >>> language: can be he (Hebrew) or en (English). default will be he
+            >>> language: can be he (Hebrew) or en (English). default will be "he"
         """
         self.language = language
         self.location = str(location)
@@ -35,22 +34,26 @@ class WeatherIL:
     def get_current_analysis(self):
         try:
             logger.debug('Getting current analysis')
-            data = self.get_data(current_analysis_url.format(self.language))
-            weather_data = data["data"][self.location]
-            logger.debug('Got current analysis for location ' + str(self.location))
-            weather = Weather(langauge=self.language,
-                              lid=int(weather_data["lid"]),
-                              humidity=int(weather_data["relative_humidity"]),
-                              rain=float(weather_data["rain"]) if (weather_data["rain"]) else 0,
-                              temperature=int(weather_data["temperature"]),
-                              wind_speed=int(weather_data["wind_speed"]),
-                              feels_like=int(weather_data["feels_like"]),
-                              u_v_index=int(weather_data["u_v_index"]),
-                              forecast_time=datetime.strptime(weather_data["forecast_time"], '%Y-%m-%d %H:%M:%S'),
-                              json=weather_data,
-                              weather_code=weather_data["weather_code"]
-                              )
-            return weather
+            data = self.get_data(current_analysis_url.format(self.language, self.location))
+            if "data" in data and self.location in data.get("data"):
+                weather_data = data.get("data").get(self.location)
+                logger.debug('Got current analysis for location ' + str(self.location))
+                return Weather(langauge=self.language,
+                                  lid=int(weather_data.get("lid")),
+                                  humidity=int(weather_data.get("relative_humidity")),
+                                  rain=float(weather_data.get("rain")) if (weather_data.get("rain")) else 0,
+                                  temperature=int(weather_data.get("temperature")),
+                                  wind_speed=int(weather_data.get("wind_speed")),
+                                  feels_like=int(weather_data.get("feels_like")),
+                                  u_v_index=int(weather_data.get("u_v_index")),
+                                  forecast_time=datetime.strptime(weather_data.get("forecast_time"), '%Y-%m-%d %H:%M:%S'),
+                                  json=weather_data,
+                                  weather_code=weather_data.get("weather_code")
+                                  )
+            else:
+                logger.error('No "' + self.location + '" in current analysis response')
+                logger.debug('Response: ' + data)
+                return None
         except Exception as e:
             logger.error('Error getting current analysis. ' + str(e))
             return None
@@ -63,11 +66,15 @@ class WeatherIL:
         try:
             data = self.get_data(forecast_url.format(self.language, self.location))
             days = []
-            for key in data["data"].keys():
-                hours = self.get_hourly_forecast(data["data"][key]["hourly"])
+            if "data" not in data:
+                logger.error("Error getting forecast data")
+                logger.debug("Response: " + data)
+                return None
+            for key in data.get("data").keys():
+                hours = self.get_hourly_forecast(data.get("data").get(key).get("hourly"))
                 if "description" in str(data):
                     try:
-                        description = data["data"][key]["country"]["description"]
+                        description = data.get("data").get(key).get("country").get("description")
                     except:
                         description = ""
                 else:
@@ -75,11 +82,11 @@ class WeatherIL:
                 daily = Daily(
                     language=self.language,
                     date=datetime.strptime(key, "%Y-%m-%d"),
-                    lid=int(data["data"][key]["daily"]["lid"]),
-                    weather_code=data["data"][key]["daily"]["weather_code"],
-                    minimum_temperature=int(data["data"][key]["daily"]["minimum_temperature"]),
-                    maximum_temperature=int(data["data"][key]["daily"]["maximum_temperature"]),
-                    maximum_uvi=int(data["data"][key]["daily"]["maximum_uvi"]),
+                    lid=data.get("data").get(key).get("daily").get("lid", "-1"),
+                    weather_code=data.get("data").get(key).get("daily").get("weather_code", "0"),
+                    minimum_temperature=int(data.get("data").get(key).get("daily").get("minimum_temperature", "0")),
+                    maximum_temperature=int(data.get("data").get(key).get("daily").get("maximum_temperature", "0")),
+                    maximum_uvi=int(data.get("data").get(key).get("daily").get("maximum_uvi", "0")),
                     hours=hours,
                     description=description.rstrip()
                 )
@@ -100,14 +107,14 @@ class WeatherIL:
                 hours.append(
                     Hourly(language=self.language,
                            hour=key,
-                           forecast_time=datetime.strptime(data[key]["forecast_time"], "%Y-%m-%d %H:%M:%S"),
-                           weather_code=data[key]["weather_code"],
-                           temperature=int(data[key]["temperature"]),
-                           heat_stress=int(data[key]["heat_stress"]),
-                           relative_humidity=int(data[key]["relative_humidity"]),
-                           rain=float(data[key]["rain"]),
-                           wind_speed=int(data[key]["wind_speed"]),
-                           wind_direction_id=int(data[key]["wind_direction_id"])))
+                           forecast_time=datetime.strptime(data.get(key).get("forecast_time"), "%Y-%m-%d %H:%M:%S"),
+                           weather_code=data.get(key).get("weather_code", "0"),
+                           temperature=int(data.get(key).get("temperature", "0")),
+                           heat_stress=int(data.get(key).get("heat_stress", "0")),
+                           relative_humidity=int(data.get(key).get("relative_humidity", "0")),
+                           rain=float(data.get("rain", "0.0")),
+                           wind_speed=int(data.get(key).get("wind_speed", "0")),
+                           wind_direction_id=int(data.get(key).get("wind_direction_id", "0"))))
             return hours
         except Exception as e:
             logger.error("Error getting hourly forecast" + str(e))
@@ -122,17 +129,17 @@ class WeatherIL:
         try:
             logger.debug('Getting radar images')
             data = self.get_data(radar_url.format(self.language))
-            for key in data["data"]["types"]["IMSRadar"]:
-                rs.imsradar_images.append(images_url + key["file_name"])
+            for key in data.get("data").get("types").get("IMSRadar"):
+                rs.imsradar_images.append(images_url + key.get("file_name"))
 
-            for key in data["data"]["types"]["radar"]:
-                rs.radar_images.append(images_url + key["file_name"])
+            for key in data.get("data").get("types").get("radar"):
+                rs.radar_images.append(images_url + key.get("file_name"))
 
-            for key in data["data"]["types"]["MIDDLE-EAST"]:
-                rs.middle_east_satellite_images.append(images_url + key["file_name"])
+            for key in data.get("data").get("types").get("MIDDLE-EAST"):
+                rs.middle_east_satellite_images.append(images_url + key.get("file_name"))
 
-            for key in data["data"]["types"]["EUROPE"]:
-                rs.europe_satellite_images.append(images_url + key["file_name"])
+            for key in data.get("data").get("types").get("EUROPE"):
+                rs.europe_satellite_images.append(images_url + key.get("file_name"))
 
             logger.debug(f"\
                 Got: {len(rs.imsradar_images)} IMS Radar Images;\
