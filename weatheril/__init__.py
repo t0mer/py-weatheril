@@ -14,6 +14,7 @@ forecast_url = "https://ims.gov.il/{}/full_forecast_data/{}"
 radar_url = "https://ims.gov.il/{}/radar_satellite"
 current_analysis_url = "https://ims.gov.il/{}/now_analysis/{}"
 weather_codes_url = "https://ims.gov.il/{}/weather_codes"
+city_portal_url = "https://ims.gov.il/{}/city_portal/{}"
 
 # ims.gov.il does not support ipv6 yet, `requests` use ipv6 by default
 # and wait for timeout before trying ipv4, so we have to disable ipv6
@@ -35,39 +36,60 @@ def _get_value(data: dict, key: str, dict_key: str, default_value: str = None):
         return default_value
 
 
+def _fetch_data(url: str) -> dict:
+    """
+    Helper method to get the Json data from ims website
+    """
+    try:
+        response = requests.get(url)
+        response = json.loads(response.text)
+        return response
+    except Exception as e:
+        logger.error('Error getting data. ' + str(e))
+        logger.exception(e)
+        return dict()
+
+
+DEFAULT_CITY_PORTAL_EXPIRATION = 30
+
+
 class WeatherIL:
-    def __init__(self, location, language="he"):
+    def __init__(self, location, language="he", city_portal_cache_expiration=DEFAULT_CITY_PORTAL_EXPIRATION):
         """
         Init the WeatherIL object.
         parameters:
             >>> location: Location Id for the forecast (Table exists in the readme)
             >>> language: can be he (Hebrew) or en (English). default will be "he"
+            >>> city_portal_cache_expiration: cache expiration in days for city portal data API. default is 30 seconds
         """
+        self.city_portal_cache_expiration = city_portal_cache_expiration
         self.language = language
         self.location = str(location)
+        self.city_portal_data = None
+        self.city_portal_last_fetch = None
 
     def get_current_analysis(self):
+        self._get_city_portal_data()
         try:
             logger.debug('Getting current analysis')
-            data = self.get_data(current_analysis_url.format(self.language, self.location))
-            if "data" in data and self.location in data.get("data"):
-                weather_data = data.get("data").get(self.location)
+            analysis_data = self.city_portal_data.get("analysis")
+            if analysis_data:
                 logger.debug('Got current analysis for location ' + str(self.location))
                 return Weather(langauge=self.language,
-                                  lid=weather_data.get("lid"),
-                                  humidity=int(weather_data.get("relative_humidity", "0") or "0"),
-                                  rain=float(weather_data.get("rain", "0.0") or "0.0"),
-                                  temperature=int(weather_data.get("temperature", "0") or "0"),
-                                  wind_speed=int(weather_data.get("wind_speed", "0") or "0"),
-                                  feels_like=int(weather_data.get("feels_like", "0") or "0"),
-                                  u_v_index=int(weather_data.get("u_v_index", "0") or "0"),
-                                  forecast_time=datetime.strptime(weather_data.get("forecast_time"), '%Y-%m-%d %H:%M:%S'),
-                                  json=weather_data,
-                                  weather_code=weather_data.get("weather_code", "-1" or "-1")
-                                  )
+                               lid=analysis_data.get("lid"),
+                               humidity=int(analysis_data.get("relative_humidity", "0") or "0"),
+                               rain=float(analysis_data.get("rain", "0.0") or "0.0"),
+                               temperature=int(analysis_data.get("temperature", "0") or "0"),
+                               wind_speed=int(analysis_data.get("wind_speed", "0") or "0"),
+                               feels_like=int(analysis_data.get("feels_like", "0") or "0"),
+                               u_v_index=int(analysis_data.get("u_v_index", "0") or "0"),
+                               forecast_time=datetime.strptime(analysis_data.get("forecast_time"), '%Y-%m-%d %H:%M:%S'),
+                               json=analysis_data,
+                               weather_code=analysis_data.get("weather_code", "-1" or "-1")
+                               )
             else:
                 logger.error('No "' + self.location + '" in current analysis response')
-                logger.debug('Response: ' + data)
+                logger.debug('Response: ' + analysis_data)
                 return None
         except Exception as e:
             logger.error('Error getting current analysis.')
@@ -79,19 +101,16 @@ class WeatherIL:
         Get weather forecast
         return: Forecast object
         '''
+        self._get_city_portal_data()
         try:
-            forecast_data = self.get_data(forecast_url.format(self.language, self.location))
+
             days = []
-            if "data" not in forecast_data:
-                logger.error("Error getting forecast data")
-                logger.debug("Response: " + data)
-                return None
-            data = forecast_data.get("data")
-            for key in data.keys():
-                hours = self.get_hourly_forecast(_get_value(data, key, "hourly"))
-                if "description" in str(data):
+            forecast_data = self.city_portal_data.get("forecast_data")
+            for key in forecast_data.keys():
+                hours = self.get_hourly_forecast(_get_value(forecast_data, key, "hourly"))
+                if "description" in str(forecast_data):
                     try:
-                        description = data.get("data").get(key, {}).get("country").get("description")
+                        description = forecast_data.get(key, {}).get("country").get("description")
                     except:
                         description = ""
                 else:
@@ -99,11 +118,11 @@ class WeatherIL:
                 daily = Daily(
                     language=self.language,
                     date=datetime.strptime(key, "%Y-%m-%d"),
-                    lid=_get_value(data, key, "lid", "0"),
-                    weather_code=_get_value(data, key, "weather_code", "0"),
-                    minimum_temperature=int(_get_value(data, key, "minimum_temperature", "0")),
-                    maximum_temperature=int(_get_value(data, key, "maximum_temperature", "0")),
-                    maximum_uvi=int(_get_value(data, key, "maximum_uvi", "0")),
+                    lid=_get_value(forecast_data, key, "lid", "0"),
+                    weather_code=_get_value(forecast_data, key, "weather_code", "0"),
+                    minimum_temperature=int(_get_value(forecast_data, key, "minimum_temperature", "0")),
+                    maximum_temperature=int(_get_value(forecast_data, key, "maximum_temperature", "0")),
+                    maximum_uvi=int(_get_value(forecast_data, key, "maximum_uvi", "0")),
                     hours=hours,
                     description=description.rstrip()
                 )
@@ -147,7 +166,7 @@ class WeatherIL:
         rs = RadarSatellite()
         try:
             logger.debug('Getting radar images')
-            data = self.get_data(radar_url.format(self.language))
+            data = _fetch_data(radar_url.format(self.language))
             for key in data.get("data").get("types").get("IMSRadar"):
                 rs.imsradar_images.append(images_url + key.get("file_name"))
 
@@ -170,14 +189,24 @@ class WeatherIL:
             logger.error('Error getting images. ' + str(e))
             return rs
 
-    def get_data(self, url):
-        '''
-        Helper method to get the Json data from ims website
-        '''
-        try:
-            response = requests.get(url)
-            response = json.loads(response.text)
-            return response
-        except Exception as e:
-            logger.error('Error getting data. ' + str(e))
-            return ""
+    def _get_city_portal_data(self) -> dict:
+        """
+        Get the city portal data
+        return: dict
+        """
+        if not self.city_portal_data or (
+                datetime.now() - self.city_portal_last_fetch).total_seconds() > self.city_portal_cache_expiration:
+            try:
+                logger.debug('Getting city portal data')
+                data = _fetch_data(city_portal_url.format(self.language, self.location))
+                data = data.get("data")
+                if data:
+                    self.city_portal_last_fetch = datetime.now()
+                    self.city_portal_data = data
+                else:
+                    self.city_portal_data = {}
+            except Exception as e:
+                logger.error('Error getting city portal data. ' + str(e))
+                logger.exception(e)
+                self.city_portal_data = {}
+        return self.city_portal_data
