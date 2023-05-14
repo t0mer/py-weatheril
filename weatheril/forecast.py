@@ -41,10 +41,18 @@ class Hourly:
     heat_stress: int
     relative_humidity: int
     rain: float
+    rain_chance: float
     wind_speed: int
     wind_direction_id: int
     weather: str = field(init=False)
     wind_direction: str = field(init=False)
+    wave_height: float
+    heat_stress_level: int
+    heat_stress: int
+    wind_chill: int
+    u_v_index: int
+    u_v_i_max: int
+
 
     def __post_init__(self):
         self.weather = get_weather_description_by_code(self.language, self.weather_code)

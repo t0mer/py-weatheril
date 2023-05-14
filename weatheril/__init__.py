@@ -143,15 +143,22 @@ class WeatherIL:
             for key in data.keys():
                 hours.append(
                     Hourly(language=self.language,
-                           hour=key,
-                           forecast_time=datetime.strptime(data.get(key, {}).get("forecast_time"), "%Y-%m-%d %H:%M:%S"),
-                           weather_code=_get_value(data, key, "weather_code", "0"),
-                           temperature=int(_get_value(data, key, "temperature", "0")),
-                           heat_stress=int(_get_value(data, key, "heat_stress", "0")),
-                           relative_humidity=int(_get_value(data, key, "relative_humidity", "0")),
-                           rain=float(_get_value(data, key, "rain", "0.0")),
-                           wind_speed=int(_get_value(data, key, "windspeed", "0")),
-                           wind_direction_id=int(_get_value(data, key, "wind_direction_id", "0"))))
+                       hour=key,
+                       forecast_time=datetime.strptime(data.get(key, {}).get("forecast_time"), "%Y-%m-%d %H:%M:%S"),
+                       weather_code=_get_value(data, key, "weather_code", "0"),
+                       temperature=int(_get_value(data, key, "temperature", "0")),
+                       heat_stress=int(_get_value(data, key, "heat_stress", "0")),
+                       relative_humidity=int(_get_value(data, key, "relative_humidity", "0")),
+                       rain=float(_get_value(data, key, "rain", "0.0")),
+                       rain_chance=int(_get_value(data, key, "rain_chance", "0")),
+                       wind_speed=int(_get_value(data, key, "wind_speed", "0")),
+                       wind_direction_id=int(_get_value(data, key, "wind_direction_id", "0")),
+                       wave_height=float(_get_value(data, key, "wave_height", "0.0")),
+                       heat_stress_level=int(_get_value(data, key, "heat_stress_level", "0")),
+                       wind_chill=int(_get_value(data, key, "wind_chill", "0")),
+                       u_v_index=int(_get_value(data, key, "u_v_index", "0")),
+                       u_v_i_max=int(_get_value(data, key, "u_v_i_max", "0"))
+                   ))
             return hours
         except Exception as e:
             logger.error("Error getting hourly forecast ")
