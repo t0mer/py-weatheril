@@ -117,7 +117,7 @@ class WeatherIL:
                     maximum_temperature=int(_get_value(forecast_data[key], "daily", "maximum_temperature", "0")),
                     maximum_uvi=int(_get_value(forecast_data[key], "daily", "maximum_uvi", "0")),
                     hours=hours,
-                    description=(_get_value(forecast_data, "country", "description", "")).rstrip()
+                    description=(_get_value(forecast_data[key], "country", "description", "")).rstrip()
                 )
                 days.append(daily)
             return Forecast(days)
