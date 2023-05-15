@@ -108,23 +108,16 @@ class WeatherIL:
             forecast_data = self.city_portal_data.get("forecast_data")
             for key in forecast_data.keys():
                 hours = self.get_hourly_forecast(_get_value(forecast_data, key, "hourly"))
-                if "description" in str(forecast_data):
-                    try:
-                        description = forecast_data.get(key, {}).get("country").get("description")
-                    except:
-                        description = ""
-                else:
-                    description = ""
                 daily = Daily(
                     language=self.language,
                     date=datetime.strptime(key, "%Y-%m-%d"),
-                    lid=_get_value(forecast_data, key, "lid", "0"),
-                    weather_code=_get_value(forecast_data, key, "weather_code", "0"),
-                    minimum_temperature=int(_get_value(forecast_data, key, "minimum_temperature", "0")),
-                    maximum_temperature=int(_get_value(forecast_data, key, "maximum_temperature", "0")),
-                    maximum_uvi=int(_get_value(forecast_data, key, "maximum_uvi", "0")),
+                    lid=_get_value(forecast_data[key], "daily", "lid", "0"),
+                    weather_code=_get_value(forecast_data[key], "daily", "weather_code", "0"),
+                    minimum_temperature=int(_get_value(forecast_data[key], "daily", "minimum_temperature", "0")),
+                    maximum_temperature=int(_get_value(forecast_data[key], "daily", "maximum_temperature", "0")),
+                    maximum_uvi=int(_get_value(forecast_data[key], "daily", "maximum_uvi", "0")),
                     hours=hours,
-                    description=description.rstrip()
+                    description=(_get_value(forecast_data, "country", "description", "")).rstrip()
                 )
                 days.append(daily)
             return Forecast(days)
