@@ -37,19 +37,20 @@ class Hourly:
     hour: str
     forecast_time: datetime
     temperature: int
+    precise_temperature: float
     weather_code: str
     heat_stress: int
+    heat_stress_level: int
     relative_humidity: int
     rain: float
     rain_chance: float
     wind_speed: int
     wind_direction_id: int
+    wind_chill: int
     weather: str = field(init=False)
     wind_direction: str = field(init=False)
     wave_height: float
-    heat_stress_level: int
     heat_stress: int
-    wind_chill: int
     u_v_index: int
     u_v_i_max: int
 

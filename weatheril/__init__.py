@@ -74,19 +74,28 @@ class WeatherIL:
             logger.debug('Getting current analysis')
             analysis_data = self.city_portal_data.get("analysis")
             if analysis_data:
-                logger.debug('Got current analysis for location ' + str(self.location))
                 return Weather(langauge=self.language,
                                lid=analysis_data.get("lid"),
                                humidity=int(analysis_data.get("relative_humidity", "0") or "0"),
                                rain=float(analysis_data.get("rain", "0.0") or "0.0"),
-                               temperature=int(analysis_data.get("temperature", "0") or "0"),
+                               rain_chance=int(analysis_data.get("rain_chance", "0") or "0"),
+                               temperature=float(analysis_data.get("temperature", "0.0") or "0.0"),
+                               due_point_temp=int(analysis_data.get("due_point_Temp", "0") or "0"),
                                wind_speed=int(analysis_data.get("wind_speed", "0") or "0"),
-                               feels_like=int(analysis_data.get("feels_like", "0") or "0"),
+                               wind_chill=int(analysis_data.get("wind_chill", "0") or "0"),
+                               wind_direction_id=int(analysis_data.get("wind_direction_id", "0") or "0"),
+                               feels_like=float(analysis_data.get("feels_like", "0.0") or "0.0"),
+                               heat_stress_level=int(analysis_data.get("heat_stress_level", "0") or "0"),
                                u_v_index=int(analysis_data.get("u_v_index", "0") or "0"),
+                               u_v_level=analysis_data.get("u_v_level"),
+                               u_v_i_max=int(analysis_data.get("u_v_i_max", "0") or "0"),
+                               u_v_i_factor=int(analysis_data.get("u_v_i_factor", "0") or "0"),
+                               wave_height=float(analysis_data.get("wave_height", "0.0") or "0.0"),
                                forecast_time=datetime.strptime(analysis_data.get("forecast_time"), '%Y-%m-%d %H:%M:%S'),
                                json=analysis_data,
-                               weather_code=analysis_data.get("weather_code", "-1" or "-1")
+                               weather_code=analysis_data.get("weather_code", "0")
                                )
+                logger.debug('Got current analysis for location ' + str(self.location))
             else:
                 logger.error('No "' + self.location + '" in current analysis response')
                 logger.debug('Response: ' + analysis_data)
@@ -140,6 +149,7 @@ class WeatherIL:
                        forecast_time=datetime.strptime(data.get(key, {}).get("forecast_time"), "%Y-%m-%d %H:%M:%S"),
                        weather_code=_get_value(data, key, "weather_code", "0"),
                        temperature=int(_get_value(data, key, "temperature", "0")),
+                       precise_temperature=float(_get_value(data, key, "precise_temperature", "0.0")),
                        heat_stress=int(_get_value(data, key, "heat_stress", "0")),
                        relative_humidity=int(_get_value(data, key, "relative_humidity", "0")),
                        rain=float(_get_value(data, key, "rain", "0.0")),
