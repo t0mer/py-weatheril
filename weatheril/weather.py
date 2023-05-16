@@ -27,6 +27,7 @@ class Weather:
     u_v_i_factor: int
     json: str
     weather_code: str
+    wave_height: float
     location: str = field(init=False)
     description: str = field(init=False)
 

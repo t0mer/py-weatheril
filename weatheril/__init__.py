@@ -90,6 +90,7 @@ class WeatherIL:
                                u_v_level=analysis_data.get("u_v_level"),
                                u_v_i_max=int(analysis_data.get("u_v_i_max", "0") or "0"),
                                u_v_i_factor=int(analysis_data.get("u_v_i_factor", "0") or "0"),
+                               wave_height=float(analysis_data.get("wave_height", "0.0") or "0.0"),
                                forecast_time=datetime.strptime(analysis_data.get("forecast_time"), '%Y-%m-%d %H:%M:%S'),
                                json=analysis_data,
                                weather_code=analysis_data.get("weather_code", "0")
@@ -148,6 +149,7 @@ class WeatherIL:
                        forecast_time=datetime.strptime(data.get(key, {}).get("forecast_time"), "%Y-%m-%d %H:%M:%S"),
                        weather_code=_get_value(data, key, "weather_code", "0"),
                        temperature=int(_get_value(data, key, "temperature", "0")),
+                       precise_temperature=float(_get_value(data, key, "precise_temperature", "0.0")),
                        heat_stress=int(_get_value(data, key, "heat_stress", "0")),
                        relative_humidity=int(_get_value(data, key, "relative_humidity", "0")),
                        rain=float(_get_value(data, key, "rain", "0.0")),
