@@ -24,7 +24,7 @@ class Weather:
     u_v_index: int
     u_v_level: str
     u_v_i_max: int
-    u_v_i_factor: int
+    u_v_i_factor: float
     json: str
     weather_code: str
     wave_height: float
