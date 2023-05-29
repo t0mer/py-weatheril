@@ -89,7 +89,7 @@ class WeatherIL:
                                u_v_index=int(analysis_data.get("u_v_index", "0") or "0"),
                                u_v_level=analysis_data.get("u_v_level"),
                                u_v_i_max=int(analysis_data.get("u_v_i_max", "0") or "0"),
-                               u_v_i_factor=int(float(analysis_data.get("u_v_i_factor", "0")) or "0"),
+                               u_v_i_factor=float(analysis_data.get("u_v_i_factor", "0") or "0"),
                                wave_height=float(analysis_data.get("wave_height", "0.0") or "0.0"),
                                forecast_time=datetime.strptime(analysis_data.get("forecast_time"), '%Y-%m-%d %H:%M:%S'),
                                json=analysis_data,
