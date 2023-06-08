@@ -39,7 +39,7 @@ class Hourly:
     temperature: int
     precise_temperature: float
     weather_code: str
-    heat_stress: int
+    heat_stress: float
     heat_stress_level: int
     relative_humidity: int
     rain: float
@@ -50,7 +50,6 @@ class Hourly:
     weather: str = field(init=False)
     wind_direction: str = field(init=False)
     wave_height: float
-    heat_stress: int
     u_v_index: int
     u_v_i_max: int
 
