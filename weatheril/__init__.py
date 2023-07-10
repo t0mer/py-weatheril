@@ -120,7 +120,7 @@ class WeatherIL:
             forecast_data = self._forecast_data
             logger.debug('Got forecast for location ' + str(self.location))
             for key in forecast_data.keys():
-                hours = self.get_hourly_forecast(_get_value(forecast_data, key, "hourly"))
+                hours = self._get_hourly_forecast(_get_value(forecast_data, key, "hourly"))
                 daily = Daily(
                     language=self.language,
                     date=datetime.strptime(key, "%Y-%m-%d"),
@@ -140,7 +140,7 @@ class WeatherIL:
             logger.exception(e)
             return None
 
-    def get_hourly_forecast(self, data):
+    def _get_hourly_forecast(self, data):
         '''
         Get the hourly forecast
         '''
