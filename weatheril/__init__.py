@@ -50,11 +50,11 @@ def _fetch_data(url: str) -> dict:
         return dict()
 
 
-DEFAULT_CITY_PORTAL_EXPIRATION = 30
+DEFAULT_CACHE_EXPIRATION = 30
 
 
 class WeatherIL:
-    def __init__(self, location, language="he", city_portal_cache_expiration=DEFAULT_CITY_PORTAL_EXPIRATION):
+    def __init__(self, location, language="he", cache_expiration_in_sec=DEFAULT_CACHE_EXPIRATION):
         """
         Init the WeatherIL object.
         parameters:
@@ -62,18 +62,21 @@ class WeatherIL:
             >>> language: can be he (Hebrew) or en (English). default will be "he"
             >>> city_portal_cache_expiration: cache expiration in days for city portal data API. default is 30 seconds
         """
-        self.city_portal_cache_expiration = city_portal_cache_expiration
+        self._cache_expiration_in_sec = cache_expiration_in_sec
         self.language = language
         self.location = str(location)
-        self.city_portal_data = None
-        self.city_portal_last_fetch = None
+        self._analysis_data = None
+        self._analysis_last_fetch = None
+        self._forecast_data = None
+        self._forecast_last_fetch = None
 
     def get_current_analysis(self):
-        self._get_city_portal_data()
+        self._get_analysis_data()
         try:
             logger.debug('Getting current analysis')
-            analysis_data = self.city_portal_data.get("analysis")
+            analysis_data = self._analysis_data.get(self.location, {})
             if analysis_data:
+                logger.debug('Got current analysis for location ' + str(self.location))
                 return Weather(langauge=self.language,
                                lid=analysis_data.get("lid"),
                                humidity=int(analysis_data.get("relative_humidity", "0") or "0"),
@@ -95,7 +98,6 @@ class WeatherIL:
                                json=analysis_data,
                                weather_code=analysis_data.get("weather_code", "0")
                                )
-                logger.debug('Got current analysis for location ' + str(self.location))
             else:
                 logger.error('No "' + self.location + '" in current analysis response')
                 logger.debug('Response: ' + analysis_data)
@@ -110,13 +112,15 @@ class WeatherIL:
         Get weather forecast
         return: Forecast object
         '''
-        self._get_city_portal_data()
+        logger.debug('Getting forecast')
+        self._get_forecast_data()
         try:
 
             days = []
-            forecast_data = self.city_portal_data.get("forecast_data")
+            forecast_data = self._forecast_data
+            logger.debug('Got forecast for location ' + str(self.location))
             for key in forecast_data.keys():
-                hours = self.get_hourly_forecast(_get_value(forecast_data, key, "hourly"))
+                hours = self._get_hourly_forecast(_get_value(forecast_data, key, "hourly"))
                 daily = Daily(
                     language=self.language,
                     date=datetime.strptime(key, "%Y-%m-%d"),
@@ -136,7 +140,7 @@ class WeatherIL:
             logger.exception(e)
             return None
 
-    def get_hourly_forecast(self, data):
+    def _get_hourly_forecast(self, data):
         '''
         Get the hourly forecast
         '''
@@ -199,24 +203,31 @@ class WeatherIL:
             logger.error('Error getting images. ' + str(e))
             return rs
 
-    def _get_city_portal_data(self) -> dict:
+    def _get_analysis_data(self):
         """
-        Get the city portal data
+        Get the city current analysis data
         return: dict
         """
-        if not self.city_portal_data or (
-                datetime.now() - self.city_portal_last_fetch).total_seconds() > self.city_portal_cache_expiration:
-            try:
-                logger.debug('Getting city portal data')
-                data = _fetch_data(city_portal_url.format(self.language, self.location))
-                data = data.get("data")
-                if data:
-                    self.city_portal_last_fetch = datetime.now()
-                    self.city_portal_data = data
-                else:
-                    self.city_portal_data = {}
-            except Exception as e:
-                logger.error('Error getting city portal data. ' + str(e))
-                logger.exception(e)
-                self.city_portal_data = {}
-        return self.city_portal_data
+        self._analysis_data = self._get_data(self._analysis_data, current_analysis_url, self._analysis_last_fetch)
+        if self._analysis_data:
+            self._analysis_last_fetch = datetime.now()
+
+    def _get_forecast_data(self):
+        """
+        Get the city forecast data
+        """
+        self._forecast_data = self._get_data(self._forecast_data, forecast_url, self._forecast_last_fetch)
+        if self._forecast_data:
+            self._forecast_last_fetch = datetime.now()
+
+    def _get_data(self, current_data, url, last_fetch_time) -> dict:
+        formatted_url = url.format(self.language, self.location)
+        if current_data and (datetime.now() - last_fetch_time).total_seconds() < self._cache_expiration_in_sec:
+            return current_data
+        try:
+            logger.debug('Getting data from ' + formatted_url)
+            return _fetch_data(formatted_url).get("data", {})
+        except Exception as e:
+            logger.error('Error getting city portal data. ' + str(e))
+            logger.exception(e)
+        return {}
