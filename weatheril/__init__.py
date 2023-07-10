@@ -74,7 +74,7 @@ class WeatherIL:
         self._get_analysis_data()
         try:
             logger.debug('Getting current analysis')
-            analysis_data = self._analysis_data
+            analysis_data = self._analysis_data.get(self.location, {})
             if analysis_data:
                 logger.debug('Got current analysis for location ' + str(self.location))
                 return Weather(langauge=self.language,
@@ -112,10 +112,13 @@ class WeatherIL:
         Get weather forecast
         return: Forecast object
         '''
+        logger.debug('Getting forecast')
         self._get_forecast_data()
         try:
+
             days = []
             forecast_data = self._forecast_data
+            logger.debug('Got forecast for location ' + str(self.location))
             for key in forecast_data.keys():
                 hours = self.get_hourly_forecast(_get_value(forecast_data, key, "hourly"))
                 daily = Daily(
@@ -205,8 +208,7 @@ class WeatherIL:
         Get the city current analysis data
         return: dict
         """
-        self._analysis_data = self._get_data(self._analysis_data, current_analysis_url, self._analysis_last_fetch)\
-            .get(self.location, {})
+        self._analysis_data = self._get_data(self._analysis_data, current_analysis_url, self._analysis_last_fetch)
         if self._analysis_data:
             self._analysis_last_fetch = datetime.now()
 
@@ -220,12 +222,12 @@ class WeatherIL:
 
     def _get_data(self, current_data, url, last_fetch_time) -> dict:
         formatted_url = url.format(self.language, self.location)
-        if not current_data or (
-                datetime.now() - last_fetch_time).total_seconds() > self._cache_expiration_in_sec:
-            try:
-                logger.debug('Getting data from ' + formatted_url)
-                return _fetch_data(formatted_url).get("data", {})
-            except Exception as e:
-                logger.error('Error getting city portal data. ' + str(e))
-                logger.exception(e)
+        if current_data and (datetime.now() - last_fetch_time).total_seconds() < self._cache_expiration_in_sec:
+            return current_data
+        try:
+            logger.debug('Getting data from ' + formatted_url)
+            return _fetch_data(formatted_url).get("data", {})
+        except Exception as e:
+            logger.error('Error getting city portal data. ' + str(e))
+            logger.exception(e)
         return {}
