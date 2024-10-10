@@ -2,6 +2,7 @@
 import json
 
 import requests
+import pytz
 from loguru import logger
 
 from .forecast import Forecast, Daily, Hourly
@@ -20,6 +21,7 @@ city_portal_url = "https://ims.gov.il/{}/city_portal/{}"
 # and wait for timeout before trying ipv4, so we have to disable ipv6
 requests.packages.urllib3.util.connection.HAS_IPV6 = False
 
+timezone = pytz.timezone("Asia/Jerusalem")
 
 def _get_value(data: dict, key: str, dict_key: str, default_value: str = None):
     """
@@ -101,7 +103,7 @@ class WeatherIL:
                                u_v_i_max=int(analysis_data.get("u_v_i_max", "0") or "0"),
                                u_v_i_factor=float(analysis_data.get("u_v_i_factor", "0") or "0"),
                                wave_height=float(analysis_data.get("wave_height", "0.0") or "0.0"),
-                               forecast_time=datetime.strptime(analysis_data.get("forecast_time"), '%Y-%m-%d %H:%M:%S'),
+                               forecast_time=timezone.localize(datetime.strptime(analysis_data.get("forecast_time"), '%Y-%m-%d %H:%M:%S')),
                                json=analysis_data,
                                weather_code=analysis_data.get("weather_code", "0")
                                )
@@ -130,7 +132,7 @@ class WeatherIL:
                 hours = self._get_hourly_forecast(_get_value(forecast_data, key, "hourly"))
                 daily = Daily(
                     language=self.language,
-                    date=datetime.strptime(key, "%Y-%m-%d"),
+                    date=timezone.localize(datetime.strptime(key, "%Y-%m-%d")),
                     lid=_get_value(forecast_data[key], "daily", "lid", "0"),
                     weather_code=_get_value(forecast_data[key], "daily", "weather_code", "0"),
                     minimum_temperature=int(_get_value(forecast_data[key], "daily", "minimum_temperature", "0")),
@@ -157,7 +159,7 @@ class WeatherIL:
                 hours.append(
                     Hourly(language=self.language,
                        hour=key,
-                       forecast_time=datetime.strptime(data.get(key, {}).get("forecast_time"), "%Y-%m-%d %H:%M:%S"),
+                       forecast_time=timezone.localize(datetime.strptime(data.get(key, {}).get("forecast_time"), "%Y-%m-%d %H:%M:%S")),
                        weather_code=_get_value(data, key, "weather_code", "0"),
                        temperature=int(_get_value(data, key, "temperature", "0")),
                        precise_temperature=float(_get_value(data, key, "precise_temperature", "0.0")),
