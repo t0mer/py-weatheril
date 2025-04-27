@@ -1,5 +1,6 @@
 """Israel Meteorological Service unofficial python api wrapper"""
 import json
+from typing import Type
 
 import requests
 import pytz
@@ -23,19 +24,36 @@ requests.packages.urllib3.util.connection.HAS_IPV6 = False
 
 timezone = pytz.timezone("Asia/Jerusalem")
 
-def _get_value(data: dict, key: str, dict_key: str, default_value: str = None):
+def _get_value(data: dict, key: str, dict_key: str, data_type=str, default_value=None):
     """
-        Get default value from nested dictionary
+    Get default value from nested dictionary and convert to specified data type
     :param data: dictionary
     :param key: first level key
     :param dict_key: second level key
+    :param data_type: data type to convert to (str, int, float)
     :param default_value: default value
     :return: data[key][dict_key] or default_value
     """
+    value = None
     if key in data and dict_key in data.get(key):
-        return data.get(key).get(dict_key) or default_value
-    else:
+        value = data.get(key).get(dict_key)
+    if value is None:
         return default_value
+
+    if data_type is str:
+        return str(value)
+    elif data_type is int:
+        try:
+            return int(value)
+        except (ValueError, TypeError):
+            return default_value
+    elif data_type is float:
+        try:
+            return float(value)
+        except (ValueError, TypeError):
+            return default_value
+    else:
+        return value
 
 def usage_analytics():
     try:
@@ -100,12 +118,16 @@ class WeatherIL:
                                heat_stress_level=int(analysis_data.get("heat_stress_level", "0") or "0"),
                                u_v_index=int(analysis_data.get("u_v_index", "0") or "0"),
                                u_v_level=analysis_data.get("u_v_level"),
-                               u_v_i_max=int(analysis_data.get("u_v_i_max", "0") or "0"),
-                               u_v_i_factor=float(analysis_data.get("u_v_i_factor", "0") or "0"),
+                               u_v_i_max=int(analysis_data.get("u_v_i_max", "0") or "0") or None,
+                               u_v_i_factor=float(analysis_data.get("u_v_i_factor", "0") or "0") or None,
                                wave_height=float(analysis_data.get("wave_height", "0.0") or "0.0"),
+                               max_temp=int(analysis_data.get("max_temp", "0") or "0") or None,
+                               min_temp=int(analysis_data.get("min_temp", "0") or "0") or None,
+                               pm10=int(analysis_data.get("pm10", "0.0")),
                                forecast_time=timezone.localize(datetime.strptime(analysis_data.get("forecast_time"), '%Y-%m-%d %H:%M:%S')),
+                               modified_at=timezone.localize(datetime.strptime(analysis_data.get("modified"), '%Y-%m-%d %H:%M:%S')),
                                json=analysis_data,
-                               weather_code=analysis_data.get("weather_code", "0")
+                               weather_code=int(analysis_data.get("weather_code", "0") or "0") or None
                                )
             else:
                 logger.error('No "' + self.location + '" in current analysis response')
@@ -129,17 +151,18 @@ class WeatherIL:
             forecast_data = self._forecast_data
             logger.debug('Got forecast for location ' + str(self.location))
             for key in forecast_data.keys():
-                hours = self._get_hourly_forecast(_get_value(forecast_data, key, "hourly"))
+                hours = self._get_hourly_forecast(_get_value(forecast_data, key, "hourly", Type[dict]))
                 daily = Daily(
                     language=self.language,
                     date=timezone.localize(datetime.strptime(key, "%Y-%m-%d")),
-                    lid=_get_value(forecast_data[key], "daily", "lid", "0"),
-                    weather_code=_get_value(forecast_data[key], "daily", "weather_code", "0"),
-                    minimum_temperature=int(_get_value(forecast_data[key], "daily", "minimum_temperature", "0")),
-                    maximum_temperature=int(_get_value(forecast_data[key], "daily", "maximum_temperature", "0")),
-                    maximum_uvi=int(_get_value(forecast_data[key], "daily", "maximum_uvi", "0")),
+                    lid=_get_value(forecast_data[key], "daily", "lid", default_value="0"),
+                    weather_code=_get_value(forecast_data[key], "daily", "weather_code", Type[int]),
+                    minimum_temperature=_get_value(forecast_data[key], "daily", "minimum_temperature", Type[int]),
+                    maximum_temperature=_get_value(forecast_data[key], "daily", "maximum_temperature", Type[int]),
+                    maximum_uvi=_get_value(forecast_data[key], "daily", "maximum_uvi", Type[int]),
+                    u_v_i_factor=_get_value(forecast_data[key], "daily", "u_v_i_factor", Type[float]),
                     hours=hours,
-                    description=(_get_value(forecast_data[key], "country", "description", "")).rstrip()
+                    description=(_get_value(forecast_data[key], "country", "description", default_value="")).rstrip()
                 )
                 days.append(daily)
             return Forecast(days)
@@ -160,20 +183,22 @@ class WeatherIL:
                     Hourly(language=self.language,
                        hour=key,
                        forecast_time=timezone.localize(datetime.strptime(data.get(key, {}).get("forecast_time"), "%Y-%m-%d %H:%M:%S")),
-                       weather_code=_get_value(data, key, "weather_code", "0"),
-                       temperature=int(_get_value(data, key, "temperature", "0")),
-                       precise_temperature=float(_get_value(data, key, "precise_temperature", "0.0")),
-                       heat_stress=float(_get_value(data, key, "heat_stress", "0.0")),
-                       heat_stress_level=int(_get_value(data, key, "heat_stress_level", "0")),
-                       relative_humidity=int(_get_value(data, key, "relative_humidity", "0")),
-                       rain=float(_get_value(data, key, "rain", "0.0")),
-                       rain_chance=int(_get_value(data, key, "rain_chance", "0")),
-                       wind_speed=int(_get_value(data, key, "wind_speed", "0")),
-                       wind_direction_id=int(_get_value(data, key, "wind_direction_id", "0")),
-                       wave_height=float(_get_value(data, key, "wave_height", "0.0")),
-                       wind_chill=int(_get_value(data, key, "wind_chill", "0")),
-                       u_v_index=int(_get_value(data, key, "u_v_index", "0")),
-                       u_v_i_max=int(_get_value(data, key, "u_v_i_max", "0"))
+                       created=timezone.localize(datetime.strptime(data.get(key, {}).get("created"), "%Y-%m-%d %H:%M:%S")),
+                       weather_code=_get_value(data, key, "weather_code", Type[int]),
+                       temperature=_get_value(data, key, "temperature", Type[int]),
+                       precise_temperature=_get_value(data, key, "precise_temperature", Type[float]),
+                       heat_stress=_get_value(data, key, "heat_stress", Type[float]),
+                       heat_stress_level = _get_value(data, key, "heat_stress_level", Type[int]),
+                       pm10=_get_value(data, key, "pm10", Type[int]),
+                       relative_humidity=_get_value(data, key, "relative_humidity", Type[int]),
+                       rain=_get_value(data, key, "rain", Type[float]),
+                       rain_chance=_get_value(data, key, "rain_chance", Type[int]),
+                       wind_speed=_get_value(data, key, "wind_speed", Type[int]),
+                       wind_direction_id=_get_value(data, key, "wind_direction_id", Type[int]),
+                       wave_height=_get_value(data, key, "wave_height", Type[float]),
+                       wind_chill=_get_value(data, key, "wind_chill", Type[int]),
+                       u_v_index=_get_value(data, key, "u_v_index", Type[int], 0),
+                       u_v_i_max=_get_value(data, key, "u_v_i_max", Type[int])
                    ))
             return hours
         except Exception as e:

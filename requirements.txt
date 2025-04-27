@@ -1,0 +1,4 @@
+requests==2.31.0
+pytz==2024.1
+loguru==0.7.2
+
