@@ -1,4 +1,5 @@
 """Israel Meteorological Service unofficial python api wrapper"""
+
 import json
 from typing import Type
 
@@ -24,55 +25,59 @@ requests.packages.urllib3.util.connection.HAS_IPV6 = False
 
 timezone = pytz.timezone("Asia/Jerusalem")
 
-def _get_value(data: dict, key: str, dict_key: str, data_type=str, default_value=None):
+DAILY_KEY = "daily"
+HOURLY_KEY = "hourly"
+
+
+def _get_value(
+    data: dict,
+    key: str,
+    inner_dict_key: Optional[str],
+    data_type: Type = dict,
+    default_value=None,
+):
     """
     Get default value from nested dictionary and convert to specified data type
     :param data: dictionary
     :param key: first level key
-    :param dict_key: second level key
+    :param inner_dict_key: second level key
     :param data_type: data type to convert to (str, int, float)
     :param default_value: default value
-    :return: data[key][dict_key] or default_value
+    :return: data[key][dict_key] or data[key] or default_value
     """
     value = None
-    if key in data and dict_key in data.get(key):
-        value = data.get(key).get(dict_key)
+    if key in data:
+        if inner_dict_key is None:
+            value = data.get(key)
+        elif isinstance(data.get(key), dict) and inner_dict_key in data.get(key):
+            value = data.get(key).get(inner_dict_key)
+
     if value is None:
         return default_value
 
-    if data_type is str:
-        return str(value)
-    elif data_type is int:
-        try:
-            return int(value)
-        except (ValueError, TypeError):
-            return default_value
-    elif data_type is float:
-        try:
-            return float(value)
-        except (ValueError, TypeError):
-            return default_value
-    else:
-        return value
-
-def usage_analytics():
     try:
-        requests.get('https://analytics.techblog.co.il/ingress/487253f2-f656-486c-852a-b114ec772df3/pixel.gif')
-    except:
-        pass
+        if data_type is str:
+            return str(value)
+        if data_type is int:
+            return int(value)
+        if data_type is float:
+            return float(value)
+        else:
+            return value
+    except (ValueError, TypeError):
+        return default_value
 
 
 def _fetch_data(url: str) -> dict:
     """
     Helper method to get the Json data from ims website
     """
-    usage_analytics()
     try:
         response = requests.get(url)
         response = json.loads(response.text)
         return response
     except Exception as e:
-        logger.error('Error getting data. ' + str(e))
+        logger.error("Error getting data. " + str(e))
         logger.exception(e)
         return dict()
 
@@ -81,7 +86,9 @@ DEFAULT_CACHE_EXPIRATION = 30
 
 
 class WeatherIL:
-    def __init__(self, location, language="he", cache_expiration_in_sec=DEFAULT_CACHE_EXPIRATION):
+    def __init__(
+        self, location, language="he", cache_expiration_in_sec=DEFAULT_CACHE_EXPIRATION
+    ):
         """
         Init the WeatherIL object.
         parameters:
@@ -100,69 +107,125 @@ class WeatherIL:
     def get_current_analysis(self):
         self._get_analysis_data()
         try:
-            logger.debug('Getting current analysis')
+            logger.debug("Getting current analysis")
             analysis_data = self._analysis_data.get(self.location, {})
             if analysis_data:
-                logger.debug('Got current analysis for location ' + str(self.location))
-                return Weather(langauge=self.language,
-                               lid=analysis_data.get("lid"),
-                               humidity=int(analysis_data.get("relative_humidity", "0") or "0"),
-                               rain=float(analysis_data.get("rain", "0.0") or "0.0"),
-                               rain_chance=int(analysis_data.get("rain_chance", "0") or "0"),
-                               temperature=float(analysis_data.get("temperature", "0.0") or "0.0"),
-                               due_point_temp=int(analysis_data.get("due_point_Temp", "0") or "0"),
-                               wind_speed=int(analysis_data.get("wind_speed", "0") or "0"),
-                               wind_chill=int(analysis_data.get("wind_chill", "0") or "0"),
-                               wind_direction_id=int(analysis_data.get("wind_direction_id", "0") or "0"),
-                               feels_like=float(analysis_data.get("feels_like", "0.0") or "0.0"),
-                               heat_stress_level=int(analysis_data.get("heat_stress_level", "0") or "0"),
-                               u_v_index=int(analysis_data.get("u_v_index", "0") or "0"),
-                               u_v_level=analysis_data.get("u_v_level"),
-                               u_v_i_max=int(analysis_data.get("u_v_i_max", "0") or "0") or None,
-                               u_v_i_factor=float(analysis_data.get("u_v_i_factor", "0") or "0") or None,
-                               wave_height=float(analysis_data.get("wave_height", "0.0") or "0.0"),
-                               max_temp=int(analysis_data.get("max_temp", "0") or "0") or None,
-                               min_temp=int(analysis_data.get("min_temp", "0") or "0") or None,
-                               pm10=int(analysis_data.get("pm10", "0.0")),
-                               forecast_time=timezone.localize(datetime.strptime(analysis_data.get("forecast_time"), '%Y-%m-%d %H:%M:%S')),
-                               modified_at=timezone.localize(datetime.strptime(analysis_data.get("modified"), '%Y-%m-%d %H:%M:%S')),
-                               json=analysis_data,
-                               weather_code=int(analysis_data.get("weather_code", "0") or "0") or None
-                               )
+                logger.debug("Got current analysis for location " + str(self.location))
+                # Parse forecast_time and modified_at separately due to datetime parsing
+                forecast_time_str = _get_value(
+                    analysis_data, "forecast_time", None, str
+                )
+                forecast_time = (
+                    timezone.localize(
+                        datetime.strptime(forecast_time_str, "%Y-%m-%d %H:%M:%S")
+                    )
+                    if forecast_time_str
+                    else None
+                )
+
+                modified_at_str = _get_value(analysis_data, "modified", None, str)
+                modified_at = (
+                    timezone.localize(
+                        datetime.strptime(modified_at_str, "%Y-%m-%d %H:%M:%S")
+                    )
+                    if modified_at_str
+                    else None
+                )
+
+                return Weather(
+                    langauge=self.language,
+                    lid=_get_value(analysis_data, "lid", None, str),
+                    humidity=_get_value(
+                        analysis_data, "relative_humidity", None, int, 0
+                    ),
+                    rain=_get_value(analysis_data, "rain", None, float, 0.0),
+                    rain_chance=_get_value(analysis_data, "rain_chance", None, int, 0),
+                    temperature=_get_value(
+                        analysis_data, "temperature", None, float, 0.0
+                    ),
+                    due_point_temp=_get_value(
+                        analysis_data, "due_point_Temp", None, int, 0
+                    ),
+                    wind_speed=_get_value(analysis_data, "wind_speed", None, int, 0),
+                    wind_chill=_get_value(analysis_data, "wind_chill", None, int, 0),
+                    wind_direction_id=_get_value(
+                        analysis_data, "wind_direction_id", None, int, 0
+                    ),
+                    feels_like=_get_value(
+                        analysis_data, "feels_like", None, float, 0.0
+                    ),
+                    heat_stress_level=_get_value(
+                        analysis_data, "heat_stress_level", None, int, 0
+                    ),
+                    u_v_index=_get_value(analysis_data, "u_v_index", None, int, 0),
+                    u_v_level=_get_value(analysis_data, "u_v_level", None, str),
+                    u_v_i_max=_get_value(analysis_data, "u_v_i_max", None, int),
+                    u_v_i_factor=_get_value(analysis_data, "u_v_i_factor", None, float),
+                    wave_height=_get_value(
+                        analysis_data, "wave_height", None, float, 0.0
+                    ),
+                    max_temp=_get_value(analysis_data, "max_temp", None, int),
+                    min_temp=_get_value(analysis_data, "min_temp", None, int),
+                    pm10=_get_value(analysis_data, "pm10", None, int, 0),
+                    forecast_time=forecast_time,
+                    modified_at=modified_at,
+                    json=analysis_data,
+                    weather_code=_get_value(analysis_data, "weather_code", None, int),
+                )
             else:
                 logger.error('No "' + self.location + '" in current analysis response')
-                logger.debug('Response: ' + analysis_data)
+                logger.debug("Response: " + analysis_data)
                 return None
         except Exception as e:
-            logger.error('Error getting current analysis.')
+            logger.error("Error getting current analysis.")
             logger.exception(e)
             return None
 
     def get_forecast(self):
-        '''
+        """
         Get weather forecast
         return: Forecast object
-        '''
-        logger.debug('Getting forecast')
+        """
+        logger.debug("Getting forecast")
         self._get_forecast_data()
         try:
-
             days = []
             forecast_data = self._forecast_data
-            logger.debug('Got forecast for location ' + str(self.location))
+            logger.debug("Got forecast for location " + str(self.location))
             for key in forecast_data.keys():
-                hours = self._get_hourly_forecast(_get_value(forecast_data, key, "hourly", Type[dict]))
+                hours = self._get_hourly_forecast(
+                    _get_value(forecast_data, key, HOURLY_KEY, dict)
+                )
                 daily = Daily(
                     language=self.language,
                     date=timezone.localize(datetime.strptime(key, "%Y-%m-%d")),
-                    lid=_get_value(forecast_data[key], "daily", "lid", default_value="0"),
-                    weather_code=_get_value(forecast_data[key], "daily", "weather_code", Type[int]),
-                    minimum_temperature=_get_value(forecast_data[key], "daily", "minimum_temperature", Type[int]),
-                    maximum_temperature=_get_value(forecast_data[key], "daily", "maximum_temperature", Type[int]),
-                    maximum_uvi=_get_value(forecast_data[key], "daily", "maximum_uvi", Type[int]),
-                    u_v_i_factor=_get_value(forecast_data[key], "daily", "u_v_i_factor", Type[float]),
+                    lid=_get_value(
+                        forecast_data[key], DAILY_KEY, "lid", default_value="0"
+                    ),
+                    weather_code=_get_value(
+                        forecast_data[key], DAILY_KEY, "weather_code", int
+                    ),
+                    minimum_temperature=_get_value(
+                        forecast_data[key], DAILY_KEY, "minimum_temperature", int
+                    ),
+                    maximum_temperature=_get_value(
+                        forecast_data[key], DAILY_KEY, "maximum_temperature", int
+                    ),
+                    maximum_uvi=_get_value(
+                        forecast_data[key], DAILY_KEY, "maximum_uvi", int
+                    ),
+                    u_v_i_factor=_get_value(
+                        forecast_data[key], "daily", "u_v_i_factor", float
+                    ),
                     hours=hours,
-                    description=(_get_value(forecast_data[key], "country", "description", default_value="")).rstrip()
+                    description=(
+                        _get_value(
+                            forecast_data[key],
+                            "country",
+                            "description",
+                            default_value="",
+                        )
+                    ).rstrip(),
                 )
                 days.append(daily)
             return Forecast(days)
@@ -173,33 +236,52 @@ class WeatherIL:
             return None
 
     def _get_hourly_forecast(self, data):
-        '''
+        """
         Get the hourly forecast
-        '''
+        """
         hours = []
         try:
             for key in data.keys():
                 hours.append(
-                    Hourly(language=self.language,
-                       hour=key,
-                       forecast_time=timezone.localize(datetime.strptime(data.get(key, {}).get("forecast_time"), "%Y-%m-%d %H:%M:%S")),
-                       created=timezone.localize(datetime.strptime(data.get(key, {}).get("created"), "%Y-%m-%d %H:%M:%S")),
-                       weather_code=_get_value(data, key, "weather_code", Type[int]),
-                       temperature=_get_value(data, key, "temperature", Type[int]),
-                       precise_temperature=_get_value(data, key, "precise_temperature", Type[float]),
-                       heat_stress=_get_value(data, key, "heat_stress", Type[float]),
-                       heat_stress_level = _get_value(data, key, "heat_stress_level", Type[int]),
-                       pm10=_get_value(data, key, "pm10", Type[int]),
-                       relative_humidity=_get_value(data, key, "relative_humidity", Type[int]),
-                       rain=_get_value(data, key, "rain", Type[float]),
-                       rain_chance=_get_value(data, key, "rain_chance", Type[int]),
-                       wind_speed=_get_value(data, key, "wind_speed", Type[int]),
-                       wind_direction_id=_get_value(data, key, "wind_direction_id", Type[int]),
-                       wave_height=_get_value(data, key, "wave_height", Type[float]),
-                       wind_chill=_get_value(data, key, "wind_chill", Type[int]),
-                       u_v_index=_get_value(data, key, "u_v_index", Type[int], 0),
-                       u_v_i_max=_get_value(data, key, "u_v_i_max", Type[int])
-                   ))
+                    Hourly(
+                        language=self.language,
+                        hour=key,
+                        forecast_time=timezone.localize(
+                            datetime.strptime(
+                                data.get(key, {}).get("forecast_time"),
+                                "%Y-%m-%d %H:%M:%S",
+                            )
+                        ),
+                        created=timezone.localize(
+                            datetime.strptime(
+                                data.get(key, {}).get("created"), "%Y-%m-%d %H:%M:%S"
+                            )
+                        ),
+                        weather_code=_get_value(data, key, "weather_code", int),
+                        temperature=_get_value(data, key, "temperature", int),
+                        precise_temperature=_get_value(
+                            data, key, "precise_temperature", float
+                        ),
+                        heat_stress=_get_value(data, key, "heat_stress", float),
+                        heat_stress_level=_get_value(
+                            data, key, "heat_stress_level", int
+                        ),
+                        pm10=_get_value(data, key, "pm10", int),
+                        relative_humidity=_get_value(
+                            data, key, "relative_humidity", int
+                        ),
+                        rain=_get_value(data, key, "rain", float),
+                        rain_chance=_get_value(data, key, "rain_chance", int),
+                        wind_speed=_get_value(data, key, "wind_speed", int),
+                        wind_direction_id=_get_value(
+                            data, key, "wind_direction_id", int
+                        ),
+                        wave_height=_get_value(data, key, "wave_height", float),
+                        wind_chill=_get_value(data, key, "wind_chill", int),
+                        u_v_index=_get_value(data, key, "u_v_index", int, 0),
+                        u_v_i_max=_get_value(data, key, "u_v_i_max", int),
+                    )
+                )
             return hours
         except Exception as e:
             logger.error("Error getting hourly forecast ")
@@ -207,13 +289,13 @@ class WeatherIL:
             return None
 
     def get_radar_images(self):
-        '''
+        """
         Get the list of images for Satellite and Radar
         return: RadarSatellite objects with the lists
-        '''
+        """
         rs = RadarSatellite()
         try:
-            logger.debug('Getting radar images')
+            logger.debug("Getting radar images")
             data = _fetch_data(radar_url.format(self.language))
             for key in data.get("data").get("types").get("IMSRadar"):
                 rs.imsradar_images.append(images_url + key.get("file_name"))
@@ -222,7 +304,9 @@ class WeatherIL:
                 rs.radar_images.append(images_url + key.get("file_name"))
 
             for key in data.get("data").get("types").get("MIDDLE-EAST"):
-                rs.middle_east_satellite_images.append(images_url + key.get("file_name"))
+                rs.middle_east_satellite_images.append(
+                    images_url + key.get("file_name")
+                )
 
             for key in data.get("data").get("types").get("EUROPE"):
                 rs.europe_satellite_images.append(images_url + key.get("file_name"))
@@ -234,7 +318,7 @@ class WeatherIL:
                 {len(rs.europe_satellite_images)} European Satellite Images")
             return rs
         except Exception as e:
-            logger.error('Error getting images. ' + str(e))
+            logger.error("Error getting images. " + str(e))
             return rs
 
     def _get_analysis_data(self):
@@ -242,7 +326,9 @@ class WeatherIL:
         Get the city current analysis data
         return: dict
         """
-        self._analysis_data = self._get_data(self._analysis_data, current_analysis_url, self._analysis_last_fetch)
+        self._analysis_data = self._get_data(
+            self._analysis_data, current_analysis_url, self._analysis_last_fetch
+        )
         if self._analysis_data:
             self._analysis_last_fetch = datetime.now()
 
@@ -250,18 +336,24 @@ class WeatherIL:
         """
         Get the city forecast data
         """
-        self._forecast_data = self._get_data(self._forecast_data, forecast_url, self._forecast_last_fetch)
+        self._forecast_data = self._get_data(
+            self._forecast_data, forecast_url, self._forecast_last_fetch
+        )
         if self._forecast_data:
             self._forecast_last_fetch = datetime.now()
 
     def _get_data(self, current_data, url, last_fetch_time) -> dict:
         formatted_url = url.format(self.language, self.location)
-        if current_data and (datetime.now() - last_fetch_time).total_seconds() < self._cache_expiration_in_sec:
+        if (
+            current_data
+            and (datetime.now() - last_fetch_time).total_seconds()
+            < self._cache_expiration_in_sec
+        ):
             return current_data
         try:
-            logger.debug('Getting data from ' + formatted_url)
+            logger.debug("Getting data from " + formatted_url)
             return _fetch_data(formatted_url).get("data", {})
         except Exception as e:
-            logger.error('Error getting city portal data. ' + str(e))
+            logger.error("Error getting city portal data. " + str(e))
             logger.exception(e)
         return {}

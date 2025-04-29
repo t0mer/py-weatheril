@@ -4,7 +4,11 @@ from dataclasses import dataclass, field
 from datetime import datetime
 from typing import Optional
 
-from .utils import get_location_name_by_id, get_weather_description_by_code, get_wind_direction
+from .utils import (
+    get_location_name_by_id,
+    get_weather_description_by_code,
+    get_wind_direction,
+)
 
 
 @dataclass
@@ -39,6 +43,7 @@ class Weather:
 
     def __post_init__(self):
         self.location = get_location_name_by_id(self.langauge, self.lid)
-        self.description = get_weather_description_by_code(self.langauge, self.weather_code)
+        self.description = get_weather_description_by_code(
+            self.langauge, self.weather_code
+        )
         self.wind_direction = get_wind_direction(self.langauge, self.wind_direction_id)
-

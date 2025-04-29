@@ -13,7 +13,7 @@ HE_LOCATIONS = {
         "height": "780",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "2": {
         "lid": "2",
@@ -26,7 +26,7 @@ HE_LOCATIONS = {
         "height": "30",
         "is_park": "0",
         "near_coast": "1",
-        "is_main_coast_city": "1"
+        "is_main_coast_city": "1",
     },
     "3": {
         "lid": "3",
@@ -39,7 +39,7 @@ HE_LOCATIONS = {
         "height": "250",
         "is_park": "0",
         "near_coast": "1",
-        "is_main_coast_city": "1"
+        "is_main_coast_city": "1",
     },
     "4": {
         "lid": "4",
@@ -52,7 +52,7 @@ HE_LOCATIONS = {
         "height": "50",
         "is_park": "0",
         "near_coast": "1",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "5": {
         "lid": "5",
@@ -65,7 +65,7 @@ HE_LOCATIONS = {
         "height": "50",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "6": {
         "lid": "6",
@@ -78,7 +78,7 @@ HE_LOCATIONS = {
         "height": "30",
         "is_park": "0",
         "near_coast": "1",
-        "is_main_coast_city": "1"
+        "is_main_coast_city": "1",
     },
     "7": {
         "lid": "7",
@@ -91,7 +91,7 @@ HE_LOCATIONS = {
         "height": "35",
         "is_park": "0",
         "near_coast": "1",
-        "is_main_coast_city": "1"
+        "is_main_coast_city": "1",
     },
     "8": {
         "lid": "8",
@@ -104,7 +104,7 @@ HE_LOCATIONS = {
         "height": "280",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "9": {
         "lid": "9",
@@ -117,7 +117,7 @@ HE_LOCATIONS = {
         "height": "35",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "10": {
         "lid": "10",
@@ -130,7 +130,7 @@ HE_LOCATIONS = {
         "height": "35",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "11": {
         "lid": "11",
@@ -143,7 +143,7 @@ HE_LOCATIONS = {
         "height": "50",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "12": {
         "lid": "12",
@@ -156,7 +156,7 @@ HE_LOCATIONS = {
         "height": "40",
         "is_park": "0",
         "near_coast": "1",
-        "is_main_coast_city": "1"
+        "is_main_coast_city": "1",
     },
     "13": {
         "lid": "13",
@@ -169,7 +169,7 @@ HE_LOCATIONS = {
         "height": "50",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "14": {
         "lid": "14",
@@ -182,7 +182,7 @@ HE_LOCATIONS = {
         "height": "20",
         "is_park": "0",
         "near_coast": "1",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "15": {
         "lid": "15",
@@ -195,7 +195,7 @@ HE_LOCATIONS = {
         "height": "300",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "16": {
         "lid": "16",
@@ -208,7 +208,7 @@ HE_LOCATIONS = {
         "height": "55",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "17": {
         "lid": "17",
@@ -221,7 +221,7 @@ HE_LOCATIONS = {
         "height": "45",
         "is_park": "0",
         "near_coast": "1",
-        "is_main_coast_city": "1"
+        "is_main_coast_city": "1",
     },
     "18": {
         "lid": "18",
@@ -234,7 +234,7 @@ HE_LOCATIONS = {
         "height": "25",
         "is_park": "0",
         "near_coast": "1",
-        "is_main_coast_city": "1"
+        "is_main_coast_city": "1",
     },
     "19": {
         "lid": "19",
@@ -247,7 +247,7 @@ HE_LOCATIONS = {
         "height": "270",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "20": {
         "lid": "20",
@@ -260,7 +260,7 @@ HE_LOCATIONS = {
         "height": "80",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "21": {
         "lid": "21",
@@ -273,7 +273,7 @@ HE_LOCATIONS = {
         "height": "50",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "22": {
         "lid": "22",
@@ -286,7 +286,7 @@ HE_LOCATIONS = {
         "height": "290",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "23": {
         "lid": "23",
@@ -299,7 +299,7 @@ HE_LOCATIONS = {
         "height": "230",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "24": {
         "lid": "24",
@@ -312,7 +312,7 @@ HE_LOCATIONS = {
         "height": "45",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "25": {
         "lid": "25",
@@ -325,7 +325,7 @@ HE_LOCATIONS = {
         "height": "70",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "26": {
         "lid": "26",
@@ -338,7 +338,7 @@ HE_LOCATIONS = {
         "height": "50",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "27": {
         "lid": "27",
@@ -351,7 +351,7 @@ HE_LOCATIONS = {
         "height": "15",
         "is_park": "0",
         "near_coast": "1",
-        "is_main_coast_city": "1"
+        "is_main_coast_city": "1",
     },
     "28": {
         "lid": "28",
@@ -364,7 +364,7 @@ HE_LOCATIONS = {
         "height": "710",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "29": {
         "lid": "29",
@@ -377,7 +377,7 @@ HE_LOCATIONS = {
         "height": "400",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "30": {
         "lid": "30",
@@ -390,7 +390,7 @@ HE_LOCATIONS = {
         "height": "125",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "31": {
         "lid": "31",
@@ -403,7 +403,7 @@ HE_LOCATIONS = {
         "height": "50",
         "is_park": "0",
         "near_coast": "1",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "32": {
         "lid": "32",
@@ -416,7 +416,7 @@ HE_LOCATIONS = {
         "height": "50",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "33": {
         "lid": "33",
@@ -429,7 +429,7 @@ HE_LOCATIONS = {
         "height": "80",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "34": {
         "lid": "34",
@@ -442,7 +442,7 @@ HE_LOCATIONS = {
         "height": "35",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "35": {
         "lid": "35",
@@ -455,7 +455,7 @@ HE_LOCATIONS = {
         "height": "10",
         "is_park": "0",
         "near_coast": "1",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "36": {
         "lid": "36",
@@ -468,7 +468,7 @@ HE_LOCATIONS = {
         "height": "120",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "37": {
         "lid": "37",
@@ -481,7 +481,7 @@ HE_LOCATIONS = {
         "height": "45",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "38": {
         "lid": "38",
@@ -494,7 +494,7 @@ HE_LOCATIONS = {
         "height": "235",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "39": {
         "lid": "39",
@@ -507,7 +507,7 @@ HE_LOCATIONS = {
         "height": "30",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "40": {
         "lid": "40",
@@ -520,7 +520,7 @@ HE_LOCATIONS = {
         "height": "-200",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "41": {
         "lid": "41",
@@ -533,7 +533,7 @@ HE_LOCATIONS = {
         "height": "70",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "42": {
         "lid": "42",
@@ -546,7 +546,7 @@ HE_LOCATIONS = {
         "height": "10",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "43": {
         "lid": "43",
@@ -559,7 +559,7 @@ HE_LOCATIONS = {
         "height": "130",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "44": {
         "lid": "44",
@@ -572,7 +572,7 @@ HE_LOCATIONS = {
         "height": "430",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "45": {
         "lid": "45",
@@ -585,7 +585,7 @@ HE_LOCATIONS = {
         "height": "10",
         "is_park": "0",
         "near_coast": "1",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "46": {
         "lid": "46",
@@ -598,7 +598,7 @@ HE_LOCATIONS = {
         "height": "15",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "47": {
         "lid": "47",
@@ -611,7 +611,7 @@ HE_LOCATIONS = {
         "height": "65",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "48": {
         "lid": "48",
@@ -624,7 +624,7 @@ HE_LOCATIONS = {
         "height": "480",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "49": {
         "lid": "49",
@@ -637,7 +637,7 @@ HE_LOCATIONS = {
         "height": "30",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "50": {
         "lid": "50",
@@ -650,7 +650,7 @@ HE_LOCATIONS = {
         "height": "800",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "51": {
         "lid": "51",
@@ -663,7 +663,7 @@ HE_LOCATIONS = {
         "height": "150",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "52": {
         "lid": "52",
@@ -676,7 +676,7 @@ HE_LOCATIONS = {
         "height": "550",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "53": {
         "lid": "53",
@@ -689,7 +689,7 @@ HE_LOCATIONS = {
         "height": "120",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "54": {
         "lid": "54",
@@ -702,7 +702,7 @@ HE_LOCATIONS = {
         "height": "250",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "55": {
         "lid": "55",
@@ -715,7 +715,7 @@ HE_LOCATIONS = {
         "height": "40",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "56": {
         "lid": "56",
@@ -728,7 +728,7 @@ HE_LOCATIONS = {
         "height": "100",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "57": {
         "lid": "57",
@@ -741,7 +741,7 @@ HE_LOCATIONS = {
         "height": "130",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "58": {
         "lid": "58",
@@ -754,7 +754,7 @@ HE_LOCATIONS = {
         "height": "50",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "59": {
         "lid": "59",
@@ -767,7 +767,7 @@ HE_LOCATIONS = {
         "height": "75",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "60": {
         "lid": "60",
@@ -780,7 +780,7 @@ HE_LOCATIONS = {
         "height": "600",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "61": {
         "lid": "61",
@@ -793,7 +793,7 @@ HE_LOCATIONS = {
         "height": "220",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "62": {
         "lid": "62",
@@ -806,7 +806,7 @@ HE_LOCATIONS = {
         "height": "90",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "63": {
         "lid": "63",
@@ -819,7 +819,7 @@ HE_LOCATIONS = {
         "height": "250",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "64": {
         "lid": "64",
@@ -832,7 +832,7 @@ HE_LOCATIONS = {
         "height": "140",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "65": {
         "lid": "65",
@@ -845,7 +845,7 @@ HE_LOCATIONS = {
         "height": "120",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "66": {
         "lid": "66",
@@ -858,7 +858,7 @@ HE_LOCATIONS = {
         "height": "140",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "67": {
         "lid": "67",
@@ -871,7 +871,7 @@ HE_LOCATIONS = {
         "height": "140",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "68": {
         "lid": "68",
@@ -884,7 +884,7 @@ HE_LOCATIONS = {
         "height": "50",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "69": {
         "lid": "69",
@@ -897,7 +897,7 @@ HE_LOCATIONS = {
         "height": "40",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "70": {
         "lid": "70",
@@ -910,7 +910,7 @@ HE_LOCATIONS = {
         "height": "65",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "71": {
         "lid": "71",
@@ -923,7 +923,7 @@ HE_LOCATIONS = {
         "height": "520",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "72": {
         "lid": "72",
@@ -936,7 +936,7 @@ HE_LOCATIONS = {
         "height": "50",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "73": {
         "lid": "73",
@@ -949,7 +949,7 @@ HE_LOCATIONS = {
         "height": "580",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "74": {
         "lid": "74",
@@ -962,7 +962,7 @@ HE_LOCATIONS = {
         "height": "20",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "75": {
         "lid": "75",
@@ -975,7 +975,7 @@ HE_LOCATIONS = {
         "height": "-130",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "76": {
         "lid": "76",
@@ -988,7 +988,7 @@ HE_LOCATIONS = {
         "height": "860",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "77": {
         "lid": "77",
@@ -1001,7 +1001,7 @@ HE_LOCATIONS = {
         "height": "65",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "78": {
         "lid": "78",
@@ -1014,7 +1014,7 @@ HE_LOCATIONS = {
         "height": "370",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "79": {
         "lid": "79",
@@ -1027,7 +1027,7 @@ HE_LOCATIONS = {
         "height": "320",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "80": {
         "lid": "80",
@@ -1040,7 +1040,7 @@ HE_LOCATIONS = {
         "height": "-205",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "81": {
         "lid": "81",
@@ -1053,7 +1053,7 @@ HE_LOCATIONS = {
         "height": "70",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "82": {
         "lid": "82",
@@ -1066,7 +1066,7 @@ HE_LOCATIONS = {
         "height": "65",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "83": {
         "lid": "83",
@@ -1079,7 +1079,7 @@ HE_LOCATIONS = {
         "height": "280",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "84": {
         "lid": "84",
@@ -1092,7 +1092,7 @@ HE_LOCATIONS = {
         "height": "65",
         "is_park": "0",
         "near_coast": "1",
-        "is_main_coast_city": "1"
+        "is_main_coast_city": "1",
     },
     "200": {
         "lid": "200",
@@ -1105,7 +1105,7 @@ HE_LOCATIONS = {
         "height": "750",
         "is_park": "1",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "201": {
         "lid": "201",
@@ -1118,7 +1118,7 @@ HE_LOCATIONS = {
         "height": "350",
         "is_park": "1",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "202": {
         "lid": "202",
@@ -1131,7 +1131,7 @@ HE_LOCATIONS = {
         "height": "200",
         "is_park": "1",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "203": {
         "lid": "203",
@@ -1144,7 +1144,7 @@ HE_LOCATIONS = {
         "height": "130",
         "is_park": "1",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "204": {
         "lid": "204",
@@ -1157,7 +1157,7 @@ HE_LOCATIONS = {
         "height": "150",
         "is_park": "1",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "205": {
         "lid": "205",
@@ -1170,7 +1170,7 @@ HE_LOCATIONS = {
         "height": "400",
         "is_park": "1",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "206": {
         "lid": "206",
@@ -1183,7 +1183,7 @@ HE_LOCATIONS = {
         "height": "70",
         "is_park": "1",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "207": {
         "lid": "207",
@@ -1196,7 +1196,7 @@ HE_LOCATIONS = {
         "height": "220",
         "is_park": "1",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "208": {
         "lid": "208",
@@ -1209,7 +1209,7 @@ HE_LOCATIONS = {
         "height": "10",
         "is_park": "1",
         "near_coast": "1",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "209": {
         "lid": "209",
@@ -1222,7 +1222,7 @@ HE_LOCATIONS = {
         "height": "370",
         "is_park": "1",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "210": {
         "lid": "210",
@@ -1235,7 +1235,7 @@ HE_LOCATIONS = {
         "height": "740",
         "is_park": "1",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "211": {
         "lid": "211",
@@ -1248,7 +1248,7 @@ HE_LOCATIONS = {
         "height": "470",
         "is_park": "1",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "212": {
         "lid": "212",
@@ -1261,7 +1261,7 @@ HE_LOCATIONS = {
         "height": "70",
         "is_park": "1",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "213": {
         "lid": "213",
@@ -1274,7 +1274,7 @@ HE_LOCATIONS = {
         "height": "-200",
         "is_park": "1",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "214": {
         "lid": "214",
@@ -1287,7 +1287,7 @@ HE_LOCATIONS = {
         "height": "-200",
         "is_park": "1",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "215": {
         "lid": "215",
@@ -1300,7 +1300,7 @@ HE_LOCATIONS = {
         "height": "30",
         "is_park": "1",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "216": {
         "lid": "216",
@@ -1313,7 +1313,7 @@ HE_LOCATIONS = {
         "height": "150",
         "is_park": "1",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "217": {
         "lid": "217",
@@ -1326,7 +1326,7 @@ HE_LOCATIONS = {
         "height": "370",
         "is_park": "1",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "218": {
         "lid": "218",
@@ -1339,7 +1339,7 @@ HE_LOCATIONS = {
         "height": "-200",
         "is_park": "1",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "219": {
         "lid": "219",
@@ -1352,7 +1352,7 @@ HE_LOCATIONS = {
         "height": "-200",
         "is_park": "1",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "220": {
         "lid": "220",
@@ -1365,7 +1365,7 @@ HE_LOCATIONS = {
         "height": "100",
         "is_park": "1",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "221": {
         "lid": "221",
@@ -1378,7 +1378,7 @@ HE_LOCATIONS = {
         "height": "10",
         "is_park": "1",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "222": {
         "lid": "222",
@@ -1391,7 +1391,7 @@ HE_LOCATIONS = {
         "height": "270",
         "is_park": "1",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "223": {
         "lid": "223",
@@ -1404,7 +1404,7 @@ HE_LOCATIONS = {
         "height": "350",
         "is_park": "1",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "224": {
         "lid": "224",
@@ -1417,7 +1417,7 @@ HE_LOCATIONS = {
         "height": "500",
         "is_park": "1",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "225": {
         "lid": "225",
@@ -1430,7 +1430,7 @@ HE_LOCATIONS = {
         "height": "100",
         "is_park": "1",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "226": {
         "lid": "226",
@@ -1443,7 +1443,7 @@ HE_LOCATIONS = {
         "height": "320",
         "is_park": "1",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "227": {
         "lid": "227",
@@ -1456,7 +1456,7 @@ HE_LOCATIONS = {
         "height": "40",
         "is_park": "1",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "228": {
         "lid": "228",
@@ -1469,7 +1469,7 @@ HE_LOCATIONS = {
         "height": "5",
         "is_park": "1",
         "near_coast": "1",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "229": {
         "lid": "229",
@@ -1482,7 +1482,7 @@ HE_LOCATIONS = {
         "height": "160",
         "is_park": "1",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "230": {
         "lid": "230",
@@ -1495,7 +1495,7 @@ HE_LOCATIONS = {
         "height": "300",
         "is_park": "1",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "231": {
         "lid": "231",
@@ -1508,7 +1508,7 @@ HE_LOCATIONS = {
         "height": "-10",
         "is_park": "1",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "232": {
         "lid": "232",
@@ -1521,7 +1521,7 @@ HE_LOCATIONS = {
         "height": "-75",
         "is_park": "1",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "233": {
         "lid": "233",
@@ -1534,7 +1534,7 @@ HE_LOCATIONS = {
         "height": "-100",
         "is_park": "1",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "235": {
         "lid": "235",
@@ -1547,7 +1547,7 @@ HE_LOCATIONS = {
         "height": "10",
         "is_park": "1",
         "near_coast": "1",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "236": {
         "lid": "236",
@@ -1560,7 +1560,7 @@ HE_LOCATIONS = {
         "height": "5",
         "is_park": "1",
         "near_coast": "1",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "237": {
         "lid": "237",
@@ -1573,7 +1573,7 @@ HE_LOCATIONS = {
         "height": "5",
         "is_park": "1",
         "near_coast": "1",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "238": {
         "lid": "238",
@@ -1586,7 +1586,7 @@ HE_LOCATIONS = {
         "height": "5",
         "is_park": "1",
         "near_coast": "1",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "239": {
         "lid": "239",
@@ -1599,7 +1599,7 @@ HE_LOCATIONS = {
         "height": "10",
         "is_park": "1",
         "near_coast": "1",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "240": {
         "lid": "240",
@@ -1612,7 +1612,7 @@ HE_LOCATIONS = {
         "height": "30",
         "is_park": "1",
         "near_coast": "1",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "241": {
         "lid": "241",
@@ -1625,7 +1625,7 @@ HE_LOCATIONS = {
         "height": "35",
         "is_park": "1",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "242": {
         "lid": "242",
@@ -1638,7 +1638,7 @@ HE_LOCATIONS = {
         "height": "5",
         "is_park": "1",
         "near_coast": "1",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "243": {
         "lid": "243",
@@ -1651,7 +1651,7 @@ HE_LOCATIONS = {
         "height": "780",
         "is_park": "1",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "244": {
         "lid": "244",
@@ -1664,7 +1664,7 @@ HE_LOCATIONS = {
         "height": "600",
         "is_park": "1",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "245": {
         "lid": "245",
@@ -1677,7 +1677,7 @@ HE_LOCATIONS = {
         "height": "700",
         "is_park": "1",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "246": {
         "lid": "246",
@@ -1690,7 +1690,7 @@ HE_LOCATIONS = {
         "height": "420",
         "is_park": "1",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "248": {
         "lid": "248",
@@ -1703,7 +1703,7 @@ HE_LOCATIONS = {
         "height": "280",
         "is_park": "1",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "249": {
         "lid": "249",
@@ -1716,7 +1716,7 @@ HE_LOCATIONS = {
         "height": "300",
         "is_park": "1",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "250": {
         "lid": "250",
@@ -1729,7 +1729,7 @@ HE_LOCATIONS = {
         "height": "110",
         "is_park": "1",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "251": {
         "lid": "251",
@@ -1742,7 +1742,7 @@ HE_LOCATIONS = {
         "height": "620",
         "is_park": "1",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "252": {
         "lid": "252",
@@ -1755,7 +1755,7 @@ HE_LOCATIONS = {
         "height": "440",
         "is_park": "1",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "253": {
         "lid": "253",
@@ -1768,7 +1768,7 @@ HE_LOCATIONS = {
         "height": "875",
         "is_park": "1",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "254": {
         "lid": "254",
@@ -1781,7 +1781,7 @@ HE_LOCATIONS = {
         "height": "875",
         "is_park": "1",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "255": {
         "lid": "255",
@@ -1794,7 +1794,7 @@ HE_LOCATIONS = {
         "height": "280",
         "is_park": "1",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "256": {
         "lid": "256",
@@ -1807,7 +1807,7 @@ HE_LOCATIONS = {
         "height": "100",
         "is_park": "1",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "257": {
         "lid": "257",
@@ -1820,7 +1820,7 @@ HE_LOCATIONS = {
         "height": "-385",
         "is_park": "1",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "258": {
         "lid": "258",
@@ -1833,7 +1833,7 @@ HE_LOCATIONS = {
         "height": "270",
         "is_park": "1",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "259": {
         "lid": "259",
@@ -1846,7 +1846,7 @@ HE_LOCATIONS = {
         "height": "230",
         "is_park": "1",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "261": {
         "lid": "261",
@@ -1859,7 +1859,7 @@ HE_LOCATIONS = {
         "height": "-330",
         "is_park": "1",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "262": {
         "lid": "262",
@@ -1872,7 +1872,7 @@ HE_LOCATIONS = {
         "height": "-390",
         "is_park": "1",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "263": {
         "lid": "263",
@@ -1885,7 +1885,7 @@ HE_LOCATIONS = {
         "height": "740",
         "is_park": "1",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "264": {
         "lid": "264",
@@ -1898,7 +1898,7 @@ HE_LOCATIONS = {
         "height": "925",
         "is_park": "1",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "267": {
         "lid": "267",
@@ -1911,7 +1911,7 @@ HE_LOCATIONS = {
         "height": "50",
         "is_park": "1",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "268": {
         "lid": "268",
@@ -1924,7 +1924,7 @@ HE_LOCATIONS = {
         "height": "560",
         "is_park": "1",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "269": {
         "lid": "269",
@@ -1937,7 +1937,7 @@ HE_LOCATIONS = {
         "height": "300",
         "is_park": "1",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "270": {
         "lid": "270",
@@ -1950,7 +1950,7 @@ HE_LOCATIONS = {
         "height": "70",
         "is_park": "1",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "271": {
         "lid": "271",
@@ -1963,7 +1963,7 @@ HE_LOCATIONS = {
         "height": "470",
         "is_park": "1",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "272": {
         "lid": "272",
@@ -1976,7 +1976,7 @@ HE_LOCATIONS = {
         "height": "350",
         "is_park": "1",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "273": {
         "lid": "273",
@@ -1989,7 +1989,7 @@ HE_LOCATIONS = {
         "height": "475",
         "is_park": "1",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "274": {
         "lid": "274",
@@ -2002,7 +2002,7 @@ HE_LOCATIONS = {
         "height": "400",
         "is_park": "1",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "275": {
         "lid": "275",
@@ -2015,7 +2015,7 @@ HE_LOCATIONS = {
         "height": "600",
         "is_park": "1",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "277": {
         "lid": "277",
@@ -2028,7 +2028,7 @@ HE_LOCATIONS = {
         "height": "65",
         "is_park": "1",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "278": {
         "lid": "278",
@@ -2041,7 +2041,7 @@ HE_LOCATIONS = {
         "height": "0",
         "is_park": "1",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "702": {
         "lid": "702",
@@ -2054,7 +2054,7 @@ HE_LOCATIONS = {
         "height": "-255",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "703": {
         "lid": "703",
@@ -2067,7 +2067,7 @@ HE_LOCATIONS = {
         "height": "430",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "704": {
         "lid": "704",
@@ -2080,7 +2080,7 @@ HE_LOCATIONS = {
         "height": "440",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "705": {
         "lid": "705",
@@ -2093,7 +2093,7 @@ HE_LOCATIONS = {
         "height": "405",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "706": {
         "lid": "706",
@@ -2106,7 +2106,7 @@ HE_LOCATIONS = {
         "height": "650",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "707": {
         "lid": "707",
@@ -2119,8 +2119,8 @@ HE_LOCATIONS = {
         "height": "-150",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
-    }
+        "is_main_coast_city": "0",
+    },
 }
 
 EN_LOCATIONS = {
@@ -2135,7 +2135,7 @@ EN_LOCATIONS = {
         "height": "780",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "2": {
         "lid": "2",
@@ -2148,7 +2148,7 @@ EN_LOCATIONS = {
         "height": "30",
         "is_park": "0",
         "near_coast": "1",
-        "is_main_coast_city": "1"
+        "is_main_coast_city": "1",
     },
     "3": {
         "lid": "3",
@@ -2161,7 +2161,7 @@ EN_LOCATIONS = {
         "height": "250",
         "is_park": "0",
         "near_coast": "1",
-        "is_main_coast_city": "1"
+        "is_main_coast_city": "1",
     },
     "4": {
         "lid": "4",
@@ -2174,7 +2174,7 @@ EN_LOCATIONS = {
         "height": "50",
         "is_park": "0",
         "near_coast": "1",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "5": {
         "lid": "5",
@@ -2187,7 +2187,7 @@ EN_LOCATIONS = {
         "height": "50",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "6": {
         "lid": "6",
@@ -2200,7 +2200,7 @@ EN_LOCATIONS = {
         "height": "30",
         "is_park": "0",
         "near_coast": "1",
-        "is_main_coast_city": "1"
+        "is_main_coast_city": "1",
     },
     "7": {
         "lid": "7",
@@ -2213,7 +2213,7 @@ EN_LOCATIONS = {
         "height": "35",
         "is_park": "0",
         "near_coast": "1",
-        "is_main_coast_city": "1"
+        "is_main_coast_city": "1",
     },
     "8": {
         "lid": "8",
@@ -2226,7 +2226,7 @@ EN_LOCATIONS = {
         "height": "280",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "9": {
         "lid": "9",
@@ -2239,7 +2239,7 @@ EN_LOCATIONS = {
         "height": "35",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "10": {
         "lid": "10",
@@ -2252,7 +2252,7 @@ EN_LOCATIONS = {
         "height": "35",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "11": {
         "lid": "11",
@@ -2265,7 +2265,7 @@ EN_LOCATIONS = {
         "height": "50",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "12": {
         "lid": "12",
@@ -2278,7 +2278,7 @@ EN_LOCATIONS = {
         "height": "40",
         "is_park": "0",
         "near_coast": "1",
-        "is_main_coast_city": "1"
+        "is_main_coast_city": "1",
     },
     "13": {
         "lid": "13",
@@ -2291,7 +2291,7 @@ EN_LOCATIONS = {
         "height": "50",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "14": {
         "lid": "14",
@@ -2304,7 +2304,7 @@ EN_LOCATIONS = {
         "height": "20",
         "is_park": "0",
         "near_coast": "1",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "15": {
         "lid": "15",
@@ -2317,7 +2317,7 @@ EN_LOCATIONS = {
         "height": "300",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "16": {
         "lid": "16",
@@ -2330,7 +2330,7 @@ EN_LOCATIONS = {
         "height": "55",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "17": {
         "lid": "17",
@@ -2343,7 +2343,7 @@ EN_LOCATIONS = {
         "height": "45",
         "is_park": "0",
         "near_coast": "1",
-        "is_main_coast_city": "1"
+        "is_main_coast_city": "1",
     },
     "18": {
         "lid": "18",
@@ -2356,7 +2356,7 @@ EN_LOCATIONS = {
         "height": "25",
         "is_park": "0",
         "near_coast": "1",
-        "is_main_coast_city": "1"
+        "is_main_coast_city": "1",
     },
     "19": {
         "lid": "19",
@@ -2369,7 +2369,7 @@ EN_LOCATIONS = {
         "height": "270",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "20": {
         "lid": "20",
@@ -2382,7 +2382,7 @@ EN_LOCATIONS = {
         "height": "80",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "21": {
         "lid": "21",
@@ -2395,7 +2395,7 @@ EN_LOCATIONS = {
         "height": "50",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "22": {
         "lid": "22",
@@ -2408,7 +2408,7 @@ EN_LOCATIONS = {
         "height": "290",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "23": {
         "lid": "23",
@@ -2421,7 +2421,7 @@ EN_LOCATIONS = {
         "height": "230",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "24": {
         "lid": "24",
@@ -2434,7 +2434,7 @@ EN_LOCATIONS = {
         "height": "45",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "25": {
         "lid": "25",
@@ -2447,7 +2447,7 @@ EN_LOCATIONS = {
         "height": "70",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "26": {
         "lid": "26",
@@ -2460,7 +2460,7 @@ EN_LOCATIONS = {
         "height": "50",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "27": {
         "lid": "27",
@@ -2473,7 +2473,7 @@ EN_LOCATIONS = {
         "height": "15",
         "is_park": "0",
         "near_coast": "1",
-        "is_main_coast_city": "1"
+        "is_main_coast_city": "1",
     },
     "28": {
         "lid": "28",
@@ -2486,7 +2486,7 @@ EN_LOCATIONS = {
         "height": "710",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "29": {
         "lid": "29",
@@ -2499,7 +2499,7 @@ EN_LOCATIONS = {
         "height": "400",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "30": {
         "lid": "30",
@@ -2512,7 +2512,7 @@ EN_LOCATIONS = {
         "height": "125",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "31": {
         "lid": "31",
@@ -2525,7 +2525,7 @@ EN_LOCATIONS = {
         "height": "50",
         "is_park": "0",
         "near_coast": "1",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "32": {
         "lid": "32",
@@ -2538,7 +2538,7 @@ EN_LOCATIONS = {
         "height": "50",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "33": {
         "lid": "33",
@@ -2551,7 +2551,7 @@ EN_LOCATIONS = {
         "height": "80",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "34": {
         "lid": "34",
@@ -2564,7 +2564,7 @@ EN_LOCATIONS = {
         "height": "35",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "35": {
         "lid": "35",
@@ -2577,7 +2577,7 @@ EN_LOCATIONS = {
         "height": "10",
         "is_park": "0",
         "near_coast": "1",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "36": {
         "lid": "36",
@@ -2590,7 +2590,7 @@ EN_LOCATIONS = {
         "height": "120",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "37": {
         "lid": "37",
@@ -2603,7 +2603,7 @@ EN_LOCATIONS = {
         "height": "45",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "38": {
         "lid": "38",
@@ -2616,7 +2616,7 @@ EN_LOCATIONS = {
         "height": "235",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "39": {
         "lid": "39",
@@ -2629,7 +2629,7 @@ EN_LOCATIONS = {
         "height": "30",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "40": {
         "lid": "40",
@@ -2642,7 +2642,7 @@ EN_LOCATIONS = {
         "height": "-200",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "41": {
         "lid": "41",
@@ -2655,7 +2655,7 @@ EN_LOCATIONS = {
         "height": "70",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "42": {
         "lid": "42",
@@ -2668,7 +2668,7 @@ EN_LOCATIONS = {
         "height": "10",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "43": {
         "lid": "43",
@@ -2681,7 +2681,7 @@ EN_LOCATIONS = {
         "height": "130",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "44": {
         "lid": "44",
@@ -2694,7 +2694,7 @@ EN_LOCATIONS = {
         "height": "430",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "45": {
         "lid": "45",
@@ -2707,7 +2707,7 @@ EN_LOCATIONS = {
         "height": "10",
         "is_park": "0",
         "near_coast": "1",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "46": {
         "lid": "46",
@@ -2720,7 +2720,7 @@ EN_LOCATIONS = {
         "height": "15",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "47": {
         "lid": "47",
@@ -2733,7 +2733,7 @@ EN_LOCATIONS = {
         "height": "65",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "48": {
         "lid": "48",
@@ -2746,7 +2746,7 @@ EN_LOCATIONS = {
         "height": "480",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "49": {
         "lid": "49",
@@ -2759,7 +2759,7 @@ EN_LOCATIONS = {
         "height": "30",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "50": {
         "lid": "50",
@@ -2772,7 +2772,7 @@ EN_LOCATIONS = {
         "height": "800",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "51": {
         "lid": "51",
@@ -2785,7 +2785,7 @@ EN_LOCATIONS = {
         "height": "150",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "52": {
         "lid": "52",
@@ -2798,7 +2798,7 @@ EN_LOCATIONS = {
         "height": "550",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "53": {
         "lid": "53",
@@ -2811,7 +2811,7 @@ EN_LOCATIONS = {
         "height": "120",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "54": {
         "lid": "54",
@@ -2824,7 +2824,7 @@ EN_LOCATIONS = {
         "height": "250",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "55": {
         "lid": "55",
@@ -2837,7 +2837,7 @@ EN_LOCATIONS = {
         "height": "40",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "56": {
         "lid": "56",
@@ -2850,7 +2850,7 @@ EN_LOCATIONS = {
         "height": "100",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "57": {
         "lid": "57",
@@ -2863,7 +2863,7 @@ EN_LOCATIONS = {
         "height": "130",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "58": {
         "lid": "58",
@@ -2876,7 +2876,7 @@ EN_LOCATIONS = {
         "height": "50",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "59": {
         "lid": "59",
@@ -2889,7 +2889,7 @@ EN_LOCATIONS = {
         "height": "75",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "60": {
         "lid": "60",
@@ -2902,7 +2902,7 @@ EN_LOCATIONS = {
         "height": "600",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "61": {
         "lid": "61",
@@ -2915,7 +2915,7 @@ EN_LOCATIONS = {
         "height": "220",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "62": {
         "lid": "62",
@@ -2928,7 +2928,7 @@ EN_LOCATIONS = {
         "height": "90",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "63": {
         "lid": "63",
@@ -2941,7 +2941,7 @@ EN_LOCATIONS = {
         "height": "250",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "64": {
         "lid": "64",
@@ -2954,7 +2954,7 @@ EN_LOCATIONS = {
         "height": "140",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "65": {
         "lid": "65",
@@ -2967,7 +2967,7 @@ EN_LOCATIONS = {
         "height": "120",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "66": {
         "lid": "66",
@@ -2980,7 +2980,7 @@ EN_LOCATIONS = {
         "height": "140",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "67": {
         "lid": "67",
@@ -2993,7 +2993,7 @@ EN_LOCATIONS = {
         "height": "140",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "68": {
         "lid": "68",
@@ -3006,7 +3006,7 @@ EN_LOCATIONS = {
         "height": "50",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "69": {
         "lid": "69",
@@ -3019,7 +3019,7 @@ EN_LOCATIONS = {
         "height": "40",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "70": {
         "lid": "70",
@@ -3032,7 +3032,7 @@ EN_LOCATIONS = {
         "height": "65",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "71": {
         "lid": "71",
@@ -3045,7 +3045,7 @@ EN_LOCATIONS = {
         "height": "520",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "72": {
         "lid": "72",
@@ -3058,7 +3058,7 @@ EN_LOCATIONS = {
         "height": "50",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "73": {
         "lid": "73",
@@ -3071,7 +3071,7 @@ EN_LOCATIONS = {
         "height": "580",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "74": {
         "lid": "74",
@@ -3084,7 +3084,7 @@ EN_LOCATIONS = {
         "height": "20",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "75": {
         "lid": "75",
@@ -3097,7 +3097,7 @@ EN_LOCATIONS = {
         "height": "-130",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "76": {
         "lid": "76",
@@ -3110,7 +3110,7 @@ EN_LOCATIONS = {
         "height": "860",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "77": {
         "lid": "77",
@@ -3123,7 +3123,7 @@ EN_LOCATIONS = {
         "height": "65",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "78": {
         "lid": "78",
@@ -3136,7 +3136,7 @@ EN_LOCATIONS = {
         "height": "370",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "79": {
         "lid": "79",
@@ -3149,7 +3149,7 @@ EN_LOCATIONS = {
         "height": "320",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "80": {
         "lid": "80",
@@ -3162,7 +3162,7 @@ EN_LOCATIONS = {
         "height": "-205",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "81": {
         "lid": "81",
@@ -3175,7 +3175,7 @@ EN_LOCATIONS = {
         "height": "70",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "82": {
         "lid": "82",
@@ -3188,7 +3188,7 @@ EN_LOCATIONS = {
         "height": "65",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "83": {
         "lid": "83",
@@ -3201,7 +3201,7 @@ EN_LOCATIONS = {
         "height": "280",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "84": {
         "lid": "84",
@@ -3214,7 +3214,7 @@ EN_LOCATIONS = {
         "height": "65",
         "is_park": "0",
         "near_coast": "1",
-        "is_main_coast_city": "1"
+        "is_main_coast_city": "1",
     },
     "200": {
         "lid": "200",
@@ -3227,7 +3227,7 @@ EN_LOCATIONS = {
         "height": "750",
         "is_park": "1",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "201": {
         "lid": "201",
@@ -3240,7 +3240,7 @@ EN_LOCATIONS = {
         "height": "350",
         "is_park": "1",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "202": {
         "lid": "202",
@@ -3253,7 +3253,7 @@ EN_LOCATIONS = {
         "height": "200",
         "is_park": "1",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "203": {
         "lid": "203",
@@ -3266,7 +3266,7 @@ EN_LOCATIONS = {
         "height": "130",
         "is_park": "1",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "204": {
         "lid": "204",
@@ -3279,7 +3279,7 @@ EN_LOCATIONS = {
         "height": "150",
         "is_park": "1",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "205": {
         "lid": "205",
@@ -3292,7 +3292,7 @@ EN_LOCATIONS = {
         "height": "400",
         "is_park": "1",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "206": {
         "lid": "206",
@@ -3305,7 +3305,7 @@ EN_LOCATIONS = {
         "height": "70",
         "is_park": "1",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "207": {
         "lid": "207",
@@ -3318,7 +3318,7 @@ EN_LOCATIONS = {
         "height": "220",
         "is_park": "1",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "208": {
         "lid": "208",
@@ -3331,7 +3331,7 @@ EN_LOCATIONS = {
         "height": "10",
         "is_park": "1",
         "near_coast": "1",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "209": {
         "lid": "209",
@@ -3344,7 +3344,7 @@ EN_LOCATIONS = {
         "height": "370",
         "is_park": "1",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "210": {
         "lid": "210",
@@ -3357,7 +3357,7 @@ EN_LOCATIONS = {
         "height": "740",
         "is_park": "1",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "211": {
         "lid": "211",
@@ -3370,7 +3370,7 @@ EN_LOCATIONS = {
         "height": "470",
         "is_park": "1",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "212": {
         "lid": "212",
@@ -3383,7 +3383,7 @@ EN_LOCATIONS = {
         "height": "70",
         "is_park": "1",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "213": {
         "lid": "213",
@@ -3396,7 +3396,7 @@ EN_LOCATIONS = {
         "height": "-200",
         "is_park": "1",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "214": {
         "lid": "214",
@@ -3409,7 +3409,7 @@ EN_LOCATIONS = {
         "height": "-200",
         "is_park": "1",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "215": {
         "lid": "215",
@@ -3422,7 +3422,7 @@ EN_LOCATIONS = {
         "height": "30",
         "is_park": "1",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "216": {
         "lid": "216",
@@ -3435,7 +3435,7 @@ EN_LOCATIONS = {
         "height": "150",
         "is_park": "1",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "217": {
         "lid": "217",
@@ -3448,7 +3448,7 @@ EN_LOCATIONS = {
         "height": "370",
         "is_park": "1",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "218": {
         "lid": "218",
@@ -3461,7 +3461,7 @@ EN_LOCATIONS = {
         "height": "-200",
         "is_park": "1",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "219": {
         "lid": "219",
@@ -3474,7 +3474,7 @@ EN_LOCATIONS = {
         "height": "-200",
         "is_park": "1",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "220": {
         "lid": "220",
@@ -3487,7 +3487,7 @@ EN_LOCATIONS = {
         "height": "100",
         "is_park": "1",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "221": {
         "lid": "221",
@@ -3500,7 +3500,7 @@ EN_LOCATIONS = {
         "height": "10",
         "is_park": "1",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "222": {
         "lid": "222",
@@ -3513,7 +3513,7 @@ EN_LOCATIONS = {
         "height": "270",
         "is_park": "1",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "223": {
         "lid": "223",
@@ -3526,7 +3526,7 @@ EN_LOCATIONS = {
         "height": "350",
         "is_park": "1",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "224": {
         "lid": "224",
@@ -3539,7 +3539,7 @@ EN_LOCATIONS = {
         "height": "500",
         "is_park": "1",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "225": {
         "lid": "225",
@@ -3552,7 +3552,7 @@ EN_LOCATIONS = {
         "height": "100",
         "is_park": "1",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "226": {
         "lid": "226",
@@ -3565,7 +3565,7 @@ EN_LOCATIONS = {
         "height": "320",
         "is_park": "1",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "227": {
         "lid": "227",
@@ -3578,7 +3578,7 @@ EN_LOCATIONS = {
         "height": "40",
         "is_park": "1",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "228": {
         "lid": "228",
@@ -3591,7 +3591,7 @@ EN_LOCATIONS = {
         "height": "5",
         "is_park": "1",
         "near_coast": "1",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "229": {
         "lid": "229",
@@ -3604,7 +3604,7 @@ EN_LOCATIONS = {
         "height": "160",
         "is_park": "1",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "230": {
         "lid": "230",
@@ -3617,7 +3617,7 @@ EN_LOCATIONS = {
         "height": "300",
         "is_park": "1",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "231": {
         "lid": "231",
@@ -3630,7 +3630,7 @@ EN_LOCATIONS = {
         "height": "-10",
         "is_park": "1",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "232": {
         "lid": "232",
@@ -3643,7 +3643,7 @@ EN_LOCATIONS = {
         "height": "-75",
         "is_park": "1",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "233": {
         "lid": "233",
@@ -3656,7 +3656,7 @@ EN_LOCATIONS = {
         "height": "-100",
         "is_park": "1",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "235": {
         "lid": "235",
@@ -3669,7 +3669,7 @@ EN_LOCATIONS = {
         "height": "10",
         "is_park": "1",
         "near_coast": "1",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "236": {
         "lid": "236",
@@ -3682,7 +3682,7 @@ EN_LOCATIONS = {
         "height": "5",
         "is_park": "1",
         "near_coast": "1",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "237": {
         "lid": "237",
@@ -3695,7 +3695,7 @@ EN_LOCATIONS = {
         "height": "5",
         "is_park": "1",
         "near_coast": "1",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "238": {
         "lid": "238",
@@ -3708,7 +3708,7 @@ EN_LOCATIONS = {
         "height": "5",
         "is_park": "1",
         "near_coast": "1",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "239": {
         "lid": "239",
@@ -3721,7 +3721,7 @@ EN_LOCATIONS = {
         "height": "10",
         "is_park": "1",
         "near_coast": "1",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "240": {
         "lid": "240",
@@ -3734,7 +3734,7 @@ EN_LOCATIONS = {
         "height": "30",
         "is_park": "1",
         "near_coast": "1",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "241": {
         "lid": "241",
@@ -3747,7 +3747,7 @@ EN_LOCATIONS = {
         "height": "35",
         "is_park": "1",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "242": {
         "lid": "242",
@@ -3760,7 +3760,7 @@ EN_LOCATIONS = {
         "height": "5",
         "is_park": "1",
         "near_coast": "1",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "243": {
         "lid": "243",
@@ -3773,7 +3773,7 @@ EN_LOCATIONS = {
         "height": "780",
         "is_park": "1",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "244": {
         "lid": "244",
@@ -3786,7 +3786,7 @@ EN_LOCATIONS = {
         "height": "600",
         "is_park": "1",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "245": {
         "lid": "245",
@@ -3799,7 +3799,7 @@ EN_LOCATIONS = {
         "height": "700",
         "is_park": "1",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "246": {
         "lid": "246",
@@ -3812,7 +3812,7 @@ EN_LOCATIONS = {
         "height": "420",
         "is_park": "1",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "248": {
         "lid": "248",
@@ -3825,7 +3825,7 @@ EN_LOCATIONS = {
         "height": "280",
         "is_park": "1",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "249": {
         "lid": "249",
@@ -3838,7 +3838,7 @@ EN_LOCATIONS = {
         "height": "300",
         "is_park": "1",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "250": {
         "lid": "250",
@@ -3851,7 +3851,7 @@ EN_LOCATIONS = {
         "height": "110",
         "is_park": "1",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "251": {
         "lid": "251",
@@ -3864,7 +3864,7 @@ EN_LOCATIONS = {
         "height": "620",
         "is_park": "1",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "252": {
         "lid": "252",
@@ -3877,7 +3877,7 @@ EN_LOCATIONS = {
         "height": "440",
         "is_park": "1",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "253": {
         "lid": "253",
@@ -3890,7 +3890,7 @@ EN_LOCATIONS = {
         "height": "875",
         "is_park": "1",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "254": {
         "lid": "254",
@@ -3903,7 +3903,7 @@ EN_LOCATIONS = {
         "height": "875",
         "is_park": "1",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "255": {
         "lid": "255",
@@ -3916,7 +3916,7 @@ EN_LOCATIONS = {
         "height": "280",
         "is_park": "1",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "256": {
         "lid": "256",
@@ -3929,7 +3929,7 @@ EN_LOCATIONS = {
         "height": "100",
         "is_park": "1",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "257": {
         "lid": "257",
@@ -3942,7 +3942,7 @@ EN_LOCATIONS = {
         "height": "-385",
         "is_park": "1",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "258": {
         "lid": "258",
@@ -3955,7 +3955,7 @@ EN_LOCATIONS = {
         "height": "270",
         "is_park": "1",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "259": {
         "lid": "259",
@@ -3968,7 +3968,7 @@ EN_LOCATIONS = {
         "height": "230",
         "is_park": "1",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "261": {
         "lid": "261",
@@ -3981,7 +3981,7 @@ EN_LOCATIONS = {
         "height": "-330",
         "is_park": "1",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "262": {
         "lid": "262",
@@ -3994,7 +3994,7 @@ EN_LOCATIONS = {
         "height": "-390",
         "is_park": "1",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "263": {
         "lid": "263",
@@ -4007,7 +4007,7 @@ EN_LOCATIONS = {
         "height": "740",
         "is_park": "1",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "264": {
         "lid": "264",
@@ -4020,7 +4020,7 @@ EN_LOCATIONS = {
         "height": "925",
         "is_park": "1",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "267": {
         "lid": "267",
@@ -4033,7 +4033,7 @@ EN_LOCATIONS = {
         "height": "50",
         "is_park": "1",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "268": {
         "lid": "268",
@@ -4046,7 +4046,7 @@ EN_LOCATIONS = {
         "height": "560",
         "is_park": "1",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "269": {
         "lid": "269",
@@ -4059,7 +4059,7 @@ EN_LOCATIONS = {
         "height": "300",
         "is_park": "1",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "270": {
         "lid": "270",
@@ -4072,7 +4072,7 @@ EN_LOCATIONS = {
         "height": "70",
         "is_park": "1",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "271": {
         "lid": "271",
@@ -4085,7 +4085,7 @@ EN_LOCATIONS = {
         "height": "470",
         "is_park": "1",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "272": {
         "lid": "272",
@@ -4098,7 +4098,7 @@ EN_LOCATIONS = {
         "height": "350",
         "is_park": "1",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "273": {
         "lid": "273",
@@ -4111,7 +4111,7 @@ EN_LOCATIONS = {
         "height": "475",
         "is_park": "1",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "274": {
         "lid": "274",
@@ -4124,7 +4124,7 @@ EN_LOCATIONS = {
         "height": "400",
         "is_park": "1",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "275": {
         "lid": "275",
@@ -4137,7 +4137,7 @@ EN_LOCATIONS = {
         "height": "600",
         "is_park": "1",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "277": {
         "lid": "277",
@@ -4150,7 +4150,7 @@ EN_LOCATIONS = {
         "height": "65",
         "is_park": "1",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "278": {
         "lid": "278",
@@ -4163,7 +4163,7 @@ EN_LOCATIONS = {
         "height": "0",
         "is_park": "1",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "702": {
         "lid": "702",
@@ -4176,7 +4176,7 @@ EN_LOCATIONS = {
         "height": "-255",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "703": {
         "lid": "703",
@@ -4189,7 +4189,7 @@ EN_LOCATIONS = {
         "height": "430",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "704": {
         "lid": "704",
@@ -4202,7 +4202,7 @@ EN_LOCATIONS = {
         "height": "440",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "705": {
         "lid": "705",
@@ -4215,7 +4215,7 @@ EN_LOCATIONS = {
         "height": "405",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "706": {
         "lid": "706",
@@ -4228,7 +4228,7 @@ EN_LOCATIONS = {
         "height": "650",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
+        "is_main_coast_city": "0",
     },
     "707": {
         "lid": "707",
@@ -4241,8 +4241,8 @@ EN_LOCATIONS = {
         "height": "-150",
         "is_park": "0",
         "near_coast": "0",
-        "is_main_coast_city": "0"
-    }
+        "is_main_coast_city": "0",
+    },
 }
 
 HE_WEATHER_CODES = {
@@ -4314,7 +4314,7 @@ HE_WIND_DIRECTIONS = {
     293: "צפון מערב-מערב",
     315: "צפון מערב",
     338: "צפון-צפון מערב",
-    0: "צפון"
+    0: "צפון",
 }
 
 EN_WIND_DIRECTIONS = {
@@ -4334,7 +4334,7 @@ EN_WIND_DIRECTIONS = {
     293: "West North West",
     315: "North West",
     338: "North North West",
-    0: "North"
+    0: "North",
 }
 
 WIND_DIRECTIONS_IDS = {
@@ -4354,7 +4354,7 @@ WIND_DIRECTIONS_IDS = {
     14: 293,
     15: 315,
     16: 338,
-    17: 0
+    17: 0,
 }
 
 
@@ -4410,7 +4410,7 @@ def get_day_of_the_week(language: str, date: datetime):
         "Friday": "שישי",
         "Saturday": "שבת",
     }
-    day = date.strftime('%A')
+    day = date.strftime("%A")
     if language == "he":
         return weekday.get(day, "nothing")
     else:

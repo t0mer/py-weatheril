@@ -5,12 +5,18 @@ from datetime import datetime
 from json import JSONEncoder
 from typing import Optional
 
-from .utils import get_location_name_by_id, get_day_of_the_week, get_weather_description_by_code, get_wind_direction
+from .utils import (
+    get_location_name_by_id,
+    get_day_of_the_week,
+    get_weather_description_by_code,
+    get_wind_direction,
+)
 
 
 @dataclass
 class Forecast:
     days: list[Daily] = field(default_factory=list)
+
 
 @dataclass
 class Daily:
@@ -32,6 +38,7 @@ class Daily:
         self.day = get_day_of_the_week(self.language, self.date)
         self.location = get_location_name_by_id(self.language, self.lid)
         self.weather = get_weather_description_by_code(self.language, self.weather_code)
+
 
 @dataclass
 class Hourly:
@@ -56,7 +63,6 @@ class Hourly:
     wave_height: Optional[float]
     u_v_index: int
     u_v_i_max: Optional[int]
-
 
     def __post_init__(self):
         self.weather = get_weather_description_by_code(self.language, self.weather_code)
