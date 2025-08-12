@@ -171,6 +171,7 @@ class WeatherIL:
                     modified_at=modified_at,
                     json=analysis_data,
                     weather_code=_get_value(analysis_data, "weather_code", None, int),
+                    gust_speed=_get_value(analysis_data, "gust_speed", None, int, 0)
                 )
             else:
                 logger.error('No "' + self.location + '" in current analysis response')
