@@ -35,6 +35,7 @@ def _get_value(
     inner_dict_key: Optional[str],
     data_type: Type = dict,
     default_value=None,
+    custom_empty_value=None
 ):
     """
     Get default value from nested dictionary and convert to specified data type
@@ -57,15 +58,17 @@ def _get_value(
 
     try:
         if data_type is str:
-            return str(value)
+            value = str(value)
         if data_type is int:
-            return int(value)
+            value = int(value)
         if data_type is float:
-            return float(value)
-        else:
-            return value
+            value = float(value)
     except (ValueError, TypeError):
+        value = default_value
+
+    if custom_empty_value and value == custom_empty_value:
         return default_value
+    return value
 
 
 def _fetch_data(url: str) -> dict:
@@ -138,7 +141,7 @@ class WeatherIL:
                     humidity=_get_value(
                         analysis_data, "relative_humidity", None, int, 0
                     ),
-                    rain=_get_value(analysis_data, "rain", None, float, 0.0),
+                    rain=_get_value(analysis_data, "rain", None, float, 0.0, -999.0),
                     rain_chance=_get_value(analysis_data, "rain_chance", None, int, 0),
                     temperature=_get_value(
                         analysis_data, "temperature", None, float, 0.0
@@ -171,7 +174,7 @@ class WeatherIL:
                     modified_at=modified_at,
                     json=analysis_data,
                     weather_code=_get_value(analysis_data, "weather_code", None, int),
-                    gust_speed=_get_value(analysis_data, "gust_speed", None, int, 0)
+                    gust_speed=_get_value(analysis_data, "gust_speed", None, int, None, -999)
                 )
             else:
                 logger.error('No "' + self.location + '" in current analysis response')
@@ -271,15 +274,16 @@ class WeatherIL:
                         relative_humidity=_get_value(
                             data, key, "relative_humidity", int
                         ),
-                        rain=_get_value(data, key, "rain", float),
+                        rain=_get_value(data, key, "rain", float, None, -999.0),
                         rain_chance=_get_value(data, key, "rain_chance", int),
                         wind_speed=_get_value(data, key, "wind_speed", int),
+                        gust_speed=_get_value(data, key, "gust_speed", int, None, -999),
                         wind_direction_id=_get_value(
                             data, key, "wind_direction_id", int
                         ),
                         wave_height=_get_value(data, key, "wave_height", float),
                         wind_chill=_get_value(data, key, "wind_chill", int),
-                        u_v_index=_get_value(data, key, "u_v_index", int, 0),
+                        u_v_index=_get_value(data, key, "u_v_index", int, None, -8991),
                         u_v_i_max=_get_value(data, key, "u_v_i_max", int),
                     )
                 )

@@ -39,7 +39,7 @@ class Weather:
     location: str = field(init=False)
     description: str = field(init=False)
     wind_direction: int = field(init=False)
-    gust_speed: int
+    gust_speed: Optional[int]
     modified_at: datetime
 
     def __post_init__(self):
