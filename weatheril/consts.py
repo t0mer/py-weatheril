@@ -1,3 +1,5 @@
+import pytz
+
 IMS_API_URL_BASE = "https://ims.gov.il/{language}/"
 RADAR_URL = "https://ims.gov.il/sites/default/files/ims_data/map_images/IMSRadar4GIS.gif"
 SATELLITE_URL = "https://ims.gov.il/sites/default/files/ims_data/map_images/Satellite-map.jpg"
@@ -10,6 +12,12 @@ RADAR_SATELLITE_URL = IMS_API_URL_BASE + "radar_satellite"
 WEATHER_CODES_URL = IMS_API_URL_BASE + "weather_codes"
 LOCATIONS_INFO_URL = IMS_API_URL_BASE + "locations_info"
 WIND_DIRECTIONS_URL = IMS_API_URL_BASE + "wind_directions"
+REGIONS_URL = IMS_API_URL_BASE + "regions"
+SEA_REGIONS_URL = IMS_API_URL_BASE + "sea_regions"
+WARNINGS_METADTA_URL = IMS_API_URL_BASE + "warnings_metadata"
+WARNINGS_URL = IMS_API_URL_BASE + "warnings"
+
+TIMEZONE = pytz.timezone("Asia/Jerusalem")
 
 HE_LOCATIONS = {
     "1": {
