@@ -1,5 +1,4 @@
 from setuptools import setup, find_packages
-from pathlib import Path
 
 
 with open("README.md", "r", encoding="UTF-8") as f:
