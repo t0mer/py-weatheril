@@ -1,24 +1,24 @@
 """Israel Meteorological Service unofficial python api wrapper"""
 from datetime import datetime
 
-import pytz
 import requests
 from loguru import logger
-from weatheril.consts import CURRENT_ANALYSIS_URL, FORECAST_URL, IMS_API_URL_BASE, RADAR_SATELLITE_URL
 
+from .consts import CURRENT_ANALYSIS_URL, FORECAST_URL, IMS_API_URL_BASE, RADAR_SATELLITE_URL, WARNINGS_URL, TIMEZONE
 from .forecast import Forecast, Daily, Hourly
 from .radar_satellite import RadarSatellite
-from .utils import get_value, fetch_data, get_data
+from .warning import Warning
+from .utils import get_region_by_id, get_value, fetch_data, get_data, get_location_info_by_id
 from .weather import Weather
+
 
 # ims.gov.il does not support ipv6 yet, `requests` use ipv6 by default
 # and wait for timeout before trying ipv4, so we have to disable ipv6
 requests.packages.urllib3.util.connection.HAS_IPV6 = False
 
-timezone = pytz.timezone("Asia/Jerusalem")
-
 DAILY_KEY = "daily"
 HOURLY_KEY = "hourly"
+FULL_WARNINGS_DATA_KEY = "full_warnings_data"
 
 
 DEFAULT_CACHE_EXPIRATION = 30
@@ -42,6 +42,8 @@ class WeatherIL:
         self._analysis_last_fetch = None
         self._forecast_data = None
         self._forecast_last_fetch = None
+        self._full_warnings_data = None
+        self._warnings_last_fetch = None
 
     def get_current_analysis(self):
         self._get_analysis_data()
@@ -55,7 +57,7 @@ class WeatherIL:
                     analysis_data, "forecast_time", None, str
                 )
                 forecast_time = (
-                    timezone.localize(
+                    TIMEZONE.localize(
                         datetime.strptime(forecast_time_str, "%Y-%m-%d %H:%M:%S")
                     )
                     if forecast_time_str
@@ -64,7 +66,7 @@ class WeatherIL:
 
                 modified_at_str = get_value(analysis_data, "modified", None, str)
                 modified_at = (
-                    timezone.localize(
+                    TIMEZONE.localize(
                         datetime.strptime(modified_at_str, "%Y-%m-%d %H:%M:%S")
                     )
                     if modified_at_str
@@ -72,7 +74,7 @@ class WeatherIL:
                 )
 
                 return Weather(
-                    langauge=self.language,
+                    language=self.language,
                     lid=get_value(analysis_data, "lid", None, str),
                     humidity=get_value(
                         analysis_data, "relative_humidity", None, int, 0
@@ -138,7 +140,7 @@ class WeatherIL:
                 )
                 daily = Daily(
                     language=self.language,
-                    date=timezone.localize(datetime.strptime(key, "%Y-%m-%d")),
+                    date=TIMEZONE.localize(datetime.strptime(key, "%Y-%m-%d")),
                     lid=get_value(
                         forecast_data[key], DAILY_KEY, "lid", default_value="0"
                     ),
@@ -186,13 +188,13 @@ class WeatherIL:
                     Hourly(
                         language=self.language,
                         hour=key,
-                        forecast_time=timezone.localize(
+                        forecast_time=TIMEZONE.localize(
                             datetime.strptime(
                                 data.get(key, {}).get("forecast_time"),
                                 "%Y-%m-%d %H:%M:%S",
                             )
                         ),
-                        created=timezone.localize(
+                        created=TIMEZONE.localize(
                             datetime.strptime(
                                 data.get(key, {}).get("created"), "%Y-%m-%d %H:%M:%S"
                             )
@@ -286,3 +288,61 @@ class WeatherIL:
         )
         if self._forecast_data:
             self._forecast_last_fetch = datetime.now()
+
+    def _get_warnings_data(self):
+        """
+        Get the all warning data
+        """
+
+        url = WARNINGS_URL.format(language=self.language)
+        self._full_warnings_data = get_data(
+            self._full_warnings_data, url, self._warnings_last_fetch, self._cache_expiration_in_sec
+        )
+
+        if self._full_warnings_data:
+            self._warnings_last_fetch = datetime.now()
+
+    def get_warnings(self):
+        """
+        Get weather forecast
+        return: Forecast object
+        """
+        logger.debug("Getting warnings")
+        self._get_warnings_data()
+
+        location_info = get_location_info_by_id(self.language, self.location)
+        if not location_info:
+            raise ValueError(f"Location not found for id {self.location}")
+
+        rid = location_info.get('rid')
+        region = get_region_by_id(self.language, region_id="r-" + rid)
+        if not region:
+            raise ValueError(f"Region not found for id {rid}")
+
+        warnings = []
+        if  self._full_warnings_data:
+            for key in self._full_warnings_data[FULL_WARNINGS_DATA_KEY]:
+                daily_warnings: dict = get_value(self._full_warnings_data, FULL_WARNINGS_DATA_KEY, key, dict)
+                regional_alerts = daily_warnings.get("r-" + rid, {})
+                for alert in regional_alerts.values():
+
+                    warnings.append(Warning(
+                        language=self.language,
+                        location_id=int(self.location),
+                            wid=int(alert["wid"]),
+                            alert_id=int(alert["alert_id"]),
+                            severity_id=int(alert["severity_id"]),
+                            warning_type_id=int(alert["warning_type_id"]),
+                            sent=alert["sent"],
+                            valid_from=alert["valid_from"],
+                            valid_to=alert["valid_to"],
+                            full_en=alert["full_en"],
+                            full_he=alert["full_he"],
+                            text=alert["text"],
+                            text_full=alert["text_full"],
+                            valid_from_unix=int(alert["valid_from_unix"]),
+                            groups=alert["groups"],
+                            regions=alert["regions"]
+                    ))
+
+        return warnings
