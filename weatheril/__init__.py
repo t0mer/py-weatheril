@@ -92,7 +92,7 @@ class WeatherIL:
                     wind_direction_id=get_value(
                         analysis_data, "wind_direction_id", None, int, 0
                     ),
-                    feels_like=_get_value(
+                    feels_like=get_value(
                         analysis_data, "feels_like", None, float
                     ),
                     heat_stress_level=get_value(
