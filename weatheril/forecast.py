@@ -61,8 +61,9 @@ class Hourly:
     weather: str = field(init=False)
     wind_direction: str = field(init=False)
     wave_height: Optional[float]
-    u_v_index: int
+    u_v_index: Optional[int]
     u_v_i_max: Optional[int]
+    gust_speed: Optional[int]
 
     def __post_init__(self):
         self.weather = get_weather_description_by_code(self.language, self.weather_code)

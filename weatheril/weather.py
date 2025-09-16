@@ -13,7 +13,7 @@ from .utils import (
 
 @dataclass
 class Weather:
-    langauge: str
+    language: str
     lid: str
     humidity: int
     rain: float
@@ -39,12 +39,12 @@ class Weather:
     location: str = field(init=False)
     description: str = field(init=False)
     wind_direction: int = field(init=False)
-    gust_speed: int
+    gust_speed: Optional[int]
     modified_at: datetime
 
     def __post_init__(self):
-        self.location = get_location_name_by_id(self.langauge, self.lid)
+        self.location = get_location_name_by_id(self.language, self.lid)
         self.description = get_weather_description_by_code(
-            self.langauge, self.weather_code
+            self.language, self.weather_code
         )
-        self.wind_direction = get_wind_direction(self.langauge, self.wind_direction_id)
+        self.wind_direction = get_wind_direction(self.language, self.wind_direction_id)
