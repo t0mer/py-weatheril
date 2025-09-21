@@ -4,7 +4,7 @@ from typing import Type, Optional
 
 import requests
 from loguru import logger
-from weatheril.consts import EN_LOCATIONS, EN_WEATHER_CODES, EN_WIND_DIRECTIONS, HE_LOCATIONS, HE_WEATHER_CODES, HE_WIND_DIRECTIONS, LOCATIONS_INFO_URL, WARNINGS_METADTA_URL, WEATHER_CODES_URL, WIND_DIRECTIONS_URL
+from weatheril.consts import EN_LOCATIONS, EN_WEATHER_CODES, EN_WIND_DIRECTIONS, HE_LOCATIONS, HE_WEATHER_CODES, HE_WIND_DIRECTIONS, LOCATIONS_INFO_URL, WARNINGS_METADTA_URL, WEATHER_CODES_URL, WIND_DIRECTIONS_URL, WEEKDAY_NAMES
 from weatheril.consts import REGIONS_URL
 from weatheril.consts import SEA_REGIONS_URL
 
@@ -30,6 +30,7 @@ def get_weather_description_by_code(language: str, code: int | None) -> str:
         _weather_code_map = _get_weather_codes(language)
     if not code:
         return "Nothing"
+    code = int(code)
     return _weather_code_map.get(code, "Nothing")
 
 def _get_weather_codes(language) -> dict:
@@ -50,7 +51,7 @@ def get_location_name_by_id(language: str, lid: str | int):
     """
     Converts location id to City name
     """
-    lid = str(lid)
+    lid = int(lid)
     global _locations_map
     if not _locations_map:
         _locations_map = _get_locations_map(language)
@@ -61,7 +62,7 @@ def get_location_info_by_id(language: str, lid: str | int):
     """
     Converts location id to City name
     """
-    lid = str(lid)
+    lid = int(lid)
     global _locations_map
     if not _locations_map:
         _locations_map = _get_locations_map(language)
@@ -236,18 +237,9 @@ def get_day_of_the_week(language: str, date: datetime):
     """
     Converts the given date to day of the week name
     """
-    weekday = {
-        "Sunday": "ראשון",
-        "Monday": "שני",
-        "Tuesday": "שלישי",
-        "Wednesday": "רביעי",
-        "Thursday": "חמישי",
-        "Friday": "שישי",
-        "Saturday": "שבת",
-    }
     day = date.strftime("%A")
     if language == "he":
-        return weekday.get(day, "nothing")
+        return WEEKDAY_NAMES.get(day, "nothing")
     else:
         return day
 
