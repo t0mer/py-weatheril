@@ -19,6 +19,16 @@ WARNINGS_URL = IMS_API_URL_BASE + "warnings"
 
 TIMEZONE = pytz.timezone("Asia/Jerusalem")
 
+WEEKDAY_NAMES = {
+    "Sunday": "ראשון",
+    "Monday": "שני",
+    "Tuesday": "שלישי",
+    "Wednesday": "רביעי",
+    "Thursday": "חמישי",
+    "Friday": "שישי",
+    "Saturday": "שבת",
+}
+
 HE_LOCATIONS = {
     "1": {
         "lid": "1",
