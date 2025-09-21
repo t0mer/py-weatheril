@@ -40,7 +40,7 @@ def _get_weather_codes(language) -> dict:
     try:
         url = WEATHER_CODES_URL.format(language=language)
         data = fetch_data(url)
-        return {int(d["id"]): d["desc"] for d in data["data"].values()}
+        return {int(d["weather_code"]): d["desc"] for d in data["data"].values()}
     except Exception as e:
         logger.error("Error getting weather codes. " + str(e))
         logger.exception(e)
