@@ -231,6 +231,21 @@ class WeatherIL:
             logger.exception(e)
             return None
 
+    def _get_images_list(self, data, *keys):
+        current = data
+        for key in keys:
+            if isinstance(current, dict):
+                current = current.get(key, {})
+            else:
+                return []
+        return current if isinstance(current, list) else []
+
+    def _append_images(self, rs, image_list, attribute, base_url):
+        for item in image_list:
+            file_name = item.get("file_name")
+            if file_name:
+                getattr(rs, attribute).append(base_url + file_name)
+
     def get_radar_images(self):
         """
         Get the list of images for Satellite and Radar
@@ -242,19 +257,22 @@ class WeatherIL:
             url = RADAR_SATELLITE_URL.format(language=self.language)
             data = fetch_data(url)
             base_url = IMS_API_URL_BASE.format(language="").rstrip("/")
-            for key in data.get("data").get("types").get("IMSRadar"):
-                rs.imsradar_images.append(base_url + key.get("file_name"))
 
-            for key in data.get("data").get("types").get("radar"):
-                rs.radar_images.append(base_url + key.get("file_name"))
+            print("Getting IMS Radar")
+            ims_radar_list = self._get_images_list(data, "data", "types", "IMSRadar")
+            self._append_images(rs, ims_radar_list, "imsradar_images", base_url)
 
-            for key in data.get("data").get("types").get("MIDDLE-EAST"):
-                rs.middle_east_satellite_images.append(
-                    base_url + key.get("file_name")
-                )
+            print("Getting Radar")
+            radar_list = self._get_images_list(data, "data", "types", "radar")
+            self._append_images(rs, radar_list, "radar_images", base_url)
 
-            for key in data.get("data").get("types").get("EUROPE"):
-                rs.europe_satellite_images.append(base_url + key.get("file_name"))
+            print("Getting Middle East")
+            middle_east_list = self._get_images_list(data, "data", "types", "satellite", "NATURAL")
+            self._append_images(rs, middle_east_list, "middle_east_satellite_images", base_url)
+
+            print("Getting Europe")
+            europe_list = self._get_images_list(data, "data", "types", "EUROPE")
+            self._append_images(rs, europe_list, "europe_satellite_images", base_url)
 
             logger.debug(f"\
                 Got: {len(rs.imsradar_images)} IMS Radar Images;\
