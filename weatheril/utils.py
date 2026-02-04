@@ -4,7 +4,19 @@ from typing import Type, Optional
 
 import requests
 from loguru import logger
-from weatheril.consts import EN_LOCATIONS, EN_WEATHER_CODES, EN_WIND_DIRECTIONS, HE_LOCATIONS, HE_WEATHER_CODES, HE_WIND_DIRECTIONS, LOCATIONS_INFO_URL, WARNINGS_METADTA_URL, WEATHER_CODES_URL, WIND_DIRECTIONS_URL, WEEKDAY_NAMES
+from weatheril.consts import (
+    EN_LOCATIONS,
+    EN_WEATHER_CODES,
+    EN_WIND_DIRECTIONS,
+    HE_LOCATIONS,
+    HE_WEATHER_CODES,
+    HE_WIND_DIRECTIONS,
+    LOCATIONS_INFO_URL,
+    WARNINGS_METADTA_URL,
+    WEATHER_CODES_URL,
+    WIND_DIRECTIONS_URL,
+    WEEKDAY_NAMES,
+)
 from weatheril.consts import REGIONS_URL
 from weatheril.consts import SEA_REGIONS_URL
 
@@ -21,6 +33,7 @@ _warning_type_map = {}
 _warning_group_map = {}
 _warning_severity_map = {}
 
+
 def get_weather_description_by_code(language: str, code: int | None) -> str:
     """
     Get the weather description by the weather code
@@ -32,6 +45,7 @@ def get_weather_description_by_code(language: str, code: int | None) -> str:
         return "Nothing"
     code = int(code)
     return _weather_code_map.get(code, "Nothing")
+
 
 def _get_weather_codes(language) -> dict:
     """
@@ -58,6 +72,7 @@ def get_location_name_by_id(language: str, lid: str | int):
     location = _locations_map.get(lid)
     return location["name"] if location else "Nothing"
 
+
 def get_location_info_by_id(language: str, lid: str | int):
     """
     Converts location id to City name
@@ -67,6 +82,7 @@ def get_location_info_by_id(language: str, lid: str | int):
     if not _locations_map:
         _locations_map = _get_locations_map(language)
     return _locations_map.get(int(lid))
+
 
 def _get_locations_map(language) -> dict:
     """
@@ -96,6 +112,7 @@ def get_wind_direction(language: str, direction_code: int) -> int:
         return direction
     return int(direction.get("direction"))
 
+
 def _get_wind_direction_map(language) -> dict:
     """
     Get the Wind Direction Map from IMS
@@ -108,6 +125,7 @@ def _get_wind_direction_map(language) -> dict:
         logger.error("Error getting directions info.. " + str(e))
         logger.exception(e)
         return HE_WIND_DIRECTIONS if language == "he" else EN_WIND_DIRECTIONS
+
 
 def get_sea_region_by_id(language: str, region_id: int):
     """
@@ -129,7 +147,7 @@ def _get_sea_regions(language) -> dict:
     try:
         url = SEA_REGIONS_URL.format(language=language)
         data = fetch_data(url)
-        return {int(v['rid']): v for v in data["data"].values()}
+        return {int(v["rid"]): v for v in data["data"].values()}
     except Exception as e:
         logger.error("Error getting directions info.. " + str(e))
         logger.exception(e)
@@ -176,6 +194,7 @@ def _get_warning_metadata(language) -> dict | None:
         logger.exception(e)
         raise e
 
+
 def get_warning_type_by_id(language: str, warning_type_id: int) -> dict:
     """
     Get the Warning Types by Id
@@ -188,12 +207,21 @@ def get_warning_type_by_id(language: str, warning_type_id: int) -> dict:
         if _warning_metadata is None:
             raise ValueError("Warning Type Map not found")
 
-        _warning_type_map = {int(v["warning_type_id"]): v for v in _warning_metadata["ims_warning_type"].values()}
-        _warning_group_map = {k: v for k,v in _warning_metadata["warning_groups"].items()}
-        _warning_severity_map = {int(v["severity_id"]): v for v in _warning_metadata["warning_severity"].values()}
+        _warning_type_map = {
+            int(v["warning_type_id"]): v
+            for v in _warning_metadata["ims_warning_type"].values()
+        }
+        _warning_group_map = {
+            k: v for k, v in _warning_metadata["warning_groups"].items()
+        }
+        _warning_severity_map = {
+            int(v["severity_id"]): v
+            for v in _warning_metadata["warning_severity"].values()
+        }
     if not _warning_type_map:
         raise ValueError("Warning Type Map not found")
     return _warning_type_map.get(warning_type_id, {})
+
 
 def get_warning_group_by_id(language: str, warning_group_id: str) -> dict:
     """
@@ -207,12 +235,21 @@ def get_warning_group_by_id(language: str, warning_group_id: str) -> dict:
         if _warning_metadata is None:
             return {}
 
-        _warning_type_map = {int(v["warning_type_id"]): v for v in _warning_metadata["ims_warning_type"].values()}
-        _warning_group_map = {k: v for k,v in _warning_metadata["warning_groups"].items()}
-        _warning_severity_map = {int(v["severity_id"]): v for v in _warning_metadata["warning_severity"].values()}
+        _warning_type_map = {
+            int(v["warning_type_id"]): v
+            for v in _warning_metadata["ims_warning_type"].values()
+        }
+        _warning_group_map = {
+            k: v for k, v in _warning_metadata["warning_groups"].items()
+        }
+        _warning_severity_map = {
+            int(v["severity_id"]): v
+            for v in _warning_metadata["warning_severity"].values()
+        }
     if not _warning_type_map:
         raise ValueError("Warning Group Map not found")
     return _warning_group_map.get(warning_group_id, {})
+
 
 def get_warning_severity_by_id(language: str, warning_severity_id: int) -> dict:
     """
@@ -226,12 +263,21 @@ def get_warning_severity_by_id(language: str, warning_severity_id: int) -> dict:
         if _warning_metadata is None:
             return {}
 
-        _warning_type_map = {int(v["warning_type_id"]): v for v in _warning_metadata["ims_warning_type"].values()}
-        _warning_group_map = {k: v for k,v in _warning_metadata["warning_groups"].items()}
-        _warning_severity_map = {int(v["severity_id"]): v for v in _warning_metadata["warning_severity"].values()}
+        _warning_type_map = {
+            int(v["warning_type_id"]): v
+            for v in _warning_metadata["ims_warning_type"].values()
+        }
+        _warning_group_map = {
+            k: v for k, v in _warning_metadata["warning_groups"].items()
+        }
+        _warning_severity_map = {
+            int(v["severity_id"]): v
+            for v in _warning_metadata["warning_severity"].values()
+        }
     if not _warning_severity_map:
         raise ValueError("Warning Severity Map not found")
     return _warning_severity_map.get(warning_severity_id, {})
+
 
 def get_day_of_the_week(language: str, date: datetime):
     """
@@ -243,13 +289,14 @@ def get_day_of_the_week(language: str, date: datetime):
     else:
         return day
 
+
 def get_value(
     data: dict,
     key: str,
     inner_dict_key: Optional[str],
     data_type: Type = dict,
     default_value=None,
-    custom_empty_value=None
+    custom_empty_value=None,
 ):
     """
     Get default value from nested dictionary and convert to specified data type
@@ -303,8 +350,7 @@ def fetch_data(url: str) -> dict:
 def get_data(current_data, url, last_fetch_time, cache_expiration_in_sec) -> dict:
     if (
         current_data
-        and (datetime.now() - last_fetch_time).total_seconds()
-        < cache_expiration_in_sec
+        and (datetime.now() - last_fetch_time).total_seconds() < cache_expiration_in_sec
     ):
         return current_data
     try:

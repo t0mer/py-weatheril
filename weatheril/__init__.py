@@ -1,14 +1,28 @@
 """Israel Meteorological Service unofficial python api wrapper"""
+
 from datetime import datetime
 
 import requests
 from loguru import logger
 
-from .consts import CURRENT_ANALYSIS_URL, FORECAST_URL, IMS_API_URL_BASE, RADAR_SATELLITE_URL, WARNINGS_URL, TIMEZONE
+from .consts import (
+    CURRENT_ANALYSIS_URL,
+    FORECAST_URL,
+    IMS_API_URL_BASE,
+    RADAR_SATELLITE_URL,
+    WARNINGS_URL,
+    TIMEZONE,
+)
 from .forecast import Forecast, Daily, Hourly
 from .radar_satellite import RadarSatellite
 from .warning import Warning
-from .utils import get_region_by_id, get_value, fetch_data, get_data, get_location_info_by_id
+from .utils import (
+    get_region_by_id,
+    get_value,
+    fetch_data,
+    get_data,
+    get_location_info_by_id,
+)
 from .weather import Weather
 
 
@@ -53,9 +67,7 @@ class WeatherIL:
             if analysis_data:
                 logger.debug("Got current analysis for location " + str(self.location))
                 # Parse forecast_time and modified_at separately due to datetime parsing
-                forecast_time_str = get_value(
-                    analysis_data, "forecast_time", None, str
-                )
+                forecast_time_str = get_value(analysis_data, "forecast_time", None, str)
                 forecast_time = (
                     TIMEZONE.localize(
                         datetime.strptime(forecast_time_str, "%Y-%m-%d %H:%M:%S")
@@ -92,9 +104,7 @@ class WeatherIL:
                     wind_direction_id=get_value(
                         analysis_data, "wind_direction_id", None, int, 0
                     ),
-                    feels_like=get_value(
-                        analysis_data, "feels_like", None, float
-                    ),
+                    feels_like=get_value(analysis_data, "feels_like", None, float),
                     heat_stress_level=get_value(
                         analysis_data, "heat_stress_level", None, int, 0
                     ),
@@ -112,7 +122,9 @@ class WeatherIL:
                     modified_at=modified_at,
                     json=analysis_data,
                     weather_code=get_value(analysis_data, "weather_code", None, int),
-                    gust_speed=get_value(analysis_data, "gust_speed", None, int, None, -999)
+                    gust_speed=get_value(
+                        analysis_data, "gust_speed", None, int, None, -999
+                    ),
                 )
             else:
                 logger.error('No "' + self.location + '" in current analysis response')
@@ -267,18 +279,24 @@ class WeatherIL:
             self._append_images(rs, radar_list, "radar_images", base_url)
 
             print("Getting Middle East")
-            middle_east_list = self._get_images_list(data, "data", "types", "satellite", "NATURAL")
-            self._append_images(rs, middle_east_list, "middle_east_satellite_images", base_url)
+            middle_east_list = self._get_images_list(
+                data, "data", "types", "satellite", "NATURAL"
+            )
+            self._append_images(
+                rs, middle_east_list, "middle_east_satellite_images", base_url
+            )
 
             print("Getting Europe")
             europe_list = self._get_images_list(data, "data", "types", "EUROPE")
             self._append_images(rs, europe_list, "europe_satellite_images", base_url)
 
-            logger.debug(f"\
+            logger.debug(
+                f"\
                 Got: {len(rs.imsradar_images)} IMS Radar Images;\
                 {len(rs.radar_images)} Radar Images;\
                 {len(rs.middle_east_satellite_images)} Middle East Satellite Images;\
-                {len(rs.europe_satellite_images)} European Satellite Images")
+                {len(rs.europe_satellite_images)} European Satellite Images"
+            )
             return rs
         except Exception as e:
             logger.error("Error getting images. " + str(e))
@@ -289,9 +307,14 @@ class WeatherIL:
         Get the city current analysis data
         return: dict
         """
-        url = CURRENT_ANALYSIS_URL.format(language=self.language, location=self.location)
+        url = CURRENT_ANALYSIS_URL.format(
+            language=self.language, location=self.location
+        )
         self._analysis_data = get_data(
-            self._analysis_data, url, self._analysis_last_fetch, self._cache_expiration_in_sec
+            self._analysis_data,
+            url,
+            self._analysis_last_fetch,
+            self._cache_expiration_in_sec,
         )
         if self._analysis_data:
             self._analysis_last_fetch = datetime.now()
@@ -302,7 +325,10 @@ class WeatherIL:
         """
         url = FORECAST_URL.format(language=self.language, location=self.location)
         self._forecast_data = get_data(
-            self._forecast_data, url, self._forecast_last_fetch, self._cache_expiration_in_sec
+            self._forecast_data,
+            url,
+            self._forecast_last_fetch,
+            self._cache_expiration_in_sec,
         )
         if self._forecast_data:
             self._forecast_last_fetch = datetime.now()
@@ -314,7 +340,10 @@ class WeatherIL:
 
         url = WARNINGS_URL.format(language=self.language)
         self._full_warnings_data = get_data(
-            self._full_warnings_data, url, self._warnings_last_fetch, self._cache_expiration_in_sec
+            self._full_warnings_data,
+            url,
+            self._warnings_last_fetch,
+            self._cache_expiration_in_sec,
         )
 
         if self._full_warnings_data:
@@ -332,21 +361,23 @@ class WeatherIL:
         if not location_info:
             raise ValueError(f"Location not found for id {self.location}")
 
-        rid = location_info.get('rid')
+        rid = location_info.get("rid")
         region = get_region_by_id(self.language, region_id="r-" + rid)
         if not region:
             raise ValueError(f"Region not found for id {rid}")
 
         warnings = []
-        if  self._full_warnings_data:
+        if self._full_warnings_data:
             for key in self._full_warnings_data[FULL_WARNINGS_DATA_KEY]:
-                daily_warnings: dict = get_value(self._full_warnings_data, FULL_WARNINGS_DATA_KEY, key, dict)
+                daily_warnings: dict = get_value(
+                    self._full_warnings_data, FULL_WARNINGS_DATA_KEY, key, dict
+                )
                 regional_alerts = daily_warnings.get("r-" + rid, {})
                 for alert in regional_alerts.values():
-
-                    warnings.append(Warning(
-                        language=self.language,
-                        location_id=int(self.location),
+                    warnings.append(
+                        Warning(
+                            language=self.language,
+                            location_id=int(self.location),
                             wid=int(alert["wid"]),
                             alert_id=int(alert["alert_id"]),
                             severity_id=int(alert["severity_id"]),
@@ -360,7 +391,8 @@ class WeatherIL:
                             text_full=alert["text_full"],
                             valid_from_unix=int(alert["valid_from_unix"]),
                             groups=alert["groups"],
-                            regions=alert["regions"]
-                    ))
+                            regions=alert["regions"],
+                        )
+                    )
 
         return warnings

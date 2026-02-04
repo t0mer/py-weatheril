@@ -1,10 +1,18 @@
 import pytz
 
 IMS_API_URL_BASE = "https://ims.gov.il/{language}/"
-RADAR_URL = "https://ims.gov.il/sites/default/files/ims_data/map_images/IMSRadar4GIS.gif"
-SATELLITE_URL = "https://ims.gov.il/sites/default/files/ims_data/map_images/Satellite-map.jpg"
-MIDDLE_EAST_SATELLITE_URL = "https://ims.gov.il/sites/default/files/ims_data/map_images/MIDDLE-EAST-map.jpg"
-EUROPE_SATELLITE_URL = "https://ims.gov.il/sites/default/files/ims_data/map_images/EUROPE-map.jpg"
+RADAR_URL = (
+    "https://ims.gov.il/sites/default/files/ims_data/map_images/IMSRadar4GIS.gif"
+)
+SATELLITE_URL = (
+    "https://ims.gov.il/sites/default/files/ims_data/map_images/Satellite-map.jpg"
+)
+MIDDLE_EAST_SATELLITE_URL = (
+    "https://ims.gov.il/sites/default/files/ims_data/map_images/MIDDLE-EAST-map.jpg"
+)
+EUROPE_SATELLITE_URL = (
+    "https://ims.gov.il/sites/default/files/ims_data/map_images/EUROPE-map.jpg"
+)
 
 FORECAST_URL = IMS_API_URL_BASE + "full_forecast_data/{location}"
 CURRENT_ANALYSIS_URL = IMS_API_URL_BASE + "now_analysis/{location}"
