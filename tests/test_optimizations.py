@@ -43,6 +43,10 @@ def test_fetch_data_basic():
 
 def test_fetch_data_caching():
     # Test that caching works by calling the same URL twice
+    from weatheril.utils import _fetch_data_cache
+
+    _fetch_data_cache.clear()
+
     mock_response = Mock()
     mock_response.json.return_value = {"data": "test"}
 
@@ -64,26 +68,40 @@ def test_fetch_data_cache_expiration():
     # Test that cache expires after time
     from weatheril.utils import _fetch_data_cache, _CACHE_EXPIRATION_SECONDS
     import datetime
+    from unittest.mock import patch
 
     # Clear cache
     _fetch_data_cache.clear()
 
-    mock_response = Mock()
-    mock_response.json.return_value = {"timestamp": datetime.datetime.now().timestamp()}
+    # Mock datetime to control time
+    fixed_time = datetime.datetime(2026, 1, 1, 12, 0, 0)
 
-    with patch("weatheril.utils.requests.get", return_value=mock_response) as mock_get:
+    mock_response = Mock()
+    mock_response.json.return_value = {"timestamp": fixed_time.timestamp()}
+
+    with (
+        patch("weatheril.utils.requests.get", return_value=mock_response) as mock_get,
+        patch("weatheril.utils.datetime") as mock_datetime,
+    ):
+        mock_datetime.now.return_value = fixed_time
+        mock_datetime.side_effect = lambda *args, **kw: datetime.datetime(*args, **kw)
+
         # First call
         result1 = fetch_data("http://example.com/timestamp")
         first_call_count = mock_get.call_count
 
-        # Second call immediately after (should use cache)
+        # Advance time by more than _CACHE_EXPIRATION_SECONDS (300 seconds)
+        future_time = fixed_time + datetime.timedelta(
+            seconds=_CACHE_EXPIRATION_SECONDS + 1
+        )
+        mock_datetime.now.return_value = future_time
+
+        # Second call after expiration (should make new request)
         result2 = fetch_data("http://example.com/timestamp")
         second_call_count = mock_get.call_count
 
-        # Results should be the same (from cache)
-        assert result1 == result2
-        # Mock should only be called once
-        assert mock_get.call_count == 1
+        assert result1 == result2 == {"timestamp": fixed_time.timestamp()}
+        assert mock_get.call_count == 2
 
     print("fetch_data cache expiration tests passed")
 

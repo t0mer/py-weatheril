@@ -334,18 +334,58 @@ def get_value(
     return value
 
 
-def fetch_data(url: str) -> dict:
+def fetch_data(url: str, cache_ttl_seconds: Optional[int] = None) -> dict:
     """
     Helper method to get the Json data from ims website with caching to avoid repeated API calls
     """
     global _fetch_data_cache
 
+    effective_ttl = (
+        cache_ttl_seconds
+        if cache_ttl_seconds is not None
+        else _CACHE_EXPIRATION_SECONDS
+    )
+
+    if effective_ttl <= 0:
+        try:
+            logger.debug("Getting data from (no cache): " + url)
+            response = requests.get(url)
+            data = response.json()
+            return data
+        except Exception as e:
+            logger.error("Error getting data. " + str(e))
+            logger.exception(e)
+            return dict()
+
+    if url in _fetch_data_cache:
+        cached_data, timestamp = _fetch_data_cache[url]
+        if datetime.now() - timestamp < timedelta(seconds=effective_ttl):
+            logger.debug("Returning cached data for: " + url)
+            return cached_data
+        else:
+            del _fetch_data_cache[url]
+
+    try:
+        logger.debug("Getting data from: " + url)
+        response = requests.get(url)
+        data = response.json()
+
+        _fetch_data_cache[url] = (data, datetime.now())
+        return data
+    except Exception as e:
+        logger.error("Error getting data. " + str(e))
+        logger.exception(e)
+        return dict()
+
     # Check if we have cached data that hasn't expired
     if url in _fetch_data_cache:
         cached_data, timestamp = _fetch_data_cache[url]
-        if datetime.now() - timestamp < timedelta(seconds=_CACHE_EXPIRATION_SECONDS):
+        if datetime.now() - timestamp < timedelta(seconds=effective_ttl):
             logger.debug("Returning cached data for: " + url)
             return cached_data
+        else:
+            # Remove expired cache entry
+            del _fetch_data_cache[url]
 
     try:
         logger.debug("Getting data from: " + url)
@@ -369,7 +409,7 @@ def get_data(current_data, url, last_fetch_time, cache_expiration_in_sec) -> dic
         return current_data
     try:
         logger.debug("Getting data from " + url)
-        return fetch_data(url).get("data", {})
+        return fetch_data(url, cache_expiration_in_sec).get("data", {})
     except Exception as e:
         logger.error("Error getting city portal data. " + str(e))
         logger.exception(e)
